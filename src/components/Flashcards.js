@@ -48,6 +48,8 @@ class Flashcards extends Component {
           // cards={this.state.decks[this.state.currentDeck]}
         />
 
+        <Card props={{"front": "card one front", "back": "card one back"}} />
+
         <Scoreboard />
         <div>
           Pick other decks:
