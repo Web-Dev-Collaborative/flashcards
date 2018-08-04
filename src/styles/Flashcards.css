@@ -1,12 +1,31 @@
+body {
+  text-align: center;
+}
+
+button {
+  margin: 4px;
+  padding: 14px;
+  background: #eef;
+  border-radius: 4px;
+  color: #5f6368;
+}
+
+.scoreboard,
 .flashcards-container {
-  max-width: 900px;
-  margin: 1px auto;
+  max-width: 1920px;
+  margin: 10px auto;
 }
 
 .grid-div {
   display: grid;
   grid-template-columns: repeat(1, 1fr 10fr 1fr);
   grid-gap: 10px;
+}
+
+.grid-div-even {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  grid-gap: 20px;
 }
 
 .controls {

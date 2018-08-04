@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import '../styles/Card.css'
 
 const Card = (props) => {
-  console.log(props)
   { 
     if (props.frontShowing) {
       return (
         <button onClick={() => props.flipCard()} className="card card-front">
-          { props.card.front }
+          { props.front }
         </button>
-      )  
+      )
     } else {
       return (
         <button onClick={() => props.flipCard()} className="card card-back">
-          { props.card.back }
+          { props.back }
         </button>
       ) 
     }

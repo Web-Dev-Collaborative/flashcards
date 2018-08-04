@@ -16,7 +16,9 @@ class Flashcards extends Component {
       decks: {},
       flashcardFrontShowing: true,
       // testing below
-      currentDeck: "spanish",
+      currentDeck: "",
+      keysArray: [],
+      currentCardIndex: 0,
       card1: {"front": "card one front", "back": "card one back"}
     }
   }
@@ -26,7 +28,28 @@ class Flashcards extends Component {
   }
 
   changeDeckTo = (deckName) => {
-    this.setState({ currentDeck: deckName })
+    this.setState({ 
+      currentDeck: deckName,
+      currentCardIndex: 0,
+      flashcardFrontShowing: true,
+      keysArray: [...Object.keys(this.state.decks[deckName])] 
+    })
+  }
+
+  showPreviousCard = () => {
+    if (this.state.currentCardIndex <= 0) { return }
+    this.setState({ 
+      currentCardIndex: this.state.currentCardIndex - 1,
+      flashcardFrontShowing: true 
+    })
+  }
+
+  showNextCard = () => {
+    if (this.state.currentCardIndex >= this.state.keysArray.length - 1) { return }
+    this.setState({ 
+      currentCardIndex: this.state.currentCardIndex + 1,
+      flashcardFrontShowing: true
+    })
   }
 
   async componentDidMount() {
@@ -37,6 +60,8 @@ class Flashcards extends Component {
 
       this.setState({
         decks: result.data.flashcards,
+        currentDeck: "spanish",
+        keysArray: [...Object.keys(result.data.flashcards["spanish"])],
         isLoading: false
       })
     } catch (error) {
@@ -49,6 +74,12 @@ class Flashcards extends Component {
   }
 
   render() {
+    const cardsArray = this.state.decks[this.state.currentDeck] 
+    const cardFront = this.state.keysArray[this.state.currentCardIndex] 
+
+    // if the card decks haven't loaded, don't attempt to render. wait for loading to finish.
+    if (!cardFront || !cardsArray) return null
+    
     return (
       <div className="main">
         <header className="flashcards-header">
@@ -58,33 +89,41 @@ class Flashcards extends Component {
         <div className="flashcards-container">
           <div className="grid-div">
             <div className="controls-div controls-prev">
-              <button className="controls prev">Prev Card</button>
+              <button onClick={this.showPreviousCard} className="controls prev">Prev Card</button>
             </div>
             <Card 
               frontShowing={this.state.flashcardFrontShowing} 
-              card={this.state.card1}
+              front={cardFront}
+              back={cardsArray[cardFront]}
               flipCard={this.flipCard}
             />
-            <div className="controls-div controls-prev">
-              <button className="controls next">Next Card</button>
+            <div className="controls-div controls-next">
+              <button onClick={this.showNextCard} className="controls next">Next Card</button>
             </div>
           </div>
         </div>
 
         <Scoreboard />
+
         <div>
-          Pick other decks:
-          { Object.keys(this.state.decks).map(deckName => {
-            return <button 
+          <h3>Select other flashcard decks</h3>
+          <div className="grid-div-even">
+          { 
+            Object.keys(this.state.decks).map(deckName => {
+            return <div>
+                    <button 
                       key={deckName}
                       onClick={(e) => this.changeDeckTo(deckName)}
                     > 
                     {deckName}</button>
-          })}
-  
-          <Deck 
-            cards={this.state.decks[this.state.currentDeck]}
-          />
+
+                    <Deck 
+                      cards={this.state.decks[deckName]}
+                    />
+                </div>
+            })
+          }
+          </div> 
         </div>
       </div> //end of main
     )

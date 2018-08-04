@@ -1,0 +1,8 @@
+.deck {
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.deck-data {
+  font-size: xx-small;
+}
