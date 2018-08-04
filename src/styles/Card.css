@@ -1,0 +1,11 @@
+/* CSS for Card component */
+
+.card {
+  background: #eef;
+  border-radius: 4px;
+  color: #5f6368;
+  /* transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1); */
+  text-align: center;
+  padding: 20px;
+  min-height: 160px;
+}

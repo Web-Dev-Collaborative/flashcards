@@ -14,8 +14,19 @@ class Flashcards extends Component {
     this.state = {
       isLoading: false,
       decks: {},
-      currentDeck: "spanish"
+      flashcardFrontShowing: true,
+      // testing below
+      currentDeck: "spanish",
+      card1: {"front": "card one front", "back": "card one back"}
     }
+  }
+
+  flipCard = () => {
+    this.setState({ flashcardFrontShowing: !this.state.flashcardFrontShowing })
+  }
+
+  changeDeckTo = (deckName) => {
+    this.setState({ currentDeck: deckName })
   }
 
   async componentDidMount() {
@@ -44,20 +55,38 @@ class Flashcards extends Component {
           <h1 className="flashcards-title">Flashcards</h1>
         </header>
 
-        <Deck 
-          // cards={this.state.decks[this.state.currentDeck]}
-        />
-
-        <Card props={{"front": "card one front", "back": "card one back"}} />
+        <div className="flashcards-container">
+          <div className="grid-div">
+            <div className="controls-div controls-prev">
+              <button className="controls prev">Prev Card</button>
+            </div>
+            <Card 
+              frontShowing={this.state.flashcardFrontShowing} 
+              card={this.state.card1}
+              flipCard={this.flipCard}
+            />
+            <div className="controls-div controls-prev">
+              <button className="controls next">Next Card</button>
+            </div>
+          </div>
+        </div>
 
         <Scoreboard />
         <div>
           Pick other decks:
-          { Object.keys(this.state.decks).map(key => {
-            return <button>{key}</button>
+          { Object.keys(this.state.decks).map(deckName => {
+            return <button 
+                      key={deckName}
+                      onClick={(e) => this.changeDeckTo(deckName)}
+                    > 
+                    {deckName}</button>
           })}
+  
+          <Deck 
+            cards={this.state.decks[this.state.currentDeck]}
+          />
         </div>
-      </div>
+      </div> //end of main
     )
   }
 }
