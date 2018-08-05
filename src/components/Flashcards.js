@@ -105,12 +105,12 @@ class Flashcards extends Component {
 
         <Scoreboard />
 
-        <div>
+        <div className="decks">
           <h3>Select other flashcard decks</h3>
           <div className="grid-div-even">
           { 
             Object.keys(this.state.decks).map(deckName => {
-            return <div>
+            return <div className="grid-item">
                     <button 
                       key={deckName}
                       onClick={(e) => this.changeDeckTo(deckName)}

@@ -1,9 +1,12 @@
 import React from 'react'
 
+import '../styles/Scoreboard.css'
+
 const Scoreboard = (props) => {
   return (
     <div className="scoreboard">
-    Scoreboard
+      <h3>Scoreboard</h3>
+      <span>0 : 0</span>
     </div>
   )
 }
