@@ -6,14 +6,13 @@ h1,
 h2,
 h3 {
   margin: 4px;
-  padding: 20px;
+  padding: 10px;
   font-weight: 600;
   font-size: larger;
 }
 
 button {
   padding: 12px;
-  background: #eef;
   border-radius: 4px;
   color: #5f6368;
   transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
@@ -35,15 +34,27 @@ button {
   display: grid;
   grid-template-columns: repeat(1, 1fr 10fr 1fr);
   grid-gap: 10px;
-  max-width: 98%;
+  margin: 10px;
   /* prevent CSS grid from overflowing its container */
   min-width: 0;
   min-height: 0;
 }
 
 .grid-div-even {
-  grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px;
+}
+
+@media all and (min-width: 620px) {
+  .grid-div-even {
+    grid-template-columns: repeat(1, 1fr 1fr);
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .grid-div-even {
+    grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  }
 }
 
 .grid-item {
@@ -53,22 +64,10 @@ button {
 
 .controls {
   width: 100%;
-  height: 100%;
-  background: #eef;
+  height: 65px;
+  margin-top: 90px;
   transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
   border-color: #dedede;
   cursor: pointer;
-}
-
-.prev {
-  margin-left: 10px;
-}
-
-.card {
-  margin: 0px 4px 0px 12px;
-}
-
-.next {
-  margin-right: 2px;
 }

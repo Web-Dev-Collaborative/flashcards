@@ -88,31 +88,35 @@ class Flashcards extends Component {
 
         <div className="flashcards-container">
           <div className="grid-div">
-            <div className="controls-div controls-prev">
-              <button onClick={this.showPreviousCard} className="controls prev">Prev Card</button>
-            </div>
+            <img 
+              className="controls controls-div controls-prev prev"
+              style={ { transform: 'rotate(180deg)' } }
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
+              onClick={this.showPreviousCard} 
+              />
             <Card 
               frontShowing={this.state.flashcardFrontShowing} 
               front={cardFront}
               back={cardsArray[cardFront]}
               flipCard={this.flipCard}
             />
-            <div className="controls-div controls-next">
-              <button onClick={this.showNextCard} className="controls next">Next Card</button>
-            </div>
+            <img 
+              className="controls controls-div controls-next next"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
+              onClick={this.showNextCard} 
+            />
           </div>
         </div>
 
-        <Scoreboard />
+        <Scoreboard currentDeck={this.state.currentDeck} /> 
 
         <div className="decks">
           <h3>Select other flashcard decks</h3>
           <div className="grid-div-even">
           { 
             Object.keys(this.state.decks).map(deckName => {
-            return <div className="grid-item">
+            return <div key={deckName} className="grid-item">
                     <button 
-                      key={deckName}
                       onClick={(e) => this.changeDeckTo(deckName)}
                     > 
                     {deckName}</button>
@@ -120,7 +124,7 @@ class Flashcards extends Component {
                     <Deck 
                       cards={this.state.decks[deckName]}
                     />
-                </div>
+                  </div>
             })
           }
           </div> 

@@ -1,8 +1,6 @@
 .scoreboard {
-  padding: 45px;
+  padding: 15px;
   border-radius: 6px;
-  background-color: #efe;
   transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
-  border-color: #dedede;
 }

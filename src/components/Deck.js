@@ -13,7 +13,7 @@ const Deck = (props) => {
       {
         Object.keys(props.cards).map(key => {
           return ( 
-            <span className="deck-data">{key} : {props.cards[key]} <br /></span>
+            <span key={key} className="deck-data">{key} : {props.cards[key]} <br /></span>
           )
         })
       }
