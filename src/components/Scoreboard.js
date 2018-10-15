@@ -10,10 +10,19 @@ const Scoreboard = (props) => {
       {
         props.currentDeck ? <span>Current deck: {props.currentDeck}</span> : ''
       }
-      <div className="score-holder">
-        <span className="correct">0 </span> 
-        : 
-        <span className="incorrect"> 0</span>
+      <div className="grid-parent grid-parent-3 score-holder">
+        <div className="grid-children grid-parent grid-parent-2">
+          <span className="grid-children">Easy - Got It Right</span>
+          <span className="grid-children score-easy">0</span> 
+        </div>
+        <div className="grid-children grid-parent grid-parent-2">
+          <span className="grid-children">Difficult - Got It Right</span>
+          <span className="grid-children score-difficult">0</span> 
+        </div>
+        <div className="grid-children grid-parent grid-parent-2">
+          <span className="grid-children">Got It Wrong</span>
+          <span className="grid-children score-wrong">0</span> 
+        </div>
       </div>
     </div>
   )

@@ -19,17 +19,14 @@
 }
 
 .survey-div {
-  position: absolute;
-  bottom: 2px;
-  right: 0;
-  left: 0;
+  padding-top: 50px;
   width: 100%;
   max-width: 100%;
 }
 
-.yes-no-div {
+.survey-response-div {
   display: grid;
-  grid-template-columns: repeat(1, 1fr 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
   margin: 10px;
   /* prevent CSS grid from overflowing its container */
@@ -37,14 +34,15 @@
   min-height: 0;
 }
 
-.survey-yes,
-.survey-no {
-  width: 40px;
-  margin: 0 auto;
+.survey-response {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px;
 }
 
 /* the red X no icon is slightly smaller (inset) than the yes check mark svg */
-.survey-no {
+/* .wrong {
   width: 44px;
   padding: -1px;
-}
+} */
