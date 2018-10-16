@@ -13,32 +13,49 @@
 }
 
 .flip-arrow {
-  position: absolute;
-  right: 2px;
-  top: 2px;
+  float: right;
+  padding: 2px;
+}
+
+.card-data-div {
+  padding: 15px;
 }
 
 .survey-div {
-  padding-top: 50px;
+  padding-top: 100px;
   width: 100%;
   max-width: 100%;
 }
 
-.survey-response-div {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  margin: 10px;
-  /* prevent CSS grid from overflowing its container */
-  min-width: 0;
-  min-height: 0;
+.easy, .medium, .wrong {
+  position: relative;
 }
 
-.survey-response {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 15px;
+.easy > span, 
+.medium > span, 
+.wrong > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility .2s;
+}  
+
+.easy:hover > span, 
+.medium:hover > span, 
+.wrong:hover > span {
+  visibility: visible;
+  opacity: 1;
+}
+
+.easy:hover > img, 
+.medium:hover > img, 
+.wrong:hover > img {
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* the red X no icon is slightly smaller (inset) than the yes check mark svg */
