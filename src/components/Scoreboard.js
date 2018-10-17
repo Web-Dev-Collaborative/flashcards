@@ -8,20 +8,20 @@ const Scoreboard = (props) => {
     <div className="scoreboard">
       <h3>Scoreboard</h3>
       {
-        props.currentDeck ? <span>Current deck: {props.currentDeck}</span> : ''
+        props.currentDeck ? <span>Current deck: {props.currentDeck.charAt(0).toUpperCase() + props.currentDeck.slice(1)}</span> : ''
       }
       <div className="grid-parent grid-parent-3 score-holder">
-        <div className="grid-children grid-parent grid-parent-2">
-          <span className="grid-children">Easy - Got It Right</span>
-          <span className="grid-children score-easy">0</span> 
+        <div className="grid-child grid-parent grid-parent-2">
+          <span>Easy - Got It Right</span>
+          <span className="score score-easy">0</span>
         </div>
-        <div className="grid-children grid-parent grid-parent-2">
-          <span className="grid-children">Difficult - Got It Right</span>
-          <span className="grid-children score-difficult">0</span> 
+        <div className="grid-child grid-parent grid-parent-2">
+          <span>Difficult - Got It Right</span>
+          <span className="score score-medium">0</span>
         </div>
-        <div className="grid-children grid-parent grid-parent-2">
-          <span className="grid-children">Got It Wrong</span>
-          <span className="grid-children score-wrong">0</span> 
+        <div className="grid-child grid-parent grid-parent-2">
+          <span>Unable To Recall</span>
+          <span className="score score-wrong">0</span>
         </div>
       </div>
     </div>

@@ -15,10 +15,13 @@ class Flashcards extends Component {
       isLoading: false,
       decks: {},
       flashcardFrontShowing: true,
-      // testing below
       currentDeck: "",
       keysArray: [],
       currentCardIndex: 0,
+      workingEasyDeck: [],
+      workingMediumDeck: [],
+      workingDifficultDeck: [],
+      // testing below
       card1: {"front": "card one front", "back": "card one back"}
     }
   }
@@ -52,6 +55,10 @@ class Flashcards extends Component {
     })
   }
 
+  moveCardToDeck = (card, deck) => {
+    console.log('moving card '+card+' to deck '+deck)
+  }
+
   async componentDidMount() {
     this.setState({ isLoading: true })
 
@@ -74,11 +81,8 @@ class Flashcards extends Component {
   }
 
   render() {
-    const cardsArray = this.state.decks[this.state.currentDeck] 
-    const cardFront = this.state.keysArray[this.state.currentCardIndex] 
-
     // if the card decks haven't loaded, don't attempt to render. wait for loading to finish.
-    if (!cardFront || !cardsArray) return null
+    if (!this.state.keysArray[this.state.currentCardIndex] || !this.state.decks[this.state.currentDeck]) return null
     
     return (
       <div className="main">
@@ -97,9 +101,10 @@ class Flashcards extends Component {
               />
             <Card 
               frontShowing={this.state.flashcardFrontShowing} 
-              front={cardFront}
-              back={cardsArray[cardFront]}
+              front={this.state.keysArray[this.state.currentCardIndex]}
+              back={this.state.decks[this.state.currentDeck][this.state.keysArray[this.state.currentCardIndex]]}
               flipCard={this.flipCard}
+              moveCardToDeck={this.moveCardToDeck}
             />
             <img 
               alt="Next Card"
