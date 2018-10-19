@@ -40,7 +40,10 @@ class Flashcards extends Component {
         currentDeckName: deckName,
         currentCardIndex: 0,
         flashcardFrontShowing: true,
-        keysArray: [...Object.keys(this.state.decks[deckName])] 
+        keysArray: Object.keys(this.state.decks[deckName]),
+        easyBucket: {},
+        mediumBucket: {},
+        difficultBucket: {}
       })  
     }
   }
@@ -54,7 +57,7 @@ class Flashcards extends Component {
   }
 
   showNextCard = () => {
-    if (this.state.currentCardIndex >= this.state.keysArray.length - 1) { return }
+    if (this.state.currentCardIndex >= this.state.keysArray.length - 1) return
     this.setState({ 
       currentCardIndex: this.state.currentCardIndex + 1,
       flashcardFrontShowing: true
@@ -95,7 +98,7 @@ class Flashcards extends Component {
         // default deck is Spanish
         currentDeckName: 'spanish',
         currentDeck: result.data.flashcards['spanish'],
-        keysArray: [Object.keys(result.data.flashcards['spanish'])],
+        keysArray: Object.keys(result.data.flashcards['spanish']),
         isLoading: false
       })
     } catch (error) {
@@ -116,6 +119,13 @@ class Flashcards extends Component {
         <header className="flashcards-header">
           <h1 className="flashcards-title">Flashcards</h1>
         </header>
+
+        <Scoreboard 
+          currentDeckName={this.state.currentDeckName} 
+          easyCount={Object.keys(this.state.easyBucket).length}
+          mediumCount={Object.keys(this.state.mediumBucket).length}
+          difficultCount={Object.keys(this.state.difficultBucket).length}
+        /> 
 
         <div className="flashcards-container">
           <div className="grid-div">
@@ -142,14 +152,11 @@ class Flashcards extends Component {
           </div>
         </div>
 
-        <Scoreboard 
-          currentDeckName={this.state.currentDeckName} 
-          easyCount={Object.keys(this.state.easyBucket).length}
-          mediumCount={Object.keys(this.state.mediumBucket).length}
-          difficultCount={Object.keys(this.state.difficultBucket).length}
-        /> 
-
         <div className="decks">
+          {
+            this.state.currentDeckName ? <span>Current deck: {this.state.currentDeckName.charAt(0).toUpperCase() + this.state.currentDeckName.slice(1)}</span> : ''
+          }
+
           <h3>Select other flashcard decks</h3>
           <div className="grid-div-even">
           { 
@@ -168,6 +175,10 @@ class Flashcards extends Component {
           }
           </div>
         </div>
+
+        <footer>
+          &copy; 2018
+        </footer>
       </div> //end of main
     )
   }

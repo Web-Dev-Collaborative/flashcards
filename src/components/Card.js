@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import '../styles/Card.css'
 
-const Card = (props) => {
+const Card = props => {
   if (props.frontShowing) {
     return (
       <button onClick={() => props.flipCard()} className="card card-front">

@@ -12,6 +12,12 @@ h3 {
   font-size: larger;
 }
 
+header, footer {
+  background-color: #c2f5e6;
+  margin: 0;
+  padding: 16px;
+}
+
 button {
   padding: 12px;
   border-radius: 4px;
@@ -27,7 +33,6 @@ button {
 .decks {
   max-width: 920px;
   margin: 10px auto;
-  margin-bottom: 45px;
 }
 
 .grid-div,
