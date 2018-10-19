@@ -8,12 +8,12 @@ h2,
 h3 {
   margin: 4px;
   padding: 10px;
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: larger;
 }
 
 header, footer {
-  background-color: #c2f5e6;
+  background-color: #dcffee;
   margin: 0;
   padding: 16px;
 }
@@ -28,6 +28,7 @@ button {
   cursor: pointer;
 }
 
+.main,
 .scoreboard,
 .flashcards-container,
 .decks {
@@ -35,10 +36,41 @@ button {
   margin: 10px auto;
 }
 
+.controls {
+  width: 100%;
+  height: 80%;
+  margin: auto;
+  cursor: pointer;
+}
+
+/* CSS Grid layouts */
+.grid-parent {
+  display: grid;
+  grid-gap: 2px;
+  margin: 2px;
+  /* prevent CSS grid from overflowing its container */
+  min-width: 0;
+  min-height: 0;
+}
+
+.grid-parent-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-parent-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-child {
+  border: 1px dotted gray;
+  border-radius: 15px;
+  padding: 8px;
+}
+
 .grid-div,
 .grid-div-even {
   display: grid;
-  grid-template-columns: repeat(1, 1fr 10fr 1fr);
+  grid-template-columns: 40px auto 40px;
   grid-gap: 10px;
   margin: 10px;
   /* prevent CSS grid from overflowing its container */
@@ -66,39 +98,4 @@ button {
 .grid-item {
   overflow: hidden;
   min-width: 0;
-}
-
-.controls {
-  width: 100%;
-  height: 65px;
-  margin-top: 90px;
-  transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
-  border-color: #dedede;
-  cursor: pointer;
-}
-
-/* CSS Grid layouts */
-.grid-parent {
-  display: grid;
-  grid-gap: 5px;
-  margin: 5px;
-  /* prevent CSS grid from overflowing its container */
-  min-width: 0;
-  min-height: 0;
-}
-
-.grid-parent-3 {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.grid-parent-2 {
-  grid-template-columns: 1fr 1fr;
-}
-
-.grid-child {
-  /* background-color: #444;
-  color: #fff; */
-  /* border: 1px solid black; */
-  border-radius: 5px;
 }

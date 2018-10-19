@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import Scoreboard from './Scoreboard'
 import Deck from './Deck'
+import Survey from './Survey'
 import Card from './Card'
 
 import '../styles/reset.css'
@@ -88,6 +89,18 @@ class Flashcards extends Component {
     })
   }
 
+  onKeyDown = e => {
+    console.log(e.keyCode + ' pressed');
+  }
+
+  componentWillMount = () => {
+      document.addEventListener("keydown", this.onKeyDown);
+  }
+
+  componentWillUnmount = () => {
+      document.removeEventListener("keydown", this.onKeyDown);
+  }
+
   async componentDidMount() {
     this.setState({ isLoading: true })
 
@@ -152,11 +165,16 @@ class Flashcards extends Component {
           </div>
         </div>
 
-        <div className="decks">
-          {
-            this.state.currentDeckName ? <span>Current deck: {this.state.currentDeckName.charAt(0).toUpperCase() + this.state.currentDeckName.slice(1)}</span> : ''
-          }
+        { 
+          this.state.flashcardFrontShowing ? 
+            '' : 
+            <Survey 
+              moveCardToBucket={this.moveCardToBucket} 
+              front={Object.keys(this.state.currentDeck)[this.state.currentCardIndex]}
+            /> 
+        }
 
+        <div className="decks">
           <h3>Select other flashcard decks</h3>
           <div className="grid-div-even">
           { 

@@ -1,0 +1,32 @@
+.survey-div {
+  padding: 15px;
+  max-width: 100%;
+}
+
+.easy, .medium, .difficult {
+  min-height: 80px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.easy {
+  background-color: #A6DD7A;
+}
+
+.medium {
+  background-color: #EAEA33;
+}
+
+.difficult {
+  background-color: #FF6645;
+}
+
+.easy > span, 
+.medium > span, 
+.difficult > span,
+.easy > img, 
+.medium > img, 
+.difficult > img {
+  padding: 3px;
+  margin: auto;
+}
