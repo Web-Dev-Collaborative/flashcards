@@ -1,6 +1,15 @@
 body {
   text-align: center;
   font-size: 115%;
+  background-color: #f5f7fa;
+}
+
+body,
+#root,
+.main {
+  /* To fix React's default structure adding some top space in Chrome */
+  margin-top: -5px;
+  padding-top: 5px;  
 }
 
 h1,
@@ -8,32 +17,28 @@ h2,
 h3 {
   margin: 4px;
   padding: 10px;
-  /* font-weight: 600; */
   font-size: larger;
 }
 
-header, footer {
-  background-color: #dcffee;
-  margin: 0;
-  padding: 16px;
-}
-
 button {
-  padding: 12px;
   border-radius: 4px;
-  color: #5f6368;
+  font-weight: bold;
+  text-transform: uppercase;
+  /* color: #5f6368; */
   transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
-  border-color: #dedede;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.0001), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+  border: 1px dashed rgba(0,0,0,0.2);
   cursor: pointer;
+  padding: 15px;
+  background-color: rgba(255,255,255,0.05);
 }
 
 .main,
 .scoreboard,
-.flashcards-container,
+.container,
 .decks {
   max-width: 920px;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 .controls {
@@ -46,8 +51,8 @@ button {
 /* CSS Grid layouts */
 .grid-parent {
   display: grid;
-  grid-gap: 2px;
-  margin: 2px;
+  grid-gap: 1px;
+  margin: 2px 1px;
   /* prevent CSS grid from overflowing its container */
   min-width: 0;
   min-height: 0;
@@ -62,17 +67,13 @@ button {
 }
 
 .grid-child {
-  border: 1px dotted gray;
-  border-radius: 15px;
-  padding: 8px;
+  padding: 4px;
 }
 
 .grid-div,
 .grid-div-even {
   display: grid;
   grid-template-columns: 40px auto 40px;
-  grid-gap: 10px;
-  margin: 10px;
   /* prevent CSS grid from overflowing its container */
   min-width: 0;
   min-height: 0;
@@ -83,19 +84,34 @@ button {
   grid-gap: 20px;
 }
 
+.grid-item {
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Media Queries - Medium and Larger Screens */
 @media all and (min-width: 620px) {
+  .grid-div,
+  .grid-div-even {
+    margin: 10px;
+  }
+
   .grid-div-even {
     grid-template-columns: repeat(1, 1fr 1fr);
   }
 }
 
 @media all and (min-width: 1200px) {
+  .grid-div,
+  .grid-div-even {
+    margin: 20px;
+  }
+
   .grid-div-even {
     grid-template-columns: repeat(1, 1fr 1fr 1fr);
   }
-}
 
-.grid-item {
-  overflow: hidden;
-  min-width: 0;
+  .grid-child {
+    padding: 12px;
+  }  
 }

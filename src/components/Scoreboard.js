@@ -6,8 +6,13 @@ import '../styles/Scoreboard.css'
 const Scoreboard = props => {
   return (
     <div className="scoreboard">
+      <h3>Flashcards</h3>
+      <div className="scoreboard-title-text small">-  S T A T S  -</div>
       {
-        props.currentDeckName ? <h3>Current Flashcard Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}</h3> : ''
+        props.currentDeckName ? <div className="small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}</div> : ''
+      }
+      {
+        props.currentCardNumber && props.totalCardNumber ? <div className="small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}</div> : ''
       }
 
       <div className="grid-parent grid-parent-3 score-holder">
@@ -30,6 +35,8 @@ const Scoreboard = props => {
 
 Scoreboard.propTypes = {
   currentDeckName: PropTypes.string,
+  currentCardNumber: PropTypes.number,
+  totalCardNumber: PropTypes.number,
   easyCount: PropTypes.number,
   mediumCount: PropTypes.number,
   difficultCount: PropTypes.number
