@@ -5,36 +5,40 @@ import '../styles/Scoreboard.css'
 
 const Scoreboard = props => {
   return (
-    <div className="scoreboard grid-parent score-holder">
-      <div className="scoreboard-title-text small">-  S T A T S  -</div>
-      {
-        props.currentDeckName ? 
-          <div 
-            className="small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}
-          </div> : ''
-      }
-      {
-        props.currentCardNumber && props.totalCardNumber ? 
-          <div 
-            className="small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}
-          </div> : ''
-      }
-
-      {/* <div className="grid-parent grid-parent-3 score-holder"> */}
-        <div className="grid-child grid-parent">
-          <h5>Easy To Recall</h5>
-          <span className="score score-easy">{props.easyCount}</span>
-        </div>
-        <div className="grid-child grid-parent">
-          <span>Difficult To Recall</span>
-          <span className="score score-medium">{props.mediumCount}</span>
-        </div>
-        <div className="grid-child grid-parent">
-          <span>Unable To Recall</span>
-          <span className="score score-wrong">{props.difficultCount}</span>
-        </div>
+    <div className="scoreboard">
+      <div className="scoreboard-small">-  S T A T S  -</div>
+      <div className="grid-parent grid-parent-2">
+        {
+          props.currentDeckName ? 
+            <div 
+              className="scoreboard-small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}
+            </div> : '' 
+        }
+        {
+          props.currentCardNumber && props.totalCardNumber ? 
+            <div 
+              className="scoreboard-small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}
+            </div> : <div className="scoreboard-small">Reviewed: 0</div>
+        }
       </div>
-    // </div>
+      <div className="grid-parent grid-parent-3">
+        {
+          props.easyCount ? 
+            <div className="scoreboard-small">Easy To Recall: {props.easyCount}
+            </div> : ''
+        }
+        {
+          props.mediumCount ? 
+            <div className="scoreboard-small">Difficult To Recall: {props.mediumCount}
+            </div> : ''
+        }
+        {
+          props.difficultCount ? 
+            <div className="scoreboard-small">Unable To Recall: {props.difficultCount}
+            </div> : ''
+        }
+      </div>
+    </div>
   )
 }
 

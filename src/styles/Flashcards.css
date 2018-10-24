@@ -58,12 +58,12 @@ button {
   min-height: 0;
 }
 
-.grid-parent-3 {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 .grid-parent-2 {
   grid-template-columns: 1fr 1fr;
+}
+
+.grid-parent-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .grid-child {

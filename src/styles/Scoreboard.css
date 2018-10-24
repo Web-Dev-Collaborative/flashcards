@@ -1,17 +1,14 @@
-.grid-parent.score-holder {
-  max-width: 600px;
-  margin: 1px auto;
+.scoreboard {
+  max-width: 920px;
+  min-height: 50px;
+  margin: 10px auto;
 }
 
 .scoreboard-title-text {
   text-transform: uppercase;
 }
 
-.small {
+.scoreboard-small {
   font-size: small;
-}
-
-.score-holder.grid-child {
-  padding: 5px 3px;
-  margin: 5px 0;
+  padding: 2px 0;
 }
