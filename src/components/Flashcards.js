@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import Scoreboard from './Scoreboard'
-import Deck from './Deck'
-import Survey from './Survey'
 import Card from './Card'
+import DeckChooser from './DeckChooser'
+import Scoreboard from './Scoreboard'
+import Survey from './Survey'
 
 import '../styles/reset.css'
 import '../styles/Flashcards.css'
@@ -157,7 +157,7 @@ class Flashcards extends Component {
         /> 
 
         <div className="container">
-          <div className="flashcards-container grid-div">
+          <div className="flashcards-container">
             <img 
               alt="Previous Card"
               className="controls controls-div controls-prev prev"
@@ -207,25 +207,7 @@ class Flashcards extends Component {
             ''
         }
 
-        <div className="decks">
-          <h3>Select other flashcard decks</h3>
-          <div className="grid-div-even">
-          { 
-            Object.keys(this.state.decks).map(deckName => {
-            return <div key={deckName} className="grid-item">
-                    <button 
-                      onClick={(e) => this.changeDeckTo(deckName)}
-                    > 
-                    {deckName}</button>
-
-                    <Deck 
-                      cards={this.state.decks[deckName]}
-                    />
-                  </div>
-            })
-          }
-          </div>
-        </div>
+        <DeckChooser decks={this.state.decks} changeDeckTo={this.changeDeckTo} />
 
         <footer>
           &copy; 2018

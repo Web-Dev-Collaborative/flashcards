@@ -1,7 +1,7 @@
 body {
   text-align: center;
   font-size: 115%;
-  background-color: #f5f7fa;
+  background-color: #fafafa;
 }
 
 body,
@@ -66,12 +66,7 @@ button {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.grid-child {
-  padding: 4px;
-}
-
-.grid-div,
-.grid-div-even {
+.flashcards-container {
   display: grid;
   grid-template-columns: 40px auto 40px;
   /* prevent CSS grid from overflowing its container */
@@ -79,39 +74,15 @@ button {
   min-height: 0;
 }
 
-.grid-div-even {
-  grid-template-columns: repeat(1, 1fr);
-  grid-gap: 20px;
-}
-
-.grid-item {
-  overflow: hidden;
-  min-width: 0;
-}
-
 /* Media Queries - Medium and Larger Screens */
 @media all and (min-width: 620px) {
-  .grid-div,
-  .grid-div-even {
+  .flashcards-container {
     margin: 10px;
-  }
-
-  .grid-div-even {
-    grid-template-columns: repeat(1, 1fr 1fr);
   }
 }
 
 @media all and (min-width: 1200px) {
-  .grid-div,
-  .grid-div-even {
+  .flashcards-container {
     margin: 20px;
   }
-
-  .grid-div-even {
-    grid-template-columns: repeat(1, 1fr 1fr 1fr);
-  }
-
-  .grid-child {
-    padding: 12px;
-  }  
 }

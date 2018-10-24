@@ -30,3 +30,17 @@
   padding: 3px;
   margin: auto;
 }
+
+.grid-child {
+  padding: 4px;
+}
+
+/* Media Queries - Medium and Larger Screens */
+/* @media all and (min-width: 620px) {
+} */
+
+@media all and (min-width: 1200px) {
+  .grid-child {
+    padding: 12px;
+  }  
+}
