@@ -145,6 +145,8 @@ class Flashcards extends Component {
 
     return (
       <div className="main">
+        <h1>Flashcards</h1>
+
         <Scoreboard 
           currentDeckName={this.state.currentDeckName} 
           easyCount={easyCount}

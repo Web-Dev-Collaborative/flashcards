@@ -5,17 +5,22 @@ import '../styles/Scoreboard.css'
 
 const Scoreboard = props => {
   return (
-    <div className="scoreboard">
-      <h3>Flashcards</h3>
+    <div className="scoreboard grid-parent score-holder">
       <div className="scoreboard-title-text small">-  S T A T S  -</div>
       {
-        props.currentDeckName ? <div className="small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}</div> : ''
+        props.currentDeckName ? 
+          <div 
+            className="small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}
+          </div> : ''
       }
       {
-        props.currentCardNumber && props.totalCardNumber ? <div className="small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}</div> : ''
+        props.currentCardNumber && props.totalCardNumber ? 
+          <div 
+            className="small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}
+          </div> : ''
       }
 
-      <div className="grid-parent grid-parent-3 score-holder">
+      {/* <div className="grid-parent grid-parent-3 score-holder"> */}
         <div className="grid-child grid-parent">
           <h5>Easy To Recall</h5>
           <span className="score score-easy">{props.easyCount}</span>
@@ -29,7 +34,7 @@ const Scoreboard = props => {
           <span className="score score-wrong">{props.difficultCount}</span>
         </div>
       </div>
-    </div>
+    // </div>
   )
 }
 
