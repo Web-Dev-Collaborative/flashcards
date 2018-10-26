@@ -114,22 +114,24 @@ class Flashcards extends Component {
     if (ofComponent === 'close') {
       // console.log('close clicked')
       this.setState({
+        deckChooserShowing: false,
+        deckCreatorShowing: false,
+        flashcardFrontShowing: true,
         optionsShowing: false,
-        reviewShowing: true,
         quizShowing: false,
         resultsShowing: false,
-        deckChooserShowing: false,
-        deckCreatorShowing: false
+        reviewShowing: true
       })  
     } else {
       // console.log(ofComponent+' clicked')
       this.setState({
-        optionsShowing: false,
-        reviewShowing: false,
-        quizShowing: false,
-        resultsShowing: false,
         deckChooserShowing: false,
         deckCreatorShowing: false,
+        flashcardFrontShowing: true,
+        optionsShowing: false,
+        quizShowing: false,
+        resultsShowing: false,
+        reviewShowing: false,
         [ofComponent]: true
       })  
     }
