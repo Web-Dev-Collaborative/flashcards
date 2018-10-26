@@ -4,19 +4,15 @@ import PropTypes from 'prop-types'
 import '../styles/Card.css'
 
 const Card = props => {
-  if (props.frontShowing) {
-    return (
+  return (
+    props.frontShowing ? 
       <button onClick={() => props.flipCard()} className="card card-front">
         <div className="card-data-div">{ props.front }</div>
-      </button>
-    )
-  } else {
-    return (
+      </button> :
       <button onClick={(e) => { e.stopPropagation(); props.flipCard() }} className="card card-back">
         <div className="card-data-div">{ props.back }</div>
       </button>
-    ) 
-  }
+  )
 }
 
 Card.propTypes = {

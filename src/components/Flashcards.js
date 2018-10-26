@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import Card from './Card'
 import DeckChooser from './DeckChooser'
+import Review from './Review'
 import Scoreboard from './Scoreboard'
 import Survey from './Survey'
 
@@ -149,47 +149,22 @@ class Flashcards extends Component {
 
         <Scoreboard 
           currentDeckName={this.state.currentDeckName} 
+          currentCardNumber={currentCardNumber}
+          difficultCount={difficultCount}
           easyCount={easyCount}
           mediumCount={mediumCount}
-          difficultCount={difficultCount}
-          currentCardNumber={currentCardNumber}
           totalCardNumber={totalCardNumber}
         /> 
 
-        <div className="container">
-          <div className="flashcards-container">
-            <img 
-              alt="Previous Card"
-              className="controls controls-div controls-prev prev"
-              style={ { transform: 'rotate(180deg)' } }
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
-              onClick={this.showPreviousCard} 
-              />
-            { // if there are more cards to be reviewed
-              this.state.keysArray.length > 0 ? 
-              <Card 
-                frontShowing={this.state.flashcardFrontShowing} 
-                front={Object.keys(this.state.currentDeck)[this.state.currentCardIndex]}
-                back={this.state.currentDeck[Object.keys(this.state.currentDeck)[this.state.currentCardIndex]]}
-                flipCard={this.flipCard}
-              /> 
-            :
-            // otherwise show a default card that indicates you have finished with this deck
-              <Card 
-                frontShowing={this.state.flashcardFrontShowing} 
-                front='You have run out of cards to review. Great job! Please select another deck below.'
-                back='Nothing to see here. Move along.'
-                flipCard={this.flipCard}
-              />
-            }
-            <img 
-              alt="Next Card"
-              className="controls controls-div controls-next next"
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
-              onClick={this.showNextCard} 
-            />
-          </div>
-        </div>
+        <Review 
+          currentDeck={this.state.currentDeck}
+          currentCardIndex={this.state.currentCardIndex}
+          flashcardFrontShowing={this.state.flashcardFrontShowing}
+          flipCard={this.flipCard} 
+          keysArray={this.state.keysArray}
+          showPreviousCard={this.showPreviousCard}
+          showNextCard={this.showNextCard}
+        />
 
         { 
           // The Survey only displays when the back of the card is showing
@@ -198,8 +173,8 @@ class Flashcards extends Component {
             this.state.keysArray.length > 0 ?
               // display the survey
               <Survey 
-                moveCardToBucket={this.moveCardToBucket} 
                 front={Object.keys(this.state.currentDeck)[this.state.currentCardIndex]}
+                moveCardToBucket={this.moveCardToBucket} 
               /> 
             : 
               '' 
@@ -207,7 +182,7 @@ class Flashcards extends Component {
             ''
         }
 
-        <DeckChooser decks={this.state.decks} changeDeckTo={this.changeDeckTo} />
+        <DeckChooser changeDeckTo={this.changeDeckTo} decks={this.state.decks} />
 
         <footer>
           &copy; 2018

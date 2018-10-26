@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import '../styles/Deck.css'
 
-const Deck = (props) => {
+const Deck = props => {
 
   // don't render until card deck is loaded
   if (!props.cards) return null

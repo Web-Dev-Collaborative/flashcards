@@ -17,10 +17,13 @@ const DeckChooser = props => {
                   onClick={(e) => props.changeDeckTo(deckName)}
                 > 
                 {deckName}</button>
-
-                <Deck 
-                  cards={props.decks[deckName]}
-                />
+                <div className="deck-overlay" onClick={(e) => {
+                  console.log(e.target)
+                }}>
+                  <Deck 
+                    cards={props.decks[deckName]}
+                  />
+                </div>
               </div>
         })
       }
@@ -31,7 +34,7 @@ const DeckChooser = props => {
 
 DeckChooser.propTypes = {
   changeDeckTo: PropTypes.func.isRequired,
-  decks: PropTypes.object
+  decks: PropTypes.object.isRequired
 }
 
 export default DeckChooser

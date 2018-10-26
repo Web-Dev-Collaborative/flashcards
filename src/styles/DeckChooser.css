@@ -11,7 +11,25 @@
   min-height: 0;
 }
 
+/* An overlay for the overflow:scroll of the displayed decks
+   user must interact (tap for mobile or mouseover) to enable scrolling within the deck div */
+.deck-overlay {
+  color: #afafaf;
+  background-color: rgba(255,255,255,0.9);
+  width: 100%;
+  height: 100%;
+}
+
+.deck-overlay:hover,
+.deck-overlay:active,
+.deck-overlay-active {
+  background-color: none;
+}
+
 @media all and (min-width: 620px) {
+  .deck-overlay {
+    color: rgba(0,0,0,0.9);
+  }  
   .growing-grid-div {
     margin: 10px;
     grid-template-columns: repeat(1, 1fr 1fr);
