@@ -12,6 +12,10 @@ body,
   padding-top: 5px;  
 }
 
+.main {
+  min-height: 85vh;
+}
+
 h1,
 h2,
 h3 {
@@ -85,4 +89,27 @@ button {
   .flashcards-container {
     margin: 20px;
   }
+}
+
+/* Options Menu Styles */
+.open-options,
+.close-options {
+  position: fixed;
+  top: 7px;
+  left: 7px;
+  max-width: 40px;
+}
+
+.options-container {
+  border: 1px dotted black;
+  padding: 25px;
+  margin: 5px;
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  background-color: rgba(235,235,235,0.95);
+  z-index: 1000;
+  text-align: left;
 }

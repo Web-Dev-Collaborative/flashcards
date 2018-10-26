@@ -2,21 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class Quiz extends React.Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-    this.state = {
-      // TODO fix these props -> should this be an array.length?
-      numberOfQuestions = props.numberOfQuestions || 0,
-      // order can be ['in numerical order', 'random', 'least studied', 'hardest', 'easiest']
-      inWhatOrder = props.inWhatOrder || 'in numerical order'
-    }
-  }
+  //   this.state = {
+  //     // TODO fix these props -> should this be an array.length?
+  //     numberOfQuestions = props.numberOfQuestions || 0,
+  //     // order can be ['in numerical order', 'random', 'least studied', 'hardest', 'easiest']
+  //     inWhatOrder = props.inWhatOrder || 'in numerical order'
+  //   }
+  // }
 
   render() {
     return (
       <div className="quiz">
-        <div className="quiz-header">
+      <h3>Quiz Coming Soon!</h3>
+        {/* <div className="quiz-header">
           Choose Quiz Options
         </div>
         <div className="how-many">
@@ -34,7 +35,7 @@ class Quiz extends React.Component {
           <button className="quiz-order-button" data-order="hardest" onClick={(e) => console.log(e.target)} >hardest</button>
           <button className="quiz-order-button" data-order="easiest" onClick={(e) => console.log(e.target)} >easiest</button>
         </div>
-        <button className="quiz-submit-button" onSubmit={(e) => console.log(e.target)} >save quiz settings</button>
+        <button className="quiz-submit-button" onSubmit={(e) => console.log(e.target)} >save quiz settings</button> */}
       </div>
     )
   }
