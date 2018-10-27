@@ -109,14 +109,13 @@ class Flashcards extends Component {
 
   toggleDisplay = (ofComponent) => {
     // console.log(ofComponent)
-    // if the close button is clicked there is no component view to toggle
-    // review is the default view set to true
+    // if the close button is clicked there, close the menu
     if (ofComponent === 'close') {
       // console.log('close clicked')
       this.setState({
         deckChooserShowing: false,
         deckCreatorShowing: false,
-        flashcardFrontShowing: true,
+        flashcardFrontShowing: false,
         optionsShowing: false,
         quizShowing: false,
         resultsShowing: false,

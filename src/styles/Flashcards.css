@@ -26,8 +26,8 @@ h3 {
 
 button {
   border-radius: 4px;
-  font-weight: bold;
   text-transform: uppercase;
+  width: 100%;
   /* color: #5f6368; */
   transition: box-shadow 135ms cubic-bezier(.4,0,.2,1),width 235ms cubic-bezier(.4,0,.2,1);
   box-shadow: 0 1px 4px rgba(0,0,0,0.0001), 0 0 40px rgba(128, 128, 128, 0.1) inset;
@@ -78,19 +78,6 @@ button {
   min-height: 0;
 }
 
-/* Media Queries - Medium and Larger Screens */
-@media all and (min-width: 620px) {
-  .flashcards-container {
-    margin: 10px;
-  }
-}
-
-@media all and (min-width: 1200px) {
-  .flashcards-container {
-    margin: 20px;
-  }
-}
-
 /* Options Menu Styles */
 .open-options,
 .close-options {
@@ -107,9 +94,24 @@ button {
   position: fixed;
   top: 5px;
   right: 5px;
-  bottom: 5px;
   left: 5px;
   background-color: rgba(235,235,235,0.95);
   z-index: 1000;
-  text-align: left;
+  max-width: 411px;
+}
+
+/* Media Queries - Medium and Larger Screens */
+@media all and (min-width: 768px) {
+  .flashcards-container {
+    margin: 10px;
+  }
+  .main > div.options-container {
+    max-width: 384px;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .flashcards-container {
+    margin: 20px;
+  }
 }

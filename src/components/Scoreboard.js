@@ -6,8 +6,8 @@ import '../styles/Scoreboard.css'
 const Scoreboard = props => {
   return (
     <div className="scoreboard">
-      <div className="scoreboard-small">-  S T A T S  -</div>
-      <div className="grid-parent grid-parent-2">
+      <div className="grid-parent grid-parent-3">
+        <div className="scoreboard-small"></div>
         {
           props.currentDeckName ? 
             <div 
