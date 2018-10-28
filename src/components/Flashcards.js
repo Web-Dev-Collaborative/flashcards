@@ -17,6 +17,7 @@ class Flashcards extends Component {
     this.state = {
       isLoading: false,
       decks: {},
+      stats: {},
       flashcardFrontShowing: true,
       currentDeck: {},
       currentDeckName: '',
@@ -26,7 +27,7 @@ class Flashcards extends Component {
       easyBucket: {},
       mediumBucket: {},
       difficultBucket: {},
-      // Options and other components displaying booleans
+      // Options and other component display booleans
       optionsShowing: false,
       reviewShowing: true,
       quizShowing: false,
@@ -76,7 +77,7 @@ class Flashcards extends Component {
 
   moveCardToBucket = (cardFront, bucket) => {
     // console.log('moving '+cardFront+' to bucket '+bucket)
-    // prevents undefined from being added to the bucket object
+    // prevents undefined/blank cards from being added to the bucket object
     if (cardFront === undefined) return
     // Copy the current deck of flashcards in use
     let tmpDeck = {...this.state.currentDeck}
@@ -85,8 +86,8 @@ class Flashcards extends Component {
     // Copy the object of the current bucket being selected (easy, medium, difficult) 
     // and append the new card to being added to that bucket
     let tmpBucket = {...this.state[bucket], [cardFront]: this.state.currentDeck[cardFront]},
+        // adjust the current card index number, defaults to 0 
         adjustedCardIndex = 0
-    // adjust the current card index number, defaults to 0 
     // if it's not already 0...
     if (this.state.currentCardIndex > 0) {
       // to one less than the previous current card index as a card was removed and put in a bucket 
@@ -134,6 +135,11 @@ class Flashcards extends Component {
       document.addEventListener("keydown", this.onKeyDown);
   }
 
+  componentDidUpdate = () => {
+    // when the component updates, save to localStorage
+    localStorage.setItem('usarneme_flashcards', JSON.stringify(this.state))
+  }
+
   componentWillUnmount = () => {
       document.removeEventListener("keydown", this.onKeyDown);
   }
@@ -141,6 +147,30 @@ class Flashcards extends Component {
   async componentDidMount() {
     this.setState({ isLoading: true })
 
+    // Restore flashcard set from localStorage if available
+    const localStorageRef = localStorage.getItem('usarneme_flashcards')
+
+    if(localStorageRef) {
+      console.log('Localstore loaded: ')
+      console.dir(JSON.parse(localStorageRef))
+
+      const decks = JSON.parse(localStorageRef).decks
+      const stats = JSON.parse(localStorageRef).stats
+      const currentDeckName = JSON.parse(localStorageRef).currentDeckName
+
+      this.setState({
+        decks,
+        stats,
+        // default deck is Spanish if no other current deck name is set
+        currentDeckName: currentDeckName || 'spanish',
+        currentDeck: decks[currentDeckName] || decks['spanish'],
+        keysArray: Object.keys(decks[currentDeckName]) || Object.keys(decks['spanish']),
+        isLoading: false
+      })
+      return
+    }
+
+    console.log('localstorage unavailable. loading remote decks')
     try {
       const result = await axios.get('./FlashcardSets.json')
       this.setState({
@@ -189,7 +219,7 @@ class Flashcards extends Component {
         { this.state.optionsShowing ? 
           <div className="options-container"> 
             <h3>Options</h3>
-            <div className="grid-parent">
+            <div className="grid-parent options-buttons-container">
               <button onClick={() => this.displayComponent('reviewShowing')}>Review Cards</button>
               <button onClick={() => this.displayComponent('quizShowing')}>Quiz</button>
               <button onClick={() => this.displayComponent('resultsShowing')}>See Results</button>

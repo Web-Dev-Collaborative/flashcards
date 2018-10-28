@@ -35,7 +35,6 @@ button {
   cursor: pointer;
   padding: 15px;
   background-color: rgba(0,0,0,0.1);
-  margin: 3px auto;
 }
 
 .main,
@@ -99,6 +98,10 @@ button {
   background-color: rgba(235,235,235,0.9);
   z-index: 1000;
   max-width: 411px;
+}
+
+.options-buttons-container > button {
+  margin: 3px auto;
 }
 
 /* Media Queries - Medium and Larger Screens */
