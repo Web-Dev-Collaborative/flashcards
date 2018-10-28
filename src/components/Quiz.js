@@ -1,49 +1,48 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Quiz extends React.Component {
-  // constructor(props) {
-  //   super(props)
+import Review from './Review'
+import Survey from './Survey'
 
-  //   this.state = {
-  //     // TODO fix these props -> should this be an array.length?
-  //     numberOfQuestions = props.numberOfQuestions || 0,
-  //     // order can be ['in numerical order', 'random', 'least studied', 'hardest', 'easiest']
-  //     inWhatOrder = props.inWhatOrder || 'in numerical order'
-  //   }
-  // }
+const Quiz = props => {
+  return (
+    <div className="quiz">
+      <h3>Quiz!</h3>
+      <Review 
+        currentCardIndex={props.currentCardIndex}
+        currentDeck={props.currentDeck}
+        flashcardFrontShowing={props.flashcardFrontShowing}
+        flipCard={props.flipCard} 
+        keysArray={props.keysArray}
+        showNextCard={props.showNextCard}
+        showPreviousCard={props.showPreviousCard}
+      />
 
-  render() {
-    return (
-      <div className="quiz">
-      <h3>Quiz Coming Soon!</h3>
-        {/* <div className="quiz-header">
-          Choose Quiz Options
-        </div>
-        <div className="how-many">
-          How many questions
-          <button className="how-many-button" data-number="4" onClick={(e) => console.log(e.target)} >4</button>
-          <button className="how-many-button" data-number="8" onClick={(e) => console.log(e.target)} >8</button>
-          <button className="how-many-button" data-number="12" onClick={(e) => console.log(e.target)} >12</button>
-          <button className="how-many-button" data-number="all" onClick={(e) => console.log(e.target)} >all</button>
-        </div>
-        <div className="quiz-order">
-          <span>In what order?</span>
-          <button className="quiz-order-button" data-order="in numerical order" onClick={(e) => console.log(e.target)} >in numerical order</button>
-          <button className="quiz-order-button" data-order="random" onClick={(e) => console.log(e.target)} >random</button>
-          <button className="quiz-order-button" data-order="least studied" onClick={(e) => console.log(e.target)} >least studied</button>
-          <button className="quiz-order-button" data-order="hardest" onClick={(e) => console.log(e.target)} >hardest</button>
-          <button className="quiz-order-button" data-order="easiest" onClick={(e) => console.log(e.target)} >easiest</button>
-        </div>
-        <button className="quiz-submit-button" onSubmit={(e) => console.log(e.target)} >save quiz settings</button> */}
-      </div>
-    )
-  }
+      { // The Survey only displays when the back of the card is showing
+        !props.flashcardFrontShowing ? 
+          // if the front is NOT showing and there are more cards in the current flashcard deck...
+          props.keysArray.length > 0 ?
+            // display the survey
+            <Survey 
+              front={Object.keys(props.currentDeck)[props.currentCardIndex]}
+              moveCardToBucket={props.moveCardToBucket} 
+            /> 
+          : '' 
+        : ''
+      }
+    </div>
+  )
 }
 
 Quiz.propTypes = {
-  numberOfQuestions: PropTypes.number,
-  inWhatOrder: PropTypes.string
+  currentCardIndex: PropTypes.number,
+  currentDeck: PropTypes.object,
+  flashcardFrontShowing: PropTypes.bool,
+  flipCard : PropTypes.func,
+  keysArray: PropTypes.array,
+  moveCardToBucket: PropTypes.func,
+  showNextCard: PropTypes.func,
+  showPreviousCard: PropTypes.func
 }
 
 export default Quiz
