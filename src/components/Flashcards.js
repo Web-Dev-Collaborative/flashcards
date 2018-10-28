@@ -127,7 +127,7 @@ class Flashcards extends Component {
   }
 
   onKeyDown = e => {
-    console.log(e.keyCode + ' pressed');
+    // console.log(e.keyCode + ' pressed');
     if (e.keyCode === 27) this.toggleOptionsMenu()
   }
 
