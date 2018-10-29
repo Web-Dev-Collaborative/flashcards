@@ -13,5 +13,20 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "*** Flashcards ***",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Usarneme/flashcards.git"
+  },
+  "keywords": [
+    "flashcards"
+  ],
+  "author": "usarneme",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Usarneme/flashcards/issues"
+  },
+  "homepage": "https://github.com/Usarneme/flashcards#readme"
 }

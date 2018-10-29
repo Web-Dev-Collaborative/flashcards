@@ -44,13 +44,19 @@ class CardCreator extends React.Component {
 
     console.log('Submitted front: '+card.front+' and back: '+card.back)
 
-    // TODO add logic to check for duplicate keys = try..catch
     this.props.addCard(card)
+
     this.setState({ 
       // Clear the form contents (front/back) after submission
       valueFront: '',
       valueBack: ''
     })
+    // Set the focus back to the card front input
+    this.cardFrontInput.focus()
+  }
+
+  componentDidMount() {
+    this.cardFrontInput.focus()
   }
 
   render() {
@@ -60,22 +66,23 @@ class CardCreator extends React.Component {
         <h3>Card Creator</h3>
         <form onSubmit={this.handleSubmit} >
           <label>
-            Card Front:
             <input 
               name="front"
               type="text" 
               value={this.state.valueFront} 
-              onChange={this.handleChange} />
+              onChange={this.handleChange} 
+              placeholder="Card Front"
+              ref={(input) => this.cardFrontInput = input }/>
           </label>
           <label>
-            Card Back:
             <input 
               name="back"
               type="text" 
+              placeholder="Card Back"
               value={this.state.valueBack} 
               onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Add Card" className="button add-card" />
         </form>
       </div>
     )

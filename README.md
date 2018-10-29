@@ -9,7 +9,7 @@ For an example of a production build, visit usarneme-flashcards.surge.sh
 
 
 **** Tech ****
+JavaScript/ES6
 ReactJS
-JavaScript
 HTML
 CSS

@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import DeckChooser from './DeckChooser'
 import DeckCreator from './DeckCreator'
+import DeckEditor from './DeckEditor'
 import Quiz from './Quiz'
 import Results from './Results'
 import Review from './Review'
@@ -33,7 +34,8 @@ class Flashcards extends Component {
       quizShowing: false,
       resultsShowing: false,
       deckChooserShowing: false,
-      deckCreatorShowing: false
+      deckCreatorShowing: false,
+      deckEditorShowing: false
     }
   }
 
@@ -41,9 +43,36 @@ class Flashcards extends Component {
     this.setState({ flashcardFrontShowing: !this.state.flashcardFrontShowing })
   }
 
+  addDeck = deck => {
+    // Validate deck has a name and cards and that the name is not a duplicate
+    if (!deck.name) return
+    if (!deck.cards) return
+    // duplicate name 
+    const currentDeckNames = Object.keys(this.state.decks)
+    if (currentDeckNames.includes(deck.name)) {
+      alert('You already have a deck by that name. Try another name.')
+      return
+    }
+    const tmpDecks = {...this.state.decks, [deck.name]: deck.cards}
+    // Update state adding the deck and making it the currently selected deck
+    this.setState({ 
+      decks: tmpDecks,
+      currentDeck: deck.cards,
+      currentDeckName: deck.name,
+      currentCardIndex: 0,
+      flashcardFrontShowing: true,
+      keysArray: Object.keys(deck.cards),
+      easyBucket: {},
+      mediumBucket: {},
+      difficultBucket: {},
+      reviewShowing: true,
+      deckCreatorShowing: false
+    })
+  }
+
   changeDeckTo = deckName => {
     if (!this.state.decks && !this.state.decks[deckName]) {
-      console.log('No deck of name '+deckName)
+      // console.log('No deck of name '+deckName)
       return null
     } else {
       this.setState({ 
@@ -151,8 +180,8 @@ class Flashcards extends Component {
     const localStorageRef = localStorage.getItem('usarneme_flashcards')
 
     if(localStorageRef) {
-      console.log('Localstore loaded: ')
-      console.dir(JSON.parse(localStorageRef))
+      console.log('Local storage loaded.')
+      // console.dir(JSON.parse(localStorageRef))
 
       const decks = JSON.parse(localStorageRef).decks
       const stats = JSON.parse(localStorageRef).stats
@@ -225,6 +254,7 @@ class Flashcards extends Component {
               <button onClick={() => this.displayComponent('resultsShowing')}>See Results</button>
               <button onClick={() => this.displayComponent('deckChooserShowing')}>Select a Deck of Flashcards</button>
               <button onClick={() => this.displayComponent('deckCreatorShowing')}>Create a New Deck of Flashcards</button>
+              <button onClick={() => this.displayComponent('deckEditorShowing')}>Edit a Deck of Flashcards</button>
             </div>
             <img 
               alt="Close Options"
@@ -272,7 +302,9 @@ class Flashcards extends Component {
 
         { this.state.deckChooserShowing ? <DeckChooser changeDeckTo={this.changeDeckTo} decks={this.state.decks} /> : '' }
 
-        { this.state.deckCreatorShowing ? <DeckCreator /> : '' }
+        { this.state.deckCreatorShowing ? <DeckCreator addDeck={this.addDeck} currentDeckNames={ Object.keys(this.state.decks) }/> : '' }
+
+        { this.state.deckEditorShowing ? <DeckEditor decks={this.state.decks} /> : '' }
 
         <div className="footer">
           <footer>
