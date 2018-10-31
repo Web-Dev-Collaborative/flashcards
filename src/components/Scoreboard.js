@@ -9,12 +9,6 @@ const Scoreboard = props => {
       <div className="grid-parent grid-parent-3">
         <div className="scoreboard-small"></div>
         {
-          props.currentDeckName ? 
-            <div 
-              className="scoreboard-small">Deck: {props.currentDeckName.charAt(0).toUpperCase() + props.currentDeckName.slice(1)}
-            </div> : '' 
-        }
-        {
           props.currentCardNumber && props.totalCardNumber ? 
             <div 
               className="scoreboard-small">Reviewed: {props.currentCardNumber} of {props.totalCardNumber}

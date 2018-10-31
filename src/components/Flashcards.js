@@ -7,7 +7,6 @@ import DeckEditor from './DeckEditor'
 import Quiz from './Quiz'
 import Results from './Results'
 import Review from './Review'
-import Scoreboard from './Scoreboard'
 
 import '../styles/reset.css'
 import '../styles/Flashcards.css'
@@ -140,6 +139,7 @@ class Flashcards extends Component {
     this.setState({
       deckChooserShowing: false,
       deckCreatorShowing: false,
+      deckEditorShowing: false,
       flashcardFrontShowing: true,
       optionsShowing: false,
       quizShowing: false,
@@ -222,7 +222,8 @@ class Flashcards extends Component {
   render() {
     // if the card decks haven't loaded, don't attempt to render. wait for loading to finish.
     if (!Object.keys(this.state.decks).length > 0) return null
-    // variables for readability
+
+    // Results component variables - for readability
     let easyCount = Object.keys(this.state.easyBucket).length,
         mediumCount = Object.keys(this.state.mediumBucket).length,
         difficultCount = Object.keys(this.state.difficultBucket).length
@@ -266,19 +267,17 @@ class Flashcards extends Component {
           ''
         }
 
-        <Scoreboard 
-          currentDeckName={this.state.currentDeckName} 
-          currentCardNumber={currentCardNumber}
-          difficultCount={difficultCount}
-          easyCount={easyCount}
-          mediumCount={mediumCount}
-          totalCardNumber={totalCardNumber}
-        /> 
+        { this.state.currentDeckName ? 
+          <div 
+            className="small">Deck: {this.state.currentDeckName.charAt(0).toUpperCase() + this.state.currentDeckName.slice(1)}
+          </div> : '' 
+        }
 
         { this.state.reviewShowing ? 
           <Review 
             currentCardIndex={this.state.currentCardIndex}
             currentDeck={this.state.currentDeck}
+            displayComponent={this.displayComponent}
             flashcardFrontShowing={this.state.flashcardFrontShowing}
             flipCard={this.flipCard} 
             keysArray={this.state.keysArray}
@@ -287,18 +286,28 @@ class Flashcards extends Component {
           /> : ''    
         }
 
-        { this.state.resultsShowing ? <Results /> : '' }
+        { this.state.resultsShowing ?
+          <Results 
+            currentCardNumber={currentCardNumber}
+            totalCardNumber={totalCardNumber}
+            easyCount={easyCount}
+            mediumCount={mediumCount}
+            difficultCount={difficultCount}
+          /> : '' }
 
-        { this.state.quizShowing ? <Quiz 
-          currentCardIndex={this.state.currentCardIndex}
-          currentDeck={this.state.currentDeck}
-          flashcardFrontShowing={this.state.flashcardFrontShowing}
-          flipCard={this.flipCard} 
-          keysArray={this.state.keysArray}
-          moveCardToBucket={this.moveCardToBucket}
-          showNextCard={this.showNextCard}
-          showPreviousCard={this.showPreviousCard}        
-        /> : '' }
+        { this.state.quizShowing ? 
+          <Quiz 
+            currentCardIndex={this.state.currentCardIndex}
+            currentDeck={this.state.currentDeck}
+            displayComponent={this.displayComponent}
+            flashcardFrontShowing={this.state.flashcardFrontShowing}
+            flipCard={this.flipCard} 
+            keysArray={this.state.keysArray}
+            moveCardToBucket={this.moveCardToBucket}
+            showNextCard={this.showNextCard}
+            showPreviousCard={this.showPreviousCard}        
+          /> : '' 
+        }
 
         { this.state.deckChooserShowing ? <DeckChooser changeDeckTo={this.changeDeckTo} decks={this.state.decks} /> : '' }
 

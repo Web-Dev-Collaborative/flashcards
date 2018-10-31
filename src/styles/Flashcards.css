@@ -105,6 +105,11 @@ button,
   margin: 3px auto;
 }
 
+.footer {
+  margin: 10px auto;
+  padding: 45px 15px 15px
+}
+
 /* Media Queries - Medium and Larger Screens */
 @media all and (min-width: 768px) {
   .flashcards-container {

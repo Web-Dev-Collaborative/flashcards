@@ -11,9 +11,11 @@ const Quiz = props => {
       <Review 
         currentCardIndex={props.currentCardIndex}
         currentDeck={props.currentDeck}
+        displayComponent={props.displayComponent}
         flashcardFrontShowing={props.flashcardFrontShowing}
         flipCard={props.flipCard} 
         keysArray={props.keysArray}
+        hideArrows={true}
         showNextCard={props.showNextCard}
         showPreviousCard={props.showPreviousCard}
       />
@@ -37,6 +39,7 @@ const Quiz = props => {
 Quiz.propTypes = {
   currentCardIndex: PropTypes.number,
   currentDeck: PropTypes.object,
+  displayComponent: PropTypes.func.isRequired,
   flashcardFrontShowing: PropTypes.bool,
   flipCard : PropTypes.func,
   keysArray: PropTypes.array,

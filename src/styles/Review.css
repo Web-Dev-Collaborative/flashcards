@@ -1,0 +1,5 @@
+div.no-cards-div {
+  margin: 20px auto;
+  padding: 20px;
+  grid-gap: 10px;
+}
