@@ -13,13 +13,12 @@ const DeckChooser = props => {
       { 
         Object.keys(props.decks).map(deckName => {
         return <div key={deckName} className="grid-child">
-                <button 
-                  onClick={(e) => props.changeDeckTo(deckName)}
-                > 
-                {deckName}</button>
-                <div className="deck-overlay" onClick={(e) => {
-                  console.log(e.target)
-                }}>
+                  <button onClick={(e) => props.changeDeckTo(deckName)}>{deckName}</button>
+
+                  <div className="deck-overlay" onClick={(e) => {
+                    console.log(e.target)
+                  }}>
+                  
                   <Deck 
                     cards={props.decks[deckName]}
                   />

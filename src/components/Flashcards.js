@@ -313,7 +313,13 @@ class Flashcards extends Component {
 
         { this.state.deckCreatorShowing ? <DeckCreator addDeck={this.addDeck} currentDeckNames={ Object.keys(this.state.decks) }/> : '' }
 
-        { this.state.deckEditorShowing ? <DeckEditor decks={this.state.decks} /> : '' }
+        { this.state.deckEditorShowing ? 
+          <DeckEditor 
+            decks={this.state.decks} 
+            currentDeckName={this.state.currentDeckName} 
+            changeDeckTo={this.changeDeckTo}
+          /> : '' 
+        }
 
         <div className="footer">
           <footer>

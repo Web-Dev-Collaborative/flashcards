@@ -1,0 +1,16 @@
+div.growing-grid-div {
+  grid-gap: 3px;
+}
+
+div.grid-child {
+  padding: 3px;
+}
+
+@media all and (min-width: 1200px) {
+  div.growing-grid-div {
+    grid-gap: 4px;
+  }
+  div.grid-child {
+    padding: 4px;
+  }  
+}

@@ -9,16 +9,18 @@ class CardCreator extends React.Component {
     this.state = {
       deckName: props.deckName,
       // Current card being added front and back text
-      valueFront: '',
-      valueBack: ''
+      valueFront: props.valueFront || '',
+      valueBack: props.valueBack || ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   static propTypes = {
+    addCard: PropTypes.func.isRequired,
     deckName: PropTypes.string.isRequired,
-    addCard: PropTypes.func.isRequired
+    valueBack: PropTypes.string,
+    valueFront: PropTypes.string
   }  
 
   handleChange(event) {
@@ -71,14 +73,14 @@ class CardCreator extends React.Component {
               type="text" 
               value={this.state.valueFront} 
               onChange={this.handleChange} 
-              placeholder="Card Front"
+              placeholder={this.state.valueFront || "Card Front"}
               ref={(input) => this.cardFrontInput = input }/>
           </label>
           <label>
             <input 
               name="back"
               type="text" 
-              placeholder="Card Back"
+              placeholder={this.state.valueBack || "Card Back"}
               value={this.state.valueBack} 
               onChange={this.handleChange} />
           </label>
