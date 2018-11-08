@@ -1,56 +1,30 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+// bind the action creators to be dispatched on submit/click/other events described in the component
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import Flashcards from '../components/Flashcards'
+// // allows the react router to connect to the redux store
+// // React-Router-4 does not have browserHistory
+// // see: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md
+// import { withRouter } from 'react-router-dom'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoading: false,
-      decks: {},
-      stats: {},
-      flashcardFrontShowing: true,
-      currentDeck: {},
-      currentDeckName: '',
-      keysArray: [],
-      currentCardIndex: 0,
-      // Buckets to hold cards while working through a set, categorized by difficulty
-      easyBucket: {},
-      mediumBucket: {},
-      difficultBucket: {},
-      // Options and other component display booleans
-      optionsShowing: false,
-      reviewShowing: true,
-      quizShowing: false,
-      resultsShowing: false,
-      deckChooserShowing: false,
-      deckCreatorShowing: false,
-      deckEditorShowing: false
-    }
-  }
+import * as actionCreators from '../actions/actionCreators'
 
-  render() {
-    return (
-      <div>
-        <h1>Flashcards</h1>
-        <div className="grid-parent grid-parent-3">
-          <NavLink className="nav-link" activeClassName="active" to="/review">
-            <h5>Review</h5>
-            <p>Review a deck of flashcards</p>
-          </NavLink>
-          <NavLink className="nav-link" activeClassName="active" to="/decks">
-            <h5>Decks</h5>
-            <p>Select a flashcard deck for review/quiz, create a flashcard deck, edit a flashcard deck, and delete a flashcard deck</p>
-          </NavLink>
-          <NavLink className="nav-link" activeClassName="active" to="/quiz">
-            <h5>Quiz</h5>
-            <p>Quiz yourself on a deck of flashcards</p>
-          </NavLink>
-        </div>
-      </div>
-    )
+import Main from '../components/Main'
+
+// use redux to connect the store/state to props useable by this component
+const mapStateToProps = (state) => {
+  return {
+    decks: state.decks,
+    stats: state.stats
   }
 }
+
+// redux to dispatch actions taken in components to the action creators/reducers defined to update the redux store
+const mapDispachToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch)
+}
+
+const App = connect(mapStateToProps, mapDispachToProps)(Main)
+// const App = withRouter(connect(mapStateToProps, mapDispachToProps)(Main))
 
 export default App

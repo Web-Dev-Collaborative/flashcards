@@ -39,14 +39,14 @@ export const addCardToDeck = (card, deck) => {
     deck 
   }
 }
-export const addCardToDeck = (card, deck) => {
+export const EditCardFromDeck = (card, deck) => {
   return { 
     type: EDIT_CARD_FROM_DECK, 
     card,
     deck 
   }
 }
-export const addCardToDeck = (card, deck) => {
+export const DeleteCardFromDeck = (card, deck) => {
   return { 
     type: DELETE_CARD_FROM_DECK, 
     card,

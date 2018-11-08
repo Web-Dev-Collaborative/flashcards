@@ -8,7 +8,7 @@ import '../styles/Review.css'
 const Review = props => {
   return (
     <div className="flashcards-container">
-      { props.hideArrows ? 
+      {/* { props.hideArrows ? 
         // Last/Next Card Arrow buttons are hidden when doing the Quiz
         <div></div> :
         <img 
@@ -45,7 +45,7 @@ const Review = props => {
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
           onClick={props.showNextCard} 
         />
-      }
+      } */}
     </div>
   )
 }

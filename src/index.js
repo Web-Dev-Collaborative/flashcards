@@ -1,11 +1,12 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import {
-  Route,
-  NavLink,
-  BrowserRouter,
-  Switch
-} from "react-router-dom"
+// react and render
+import React from 'react'
+import { render } from 'react-dom'
+
+// router and redux store and providers
+import { Router, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+
+import store, { history } from './store'
 
 import registerServiceWorker from './registerServiceWorker'
 
@@ -15,28 +16,22 @@ import NotFound from './routes/NotFound'
 import Quiz from './routes/Quiz'
 import Review from './routes/Review'
 
+// TODO Stats
+
 import './styles/entry.css'
 
 const routing = (
-  <BrowserRouter>
-    <div>
-      <nav>
-        <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
-        <NavLink to="/review" className="nav-link" activeClassName="active">Review</NavLink>
-        <NavLink to="/decks" className="nav-link" activeClassName="active">Decks</NavLink>
-        <NavLink to="/quiz" className="nav-link" activeClassName="active">Quiz</NavLink>
-      </nav>
-
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/review" component={Review} />
-        <Route path="/decks" component={Decks} />
-        <Route path="/quiz" component={Quiz} />
+  <Provider store={store} >
+    <Router history={history} >
+      <Route path="/" component={App} >
+        <Route path="review" component={Review} />
+        <Route path="decks" component={Decks} />
+        <Route path="quiz" component={Quiz} />
         <Route component={NotFound} />
-      </Switch>
-    </div>
-  </BrowserRouter>
+      </Route>
+    </Router>
+  </Provider>
 )
 
-ReactDOM.render(routing, document.getElementById("root"))
+render(routing, document.getElementById("root"))
 registerServiceWorker()
