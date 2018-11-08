@@ -21,17 +21,17 @@ const routing = (
   <BrowserRouter>
     <div>
       <nav>
-        <NavLink exact className="nav-link" activeClassName="active" to="/">Home</NavLink>
-        <NavLink className="nav-link" activeClassName="active" to="/decks">Decks</NavLink>
-        <NavLink className="nav-link" activeClassName="active" to="/quiz">Quiz</NavLink>
-        <NavLink className="nav-link" activeClassName="active" to="/review">Review</NavLink>
+        <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+        <NavLink to="/review" className="nav-link" activeClassName="active">Review</NavLink>
+        <NavLink to="/decks" className="nav-link" activeClassName="active">Decks</NavLink>
+        <NavLink to="/quiz" className="nav-link" activeClassName="active">Quiz</NavLink>
       </nav>
 
       <Switch>
         <Route exact path="/" component={App} />
+        <Route path="/review" component={Review} />
         <Route path="/decks" component={Decks} />
         <Route path="/quiz" component={Quiz} />
-        <Route path="/review" component={Review} />
         <Route component={NotFound} />
       </Switch>
     </div>
