@@ -1,9 +1,5 @@
 import { createStore } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
-
-// React Router v4 does not have browserHistory
-// import { browserHistory } from 'react-router'
-
 import { createBrowserHistory } from 'history';
 
 // import the root reducer
@@ -19,11 +15,9 @@ const defaultState = {
   stats
 }
 
-const customHistory = createBrowserHistory()
-
 const store = createStore(rootReducer, defaultState)
 
-export const history = syncHistoryWithStore(customHistory, store)
+export const history = syncHistoryWithStore(createBrowserHistory(), store)
 
 if(module.hot) {
   module.hot.accept('./reducers/',() => {

@@ -8,6 +8,7 @@ import '../styles/Review.css'
 const Review = props => {
   return (
     <div className="flashcards-container">
+      REVIEW
       {/* { props.hideArrows ? 
         // Last/Next Card Arrow buttons are hidden when doing the Quiz
         <div></div> :
