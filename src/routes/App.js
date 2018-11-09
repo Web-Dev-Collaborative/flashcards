@@ -2,10 +2,10 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-// // allows the react router to connect to the redux store
-// // React-Router-4 does not have browserHistory
-// // see: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md
-// import { withRouter } from 'react-router-dom'
+// allows the react router to connect to the redux store as React-Router-4 does not have browserHistory
+// see: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md
+// and: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
+import { withRouter } from 'react-router-dom'
 
 import * as actionCreators from '../actions/actionCreators'
 
@@ -24,7 +24,7 @@ const mapDispachToProps = (dispatch) => {
   return bindActionCreators(actionCreators, dispatch)
 }
 
-const App = connect(mapStateToProps, mapDispachToProps)(Main)
-// const App = withRouter(connect(mapStateToProps, mapDispachToProps)(Main))
+// const App = connect(mapStateToProps, mapDispachToProps)(Main)
+const App = withRouter(connect(mapStateToProps, mapDispachToProps)(Main))
 
 export default App

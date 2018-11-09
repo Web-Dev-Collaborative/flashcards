@@ -15,9 +15,9 @@ class Main extends React.Component {
         <h1>
           <Link to="/">Flashcards</Link>
         </h1>
-        {/* {React.cloneElement({...this.props}.children, {...this.props})} */}
         {console.log('rendering Main')}
-        {console.dir(this)} 
+
+        {console.dir(this)}
       </div>
     )
   }

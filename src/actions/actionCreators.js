@@ -8,6 +8,9 @@ export const EDIT_DECK = 'EDIT_DECK'
   export const EDIT_CARD_FROM_DECK = 'EDIT_CARD_FROM_DECK'
   export const DELETE_CARD_FROM_DECK = 'DELETE_CARD_FROM_DECK'
 
+// Stats
+export const RETRIEVE_STATS = 'RETRIEVE_STATS'
+export const SAVE_STATS = 'SAVE_STATS'
 /* constants */
 
 
@@ -53,7 +56,17 @@ export const DeleteCardFromDeck = (card, deck) => {
     deck 
   }
 }
-
+// stats
+export const retrieveStats = () => {
+  return {
+    type: RETRIEVE_STATS
+  }
+}
+export const saveStats = () => {
+  return {
+    type: SAVE_STATS
+  }
+}
 
 /*
 Flashcards State
