@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Link } from 'react-router-dom'
+
 import Card from './Card'
 
 import '../styles/Review.css'
@@ -32,8 +34,8 @@ const Review = props => {
         <div className="grid-parent no-cards-div">
           <h3>Great job!</h3>
           <p>You have completed the quiz!</p>
-          <button onClick={() => props.displayComponent('resultsShowing')}>See Results</button>
-          <button onClick={() => props.displayComponent('deckChooserShowing')}>Select Another Deck</button>
+          <Link to='/results'>See Results</Link>
+          <Link to='/deckChooser'>Select Another Deck</Link>
         </div>
       }
 
@@ -53,7 +55,6 @@ const Review = props => {
 Review.propTypes = {
   currentDeck: PropTypes.object.isRequired,
   currentCardIndex: PropTypes.number.isRequired,
-  displayComponent: PropTypes.func.isRequired,
   flashcardFrontShowing: PropTypes.bool.isRequired,
   flipCard: PropTypes.func.isRequired, 
   hideArrows: PropTypes.bool,
