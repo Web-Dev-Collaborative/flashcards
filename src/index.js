@@ -20,13 +20,15 @@ import './styles/entry.css'
 const routing = (
   <Provider store={store} >
     <BrowserRouter history={history} >
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/decks" component={Decks} />
-        <Route path="/quiz" component={Quiz} />
-        <Route path="/review" component={Review} />
-        <Route component={NotFound} />
-      </Switch>
+      <div>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/decks" component={Decks} />
+          <Route path="/quiz" component={Quiz} />
+          <Route path="/review" component={Review} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>
 )

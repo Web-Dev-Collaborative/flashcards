@@ -39,7 +39,7 @@ class App extends React.Component {
           <NavLink to="/decks" className="nav-link" activeClassName="active">Decks</NavLink>
           <NavLink to="/quiz" className="nav-link" activeClassName="active">Quiz</NavLink>
         </nav> 
-        <Main />
+        <Main {...this.props} />
       </div>
     )
   }

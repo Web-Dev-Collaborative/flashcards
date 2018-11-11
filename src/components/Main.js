@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import Flashcards from './Flashcards'
 
 class Main extends React.Component {
   render() {
@@ -9,10 +11,11 @@ class Main extends React.Component {
           <Link to="/">Flashcards</Link>
         </h1>
         {console.log('rendering Main')}
+        {console.dir(this.props)}
 
+        <Flashcards {...this.props} />
         {/* {React.cloneElement({...this.props}.children, {...this.props})} */}
 
-        {console.dir(this)}
       </div>
     )
   }
