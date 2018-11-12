@@ -8,11 +8,13 @@ class Quiz extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentCardIndex: 0,
-      currentDeck: props.currentDeck,
+      ...props,
+      isLoading: false,
       flashcardFrontShowing: true,
-      flipCard: props.flipCard,
-      keysArray: props.keysArray,
+      currentDeck: {},
+      currentDeckName: '',
+      keysArray: [],
+      currentCardIndex: 0,
       // Buckets to hold cards while working through a set, categorized by difficulty
       easyBucket: {},
       mediumBucket: {},
@@ -87,10 +89,9 @@ class Quiz extends React.Component {
           flashcardFrontShowing={this.state.flashcardFrontShowing}
           flipCard={this.flipCard} 
           keysArray={this.state.keysArray}
-          hideArrows={true}
           showNextCard={this.showNextCard}
           showPreviousCard={this.showPreviousCard}
-        />
+        /> 
 
         { // The Survey only displays when the back of the card is showing
           !this.state.flashcardFrontShowing ? 

@@ -5,11 +5,6 @@ import axios from 'axios'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-// allows the react router to connect to the redux store as React-Router-4 does not have browserHistory
-// see: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/redux.md
-// and: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
-import { withRouter } from 'react-router-dom'
-
 import * as actionCreators from '../actions/actionCreators'
 
 import Review from '../components/Review'
@@ -21,49 +16,18 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      ...props,
       isLoading: false,
-      decks: {},
-      stats: {},
       flashcardFrontShowing: true,
       currentDeck: {},
       currentDeckName: '',
       keysArray: [],
-      currentCardIndex: 0,
-      // Options and other component display booleans
-      deckCreatorShowing: false,
-      ...props
+      currentCardIndex: 0    
     }
   }
 
   flipCard = () => {
     this.setState({ flashcardFrontShowing: !this.state.flashcardFrontShowing })
-  }
-
-  addDeck = deck => {
-    // Validate deck has a name and cards and that the name is not a duplicate
-    if (!deck.name) return
-    if (!deck.cards) return
-    // duplicate name 
-    const currentDeckNames = Object.keys(this.state.decks)
-    if (currentDeckNames.includes(deck.name)) {
-      alert('You already have a deck by that name. Try another name.')
-      return
-    }
-    const tmpDecks = {...this.state.decks, [deck.name]: deck.cards}
-    // Update state adding the deck and making it the currently selected deck
-    this.setState({ 
-      decks: tmpDecks,
-      currentDeck: deck.cards,
-      currentDeckName: deck.name,
-      currentCardIndex: 0,
-      flashcardFrontShowing: true,
-      keysArray: Object.keys(deck.cards),
-      easyBucket: {},
-      mediumBucket: {},
-      difficultBucket: {},
-      reviewShowing: true,
-      deckCreatorShowing: false
-    })
   }
 
   showPreviousCard = () => {
@@ -173,11 +137,12 @@ class App extends React.Component {
   }
 }
 
-// use redux to connect the store/state to props useable by this component
+// use redux to connect the application with the store/state
 const mapStateToProps = (state) => {
+  console.log('App.js mapping state to props with state: ')
+  console.dir(state)
   return {
-    decks: state.decks,
-    stats: state.stats
+    ...state
   }
 }
 
@@ -186,4 +151,4 @@ const mapDispachToProps = (dispatch) => {
   return bindActionCreators(actionCreators, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispachToProps)(App))
+export default connect(mapStateToProps, mapDispachToProps)(App)

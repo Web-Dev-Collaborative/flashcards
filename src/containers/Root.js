@@ -16,25 +16,8 @@ class Root extends React.Component {
     this.state = {
       // Connect the redux store to the Main component's state
       // cards {}, decks {}, stats {}, routing {}
-      ...this.props.store.getState()
-    }
-  }
-
-  changeDeckTo = deckName => {
-    if (!this.state.decks && !this.state.decks[deckName]) {
-      // console.log('No deck of name '+deckName)
-      return null
-    } else {
-      this.setState({ 
-        currentDeck: this.state.decks[deckName],
-        currentDeckName: deckName,
-        currentCardIndex: 0,
-        flashcardFrontShowing: true,
-        keysArray: Object.keys(this.state.decks[deckName]),
-        easyBucket: {},
-        mediumBucket: {},
-        difficultBucket: {}
-      })  
+      ...this.props.store.getState(),
+      ...this.props
     }
   }
 
@@ -53,11 +36,11 @@ class Root extends React.Component {
           <Link to="/">Flashcards</Link>
         </h1>
     
-        <Provider store={this.props.store}>
+        <Provider store={this.state.store}>
           <Switch>
-            <Route exact path="/" component={() => <App {...this.state} />} />
-            <Route path="/decks" component={() => <Decks decks={this.state.decks} changeDeckTo={this.changeDeckTo} />} />
-            <Route path="/quiz" component={() => <Quiz />} />
+            <Route exact path="/" component={App} />
+            <Route path="/decks" component={Decks} />
+            <Route path="/quiz" component={Quiz} />
             <Route component={NotFound} />
           </Switch>
         </Provider>
