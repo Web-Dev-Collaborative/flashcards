@@ -12,13 +12,13 @@ import DeckCreator from '../components/DeckCreator'
 import DeckEditor from '../components/DeckEditor'
 
 const Decks = props => {
-  console.log('Rendering decks')
+  console.dir('Rendering decks')
   console.dir(props)
   return (
     <div>
-      <DeckChooser {...props} />
-      <DeckCreator {...props} />
-      <DeckEditor {...props} />      
+      <DeckCreator addDeck={props.addDeck} currentDeckName={props.currentDeckName} allDeckNames={Object.keys(props.decks)} />
+      {/* <DeckChooser />
+      <DeckEditor />       */}
     </div>
   )
 }

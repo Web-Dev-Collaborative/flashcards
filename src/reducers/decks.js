@@ -1,8 +1,20 @@
 const decks = (state = {}, action) => {
   switch(action.type) {
     case 'ADD_DECK' :
-      console.log('ADD_DECK redu')
-      return state
+      // Validate deck has a name and cards and that the name is not a duplicate
+      if (!action.deckName) return state
+      if (!action.cards) return state
+      // duplicate name 
+      const currentDeckNames = Object.keys(state)
+      if (currentDeckNames.includes(action.deckName)) {
+        alert('You already have a deck by that name. Try another name.')
+        return state
+      }
+      // Add the new deck to the decks item passed in as state
+      return {
+        ...state, 
+        [action.deckName]: action.cards
+      }
     case 'DELETE_DECK' :
       console.log('DELETE_DECK redu')
       return state

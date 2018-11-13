@@ -9,18 +9,15 @@ class CardCreator extends React.Component {
     this.state = {
       deckName: props.deckName,
       // Current card being added front and back text
-      valueFront: props.valueFront || '',
-      valueBack: props.valueBack || ''
+      valueFront: '',
+      valueBack: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   static propTypes = {
-    addCard: PropTypes.func.isRequired,
     deckName: PropTypes.string.isRequired,
-    valueBack: PropTypes.string,
-    valueFront: PropTypes.string
   }  
 
   handleChange(event) {

@@ -9,11 +9,16 @@ class DeckCreator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      deckName: '',
+      // TODO this will probably need to change to reference the redux store directly instead of a prop
+      currentDeckName: props.currentDeckName,
+      // the name of the new deck being created
+      newDeckName: '',
       // Has the user named the new deck yet?
       deckNameSubmitted: false,
+      // Cards in the new deck
       cards: {},
-      currentDeckNames: props.currentDeckNames
+      // All decks currently in the redux store/state, to validate no duplicate names/overwriting
+      allDeckNames: props.allDeckNames
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,21 +27,21 @@ class DeckCreator extends React.Component {
   }
 
   static propTypes = {
-    addDeck: PropTypes.func.isRequired,
-    currentDeckNames: PropTypes.array.isRequired
+    allDeckNames: PropTypes.array.isRequired,
+    currentDeckName: PropTypes.string
   }
 
   handleChange(event) {
-    this.setState({ deckName: event.target.value })
+    this.setState({ newDeckName: event.target.value })
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    if (this.state.currentDeckNames.includes(this.state.deckName)) {
+    if (this.state.allDeckNames.includes(this.state.newDeckName)) {
       alert('You already have a deck by that name. Try another name.')
       return
     }
-    this.setState({ deckNameSubmitted: true })
+    this.setState({ deckNameSubmitted: true, currentDeckName: this.state.newDeckName })
   }
 
   addCard(card) {
@@ -54,7 +59,7 @@ class DeckCreator extends React.Component {
 
   cancelSave() {
     this.setState({
-      deckName: '',
+      newDeckName: '',
       deckNameSubmitted: false,
       cards: {}
     })
@@ -88,9 +93,9 @@ class DeckCreator extends React.Component {
           this.state.deckNameSubmitted ? 
             <div className="card-creator-container">
               <CardCreator 
-                deckName={this.state.deckName} 
+                deckName={this.state.newDeckName} 
                 addCard={this.addCard} /> 
-              <button className="save-deck" onClick={e => this.props.addDeck({name: this.state.deckName, cards: this.state.cards}) }>Save Deck</button>
+              <button className="save-deck" onClick={e => this.props.addDeck({deckName: this.state.newDeckName, cards: this.state.cards}) }>Save Deck</button>
               <button className="cancel-create-deck" onClick={this.cancelSave}>Cancel</button>
             </div>
           : <div></div>

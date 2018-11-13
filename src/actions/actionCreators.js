@@ -3,35 +3,9 @@
 export const addDeck = (deck) => {
   return { 
     type: 'ADD_DECK', 
-    deck 
+    deckName: deck.deckName,
+    cards: deck.cards
   }
-
-  // addDeck = deck => {
-  //   // Validate deck has a name and cards and that the name is not a duplicate
-  //   if (!deck.name) return
-  //   if (!deck.cards) return
-  //   // duplicate name 
-  //   const currentDeckNames = Object.keys(this.state.decks)
-  //   if (currentDeckNames.includes(deck.name)) {
-  //     alert('You already have a deck by that name. Try another name.')
-  //     return
-  //   }
-  //   const tmpDecks = {...this.state.decks, [deck.name]: deck.cards}
-  //   // Update state adding the deck and making it the currently selected deck
-  //   this.setState({ 
-  //     decks: tmpDecks,
-  //     currentDeck: deck.cards,
-  //     currentDeckName: deck.name,
-  //     currentCardIndex: 0,
-  //     flashcardFrontShowing: true,
-  //     keysArray: Object.keys(deck.cards),
-  //     easyBucket: {},
-  //     mediumBucket: {},
-  //     difficultBucket: {},
-  //     reviewShowing: true,
-  //     deckCreatorShowing: false
-  //   })
-  // }
 }
 
 export const editDeck = (deck) => {

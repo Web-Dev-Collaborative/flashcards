@@ -16,8 +16,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // ...props,
-      // ...this.props.store.getState()
+      ...props,
+      // ...this.props.store.getState(),
       isLoading: false,
       flashcardFrontShowing: true
     }
@@ -27,21 +27,21 @@ class App extends React.Component {
     this.setState({ flashcardFrontShowing: !this.props.flashcardFrontShowing })
   }
 
-  // showPreviousCard = () => {
-  //   if (this.props.currentCardIndex <= 0) return
-  //   this.setState({ 
-  //     currentCardIndex: this.props.currentCardIndex - 1,
-  //     flashcardFrontShowing: true 
-  //   })
-  // }
+  showPreviousCard = () => {
+    if (this.props.uiState.currentCardIndex <= 0) return
+    this.setState({ 
+      uiState: { currentCardIndex: this.props.uiState.currentCardIndex - 1 },
+      flashcardFrontShowing: true 
+    })
+  }
 
-  // showNextCard = () => {
-  //   if (this.props.currentCardIndex >= this.props.keysArray.length - 1) return
-  //   this.setState({ 
-  //     currentCardIndex: this.props.currentCardIndex + 1,
-  //     flashcardFrontShowing: true
-  //   })
-  // }
+  showNextCard = () => {
+    if (this.props.uiState.currentCardIndex >= this.props.uiState.keysArray.length - 1) return
+    this.setState({ 
+      uiState: { currentCardIndex: this.props.uiState.currentCardIndex + 1 },
+      flashcardFrontShowing: true
+    })
+  }
 
   onKeyDown = e => {
     // console.log(e.keyCode + ' pressed');
@@ -73,19 +73,19 @@ class App extends React.Component {
 
       const decks = JSON.parse(localStorageRef).decks
       const stats = JSON.parse(localStorageRef).stats
-      const currentDeckName = JSON.parse(localStorageRef).currentDeckName
-
-      console.log('DEBUG BREAK in App.js retrieving local storage item')
-      console.dir(decks)
+      const currentDeckName = JSON.parse(localStorageRef).uiState.currentDeckName
+      const keysArray = Object.keys(decks[currentDeckName]) || Object.keys(decks['spanish'])
 
       this.setState({
         decks,
         stats,
-        // default deck is Spanish if no other current deck name is set
-        currentDeckName: currentDeckName || 'spanish',
-        currentDeck: decks[currentDeckName] || decks['spanish'],
-        // TODO FIX
-        // keysArray: Object.keys(decks[currentDeckName]) || Object.keys(decks['spanish']) || [],
+        uiState: { 
+          // default deck is Spanish if no other current deck name is set
+          keysArray,
+          currentDeckName: currentDeckName || 'spanish',
+          currentDeck: decks[currentDeckName] || decks['spanish'], 
+          currentCardIndex: 0
+        },
         isLoading: false
       })
       return
@@ -95,10 +95,13 @@ class App extends React.Component {
       const result = await axios.get('./FlashcardSets.json')
       this.setState({
         decks: result.data.flashcards,
-        // default deck is Spanish
-        currentDeckName: 'spanish',
-        currentDeck: result.data.flashcards['spanish'],
-        keysArray: Object.keys(result.data.flashcards['spanish']),
+        uiState: { 
+          // default deck is Spanish
+          keysArray: Object.keys(result.data.flashcards['spanish']),
+          currentDeckName: 'spanish',
+          currentDeck: result.data.flashcards['spanish'],
+          currentCardIndex: 0
+        },
         isLoading: false
       })
     } catch (error) {
@@ -115,25 +118,28 @@ class App extends React.Component {
     // console.dir(this)
     // if the card decks haven't loaded, don't attempt to render. wait for loading to finish.
     if (!Object.keys(this.props.decks).length > 0) return null
+    console.log('this.props in App render')
+    console.dir(this.props)
+    if (!this.props.uiState.keysArray) return null
 
     return (
       <div className="main">
 
-        { this.props.currentDeckName ? 
+        { this.props.uiState.currentDeckName ? 
           <div 
-            className="small">Deck: {this.props.currentDeckName.charAt(0).toUpperCase() + this.props.currentDeckName.slice(1)}
+            className="small">Deck: {this.props.uiState.currentDeckName.charAt(0).toUpperCase() + this.props.uiState.currentDeckName.slice(1)}
           </div> : '' 
         }
 
-        {/* <Review 
-          currentCardIndex={this.props.currentCardIndex}
-          currentDeck={this.props.currentDeck}
-          flashcardFrontShowing={this.props.flashcardFrontShowing}
+        <Review 
+          currentCardIndex={this.state.uiState.currentCardIndex}
+          currentDeck={this.state.uiState.currentDeck}
+          keysArray={this.state.uiState.keysArray}
+          flashcardFrontShowing={this.state.flashcardFrontShowing}
           flipCard={this.flipCard} 
-          keysArray={this.props.keysArray}
           showNextCard={this.showNextCard}
           showPreviousCard={this.showPreviousCard}
-        />  */}
+        /> 
 
       </div> //end of main
     )

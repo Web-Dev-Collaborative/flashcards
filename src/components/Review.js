@@ -8,6 +8,8 @@ import Card from './Card'
 import '../styles/Review.css'
 
 const Review = props => {
+  console.log('Rendering Review')
+  console.dir(props)
   return (
     <div className="flashcards-container">
       { props.hideArrows ? 
@@ -34,8 +36,8 @@ const Review = props => {
         <div className="grid-parent no-cards-div">
           <h3>Great job!</h3>
           <p>You have completed the quiz!</p>
-          <Link to='/results'>See Results</Link>
-          <Link to='/deckChooser'>Select Another Deck</Link>
+          <Link to='/stats'>See Results</Link>
+          <Link to='/decks'>Select Another Deck</Link>
         </div>
       }
 

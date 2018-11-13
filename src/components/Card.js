@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import '../styles/Card.css'
 
 const Card = props => {
+  console.log('Rendering Card')
+  console.dir(props)
   return (
     props.frontShowing ? 
       <button onClick={() => props.flipCard()} className="card card-front">
