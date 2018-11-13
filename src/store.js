@@ -11,8 +11,12 @@ import stats from './data/stats'
 
 // create an object for the default data
 const defaultState = {
-  decks,
-  stats
+  decks: decks || {},
+  stats: stats || {},
+  currentDeck: {},
+  currentDeckName: 'spanish',
+  keysArray: [],
+  currentCardIndex: 0
 }
 
 const store = createStore(rootReducer, defaultState)

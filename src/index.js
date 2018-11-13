@@ -4,14 +4,11 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import Root from './containers/Root'
 
-// redux store provider
-import store from './store'
-
 import registerServiceWorker from './registerServiceWorker'
 
 render(
   <Router>
-    <Root store={store} />
+    <Root />
   </Router>,
   document.getElementById('root')
 )

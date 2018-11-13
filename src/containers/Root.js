@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 
+// redux store and store Provider
 import { Provider } from 'react-redux'
+import store from '../store'
 
 import App from './App'
 import Decks from './Decks'
@@ -11,19 +13,7 @@ import NotFound from './NotFound'
 import '../styles/Root.css'
 
 class Root extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      // Connect the redux store to the Main component's state
-      // cards {}, decks {}, stats {}, routing {}
-      ...this.props.store.getState(),
-      ...this.props
-    }
-  }
-
   render() {
-    console.log('Rendering Root')
-    console.dir(this)
     return (
       <div>
         <nav className="grid-parent grid-parent-3">
@@ -36,7 +26,7 @@ class Root extends React.Component {
           <Link to="/">Flashcards</Link>
         </h1>
     
-        <Provider store={this.state.store}>
+        <Provider store={store}>
           <Switch>
             <Route exact path="/" component={App} />
             <Route path="/decks" component={Decks} />

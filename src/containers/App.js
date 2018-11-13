@@ -16,35 +16,32 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      ...props,
+      // ...props,
+      // ...this.props.store.getState()
       isLoading: false,
-      flashcardFrontShowing: true,
-      currentDeck: {},
-      currentDeckName: '',
-      keysArray: [],
-      currentCardIndex: 0    
+      flashcardFrontShowing: true
     }
   }
 
   flipCard = () => {
-    this.setState({ flashcardFrontShowing: !this.state.flashcardFrontShowing })
+    this.setState({ flashcardFrontShowing: !this.props.flashcardFrontShowing })
   }
 
-  showPreviousCard = () => {
-    if (this.state.currentCardIndex <= 0) return
-    this.setState({ 
-      currentCardIndex: this.state.currentCardIndex - 1,
-      flashcardFrontShowing: true 
-    })
-  }
+  // showPreviousCard = () => {
+  //   if (this.props.currentCardIndex <= 0) return
+  //   this.setState({ 
+  //     currentCardIndex: this.props.currentCardIndex - 1,
+  //     flashcardFrontShowing: true 
+  //   })
+  // }
 
-  showNextCard = () => {
-    if (this.state.currentCardIndex >= this.state.keysArray.length - 1) return
-    this.setState({ 
-      currentCardIndex: this.state.currentCardIndex + 1,
-      flashcardFrontShowing: true
-    })
-  }
+  // showNextCard = () => {
+  //   if (this.props.currentCardIndex >= this.props.keysArray.length - 1) return
+  //   this.setState({ 
+  //     currentCardIndex: this.props.currentCardIndex + 1,
+  //     flashcardFrontShowing: true
+  //   })
+  // }
 
   onKeyDown = e => {
     // console.log(e.keyCode + ' pressed');
@@ -57,7 +54,7 @@ class App extends React.Component {
 
   componentDidUpdate = () => {
     // when the component updates, save to localStorage
-    localStorage.setItem('usarneme_flashcards', JSON.stringify(this.state))
+    localStorage.setItem('usarneme_flashcards', JSON.stringify(this.props))
   }
 
   componentWillUnmount = () => {
@@ -78,13 +75,17 @@ class App extends React.Component {
       const stats = JSON.parse(localStorageRef).stats
       const currentDeckName = JSON.parse(localStorageRef).currentDeckName
 
+      console.log('DEBUG BREAK in App.js retrieving local storage item')
+      console.dir(decks)
+
       this.setState({
         decks,
         stats,
         // default deck is Spanish if no other current deck name is set
         currentDeckName: currentDeckName || 'spanish',
         currentDeck: decks[currentDeckName] || decks['spanish'],
-        keysArray: Object.keys(decks[currentDeckName]) || Object.keys(decks['spanish']),
+        // TODO FIX
+        // keysArray: Object.keys(decks[currentDeckName]) || Object.keys(decks['spanish']) || [],
         isLoading: false
       })
       return
@@ -110,27 +111,29 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log('Rendering App with this: ')
+    // console.dir(this)
     // if the card decks haven't loaded, don't attempt to render. wait for loading to finish.
-    if (!Object.keys(this.state.decks).length > 0) return null
+    if (!Object.keys(this.props.decks).length > 0) return null
 
     return (
       <div className="main">
 
-        { this.state.currentDeckName ? 
+        { this.props.currentDeckName ? 
           <div 
-            className="small">Deck: {this.state.currentDeckName.charAt(0).toUpperCase() + this.state.currentDeckName.slice(1)}
+            className="small">Deck: {this.props.currentDeckName.charAt(0).toUpperCase() + this.props.currentDeckName.slice(1)}
           </div> : '' 
         }
 
-        <Review 
-          currentCardIndex={this.state.currentCardIndex}
-          currentDeck={this.state.currentDeck}
-          flashcardFrontShowing={this.state.flashcardFrontShowing}
+        {/* <Review 
+          currentCardIndex={this.props.currentCardIndex}
+          currentDeck={this.props.currentDeck}
+          flashcardFrontShowing={this.props.flashcardFrontShowing}
           flipCard={this.flipCard} 
-          keysArray={this.state.keysArray}
+          keysArray={this.props.keysArray}
           showNextCard={this.showNextCard}
           showPreviousCard={this.showPreviousCard}
-        /> 
+        />  */}
 
       </div> //end of main
     )
