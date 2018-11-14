@@ -63,6 +63,14 @@ export const saveStats = () => {
   }
 }
 
+// ui state
+
+export const flipCard = () => {
+  return {
+    type: 'TOGGLE_FLASHCARD_FRONT_SHOWING'
+  }
+}
+
 /*
 Flashcards State
   Permanant/Data

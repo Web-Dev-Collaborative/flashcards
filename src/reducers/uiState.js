@@ -6,6 +6,14 @@ const uiState = (state = {}, action) => {
       // keysArray: [],
       // currentCardIndex: 0
       return state
+    case 'TOGGLE_FLASHCARD_FRONT_SHOWING' :
+      console.log('TOGGLE_FLASHCARD_FRONT_SHOWING redu')
+      console.dir(state)
+      console.dir(action)
+      return {
+        ...state,
+        flashcardFrontShowing: !state.flashcardFrontShowing
+      }
     default :
       return state
   }

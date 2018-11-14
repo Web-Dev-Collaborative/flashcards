@@ -14,35 +14,34 @@ import '../styles/Root.css'
 
 class Root extends React.Component {
   render() {
-    return (
-      <div>
-        <nav className="grid-parent grid-parent-3">
-          <Link to="/" className="nav-link" >Review</Link>
-          <Link to="/decks" className="nav-link" >Select/Create/Edit Decks</Link>
-          <Link to="/quiz" className="nav-link" >Quiz</Link>
-        </nav> 
-    
-        <h1>
-          <Link to="/">Flashcards</Link>
-        </h1>
-    
-        <Provider store={store}>
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/decks" component={Decks} />
-            <Route path="/quiz" component={Quiz} />
-            <Route component={NotFound} />
-          </Switch>
-        </Provider>
-    
-        <div className="footer">
-          <footer>
-            &copy; 2018
-          </footer>
-        </div>
-    
+    // React 16+ does not require a containing element for adjacent JSX elements, rather an array can be returned
+    // Note: to return an array of elements, each element must be separated by a comma (array style formatting)
+    return [
+      <nav key={1} className="grid-parent grid-parent-3">
+        <Link to="/" className="nav-link" >Review</Link>
+        <Link to="/decks" className="nav-link" >Select/Create/Edit Decks</Link>
+        <Link to="/quiz" className="nav-link" >Quiz</Link>
+      </nav>,
+  
+      <h1 key={2}>
+        <Link to="/">Flashcards</Link>
+      </h1>,
+  
+      <Provider key={3} store={store}>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/decks" component={Decks} />
+          <Route path="/quiz" component={Quiz} />
+          <Route component={NotFound} />
+        </Switch>
+      </Provider>,
+  
+      <div key={4} className="footer">
+        <footer>
+          &copy; 2018
+        </footer>
       </div>
-    )
+    ]
   }
 }
 

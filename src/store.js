@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
-import { createBrowserHistory } from 'history';
+import createBrowserHistory from 'history/createBrowserHistory'
 
 // import the root reducer
 import rootReducer from './reducers/index'
@@ -17,7 +17,8 @@ const defaultState = {
     currentDeck: {},
     currentDeckName: 'spanish',
     keysArray: [],
-    currentCardIndex: 0
+    currentCardIndex: 0,
+    flashcardFrontShowing: true
   }
 }
 

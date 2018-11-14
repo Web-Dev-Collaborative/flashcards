@@ -23,31 +23,6 @@ class App extends React.Component {
     }
   }
 
-  flipCard = () => {
-    this.setState({ flashcardFrontShowing: !this.props.flashcardFrontShowing })
-  }
-
-  showPreviousCard = () => {
-    if (this.props.uiState.currentCardIndex <= 0) return
-    this.setState({ 
-      uiState: { currentCardIndex: this.props.uiState.currentCardIndex - 1 },
-      flashcardFrontShowing: true 
-    })
-  }
-
-  showNextCard = () => {
-    if (this.props.uiState.currentCardIndex >= this.props.uiState.keysArray.length - 1) return
-    this.setState({ 
-      uiState: { currentCardIndex: this.props.uiState.currentCardIndex + 1 },
-      flashcardFrontShowing: true
-    })
-  }
-
-  onKeyDown = e => {
-    // console.log(e.keyCode + ' pressed');
-    if (e.keyCode === 27) this.toggleOptionsMenu()
-  }
-
   componentWillMount = () => {
       document.addEventListener("keydown", this.onKeyDown);
   }
@@ -136,9 +111,6 @@ class App extends React.Component {
           currentDeck={this.state.uiState.currentDeck}
           keysArray={this.state.uiState.keysArray}
           flashcardFrontShowing={this.state.flashcardFrontShowing}
-          flipCard={this.flipCard} 
-          showNextCard={this.showNextCard}
-          showPreviousCard={this.showPreviousCard}
         /> 
 
       </div> //end of main
