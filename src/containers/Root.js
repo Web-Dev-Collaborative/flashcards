@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link, NavLink, Route, Switch } from 'react-router-dom'
 
 // redux store and store Provider
 import { Provider } from 'react-redux'
@@ -18,9 +18,9 @@ class Root extends React.Component {
     // Note: to return an array of elements, each element must be separated by a comma (array style formatting)
     return [
       <nav key={1} className="grid-parent grid-parent-3">
-        <Link to="/" className="nav-link" >Review</Link>
-        <Link to="/decks" className="nav-link" >Select/Create/Edit Decks</Link>
-        <Link to="/quiz" className="nav-link" >Quiz</Link>
+        <NavLink activeClassName="active" exact to="/" className="nav-link" >Review</NavLink>
+        <NavLink activeClassName="active" exact to="/decks" className="nav-link" >Select/Create/Edit Decks</NavLink>
+        <NavLink activeClassName="active" exact to="/quiz" className="nav-link" >Quiz</NavLink>
       </nav>,
   
       <h1 key={2}>
