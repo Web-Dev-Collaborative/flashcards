@@ -1,103 +1,89 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Link } from 'react-router-dom'
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import * as actionCreators from '../actions/actionCreators'
 
 import Card from './Card'
 
-import '../styles/Review.css'
-
 class Review extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      cardFrontShowing: true,
+      currentCardIndex: 0,
+      keysArray: Object.keys(props.deck),
+      ...props
+    }
+  }
+
   static propTypes = {
-    currentDeck: PropTypes.object.isRequired,
-    currentCardIndex: PropTypes.number.isRequired,
-    hideArrows: PropTypes.bool,
-    keysArray: PropTypes.array.isRequired
+    deckName: PropTypes.string.isRequired,
+    deck: PropTypes.object.isRequired
   }
 
   showPreviousCard = () => {
-    if (this.props.uiState.currentCardIndex <= 0) return
-    this.setState({ 
-      uiState: { currentCardIndex: this.props.uiState.currentCardIndex - 1 },
-      flashcardFrontShowing: true 
+    console.log('showPrevious clicked with this.props.currentCardIndex: ',this.state.currentCardIndex)
+
+    if (this.state.currentCardIndex <= 0) return
+    this.setState({
+      currentCardIndex: this.state.currentCardIndex - 1,
+      cardFrontShowing: true 
     })
   }
 
   showNextCard = () => {
-    if (this.props.uiState.currentCardIndex >= this.props.uiState.keysArray.length - 1) return
-    this.setState({ 
-      uiState: { currentCardIndex: this.props.uiState.currentCardIndex + 1 },
-      flashcardFrontShowing: true
+    console.log('showNext clicked with this.props.currentCardIndex: ',this.state.currentCardIndex)
+
+    if (this.state.currentCardIndex >= this.state.keysArray.length - 1) return
+      this.setState({ 
+      currentCardIndex: this.state.currentCardIndex + 1,
+      cardFrontShowing: true
+    })
+  }
+
+  flipCard = () => {
+    console.log('flipCard clicked')
+
+    this.setState({
+      cardFrontShowing: !this.state.cardFrontShowing
     })
   }
 
   render() {
     console.log('Rendering Review')
-    console.dir(this)
+    console.dir(this.props)
+  
     return (
-      <div className="flashcards-container">
-        { this.props.hideArrows ? 
-          // Last/Next Card Arrow buttons are hidden when doing the Quiz
-          <div></div> :
+      <div className="review">
+        <div className="header">
+          <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Review</h1></Link>
+        </div>
+        
+        <div className="grid grid-3 review-container card-container">
           <img 
             alt="Previous Card"
             className="controls controls-div controls-prev prev"
             style={ { transform: 'rotate(180deg)' } }
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
             onClick={this.showPreviousCard} 
-          />      
-        }
-  
-        { // if there are more cards to be reviewed
-          this.props.keysArray.length > 0 ? 
-          <Card 
-            frontShowing={this.props.flashcardFrontShowing} 
-            front={Object.keys(this.props.currentDeck)[this.props.currentCardIndex]}
-            back={this.props.currentDeck[Object.keys(this.props.currentDeck)[this.props.currentCardIndex]]}
-            flipCard={'this.props.store.flipCard'}
           /> 
-        :
-          <div className="grid-parent no-cards-div">
-            <h3>Great job!</h3>
-            <p>You have completed the quiz!</p>
-            <Link to='/stats'>See Results</Link>
-            <Link to='/decks'>Select Another Deck</Link>
-          </div>
-        }
-  
-        { this.props.hideArrows ? 
-          <div></div> :
+
+          <Card 
+            frontShowing={this.state.cardFrontShowing} 
+            front={Object.keys(this.props.deck)[this.state.currentCardIndex]}
+            back={this.props.deck[Object.keys(this.props.deck)[this.state.currentCardIndex]]}
+            flipCard={this.flipCard}
+          />
+
           <img 
             alt="Next Card"
             className="controls controls-div controls-next next"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVGhD7dmxDYQwEERRJ3RAIVQIVEVCEfRDArOBM8sissbmP2miS7zSv4gEAL8za4d2VrZoXdi0p7JLmzR78ch4bOmIvDi2C5HPrZWOiMVvJNYaibkiMUck5ojEXJGYIxJzRGKOhjjkS1q7Zm/VSo/P6+LPTlJOSMoFSTkhKSck5YKknJCUkyGSGupjKAC0kNILaew3BgvattYAAAAASUVORK5CYII=" 
             onClick={this.showNextCard} 
           />
-        }
+        </div>
       </div>
-    )
+    ) 
   }
 }
 
-// use redux to connect the application with the store/state
-const mapStateToProps = (state) => {
-  console.log('Review.js mapping state to props with state: ')
-  console.dir(state)
-  return {
-    ...state
-  }
-}
-
-// redux to dispatch actions taken in components to the action creators/reducers defined to update the redux store
-const mapDispachToProps = (dispatch) => {
-  return bindActionCreators(actionCreators, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispachToProps)(Review)
-
-// export default Review
+export default Review
