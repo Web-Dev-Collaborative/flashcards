@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import Card from '../Card'
-
 class QuizMatch extends React.Component {
   constructor(props) {
     super(props)
@@ -12,9 +10,6 @@ class QuizMatch extends React.Component {
       currentCardIndex: 0,
       cardFrontShowing: true,
       // Buckets to hold cards while working through a set, categorized by difficulty
-      easyBucket: {},
-      mediumBucket: {},
-      difficultBucket: {},
       remainingCards: [],
       ...props
     }
@@ -24,14 +19,6 @@ class QuizMatch extends React.Component {
     deckName: PropTypes.string.isRequired,
     deck: PropTypes.object.isRequired
   }
-
-  flipCard = () => {
-    console.log('flipCard clicked')
-    this.setState({
-      cardFrontShowing: !this.state.cardFrontShowing
-    })
-  }
-
 
   componentDidMount() {
     this.setState({
@@ -56,12 +43,7 @@ class QuizMatch extends React.Component {
         </div>
 
         <div className="grid card-container">
-          <Card 
-            flipCard={this.flipCard}
-            frontShowing={this.state.cardFrontShowing}
-            front={front}
-            back={this.state.deck[front]}
-          />
+          Coming soon...
         </div>
 
       </div>

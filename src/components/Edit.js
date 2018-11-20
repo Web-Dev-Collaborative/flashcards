@@ -12,11 +12,21 @@ const Edit = (props) => {
       <div className="header">
         <Link to={`/decks/${props.deckName}`}><h1>{ props.deckName.charAt(0).toUpperCase()+props.deckName.slice(1) } - Edit</h1></Link>
       </div>
-
-      <div className="grid grid-2">
-        {Object.keys(props.deck).map((card, index) => <div key={index}><span>{card}</span><span>{props.deck[card]}</span></div>)}
+      <div className="sub-header">
+        <h2>Cards...</h2>
       </div>
-      <button className="delete-button">Delete Deck</button>
+      { Object.keys(props.deck).map((card, index) => {
+        return (
+          <div className="card-holder grid grid-2" key={index} >
+            <input className="card-edit-input-front" placeholder={card} />
+            <input className="card-edit-input-back" placeholder={props.deck[card]} />
+          </div>
+          )
+        })
+      }
+      <button className="edit-button cancel">Cancel Changes</button>
+      <button className="edit-button save">Save Deck</button>
+      <button className="edit-button delete">Delete Deck</button>
     </div>
   )
 }

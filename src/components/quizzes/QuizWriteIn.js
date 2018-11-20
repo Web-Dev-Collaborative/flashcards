@@ -2,20 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import Card from '../Card'
-
 class QuizWriteIn extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       isLoading: true,
       currentCardIndex: 0,
-      cardFrontShowing: true,
-      // Buckets to hold cards while working through a set, categorized by difficulty
-      easyBucket: {},
-      mediumBucket: {},
-      difficultBucket: {},
-      remainingCards: [],
       ...props
     }
   }
@@ -24,14 +16,6 @@ class QuizWriteIn extends React.Component {
     deckName: PropTypes.string.isRequired,
     deck: PropTypes.object.isRequired
   }
-
-  flipCard = () => {
-    console.log('flipCard clicked')
-    this.setState({
-      cardFrontShowing: !this.state.cardFrontShowing
-    })
-  }
-
 
   componentDidMount() {
     this.setState({
@@ -45,10 +29,6 @@ class QuizWriteIn extends React.Component {
     console.log('Rendering QuizWriteIn')
     console.dir(this.state)
 
-    console.log('this.state.remainingCards: '+this.state.remainingCards+'. this.state.currentCardIndex: '+this.state.currentCardIndex)
-    const front = this.state.remainingCards[this.state.currentCardIndex]
-    console.log('front: ',front)
-
     return (
       <div>
         <div className="header">
@@ -56,12 +36,16 @@ class QuizWriteIn extends React.Component {
         </div>
 
         <div className="grid card-container">
-          <Card 
-            flipCard={this.flipCard}
-            frontShowing={this.state.cardFrontShowing}
-            front={front}
-            back={this.state.deck[front]}
-          />
+          Coming soon...
+          { Object.keys(this.state.deck).map((card, index) => {
+            return (
+              <div className="card-holder grid grid-2" key={index} >
+                <div className="card-front">{card}</div>
+                <input className="card-edit-input-back" placeholder={this.state.deck[card]} />
+              </div>
+              )
+            })
+          }
         </div>
 
       </div>

@@ -145,8 +145,8 @@ a.nav-link {
 
 /* Since they are fixed, we need another element between the main page and the fixed item to create spacing */
 .break {
-  margin: 15px 0;
-  padding: 15px 0;
+  margin: 15px 0 20px;
+  padding: 15px 0 20px;
 }
 
 .footer {
@@ -178,10 +178,21 @@ a > .deck-selector-link {
   margin: 20px auto 30px;
 }
 
-.delete-button {
+.edit-button {
   bottom: 35px;
   position: fixed;
+}
+
+.delete {
   right: 4px;
+}
+
+.cancel {
+  right: 154px;
+}
+
+.save {
+  left: 4px;
 }
 
 .review, .edit, .quiz {
