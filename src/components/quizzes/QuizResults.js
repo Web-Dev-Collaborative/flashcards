@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const QuizResults = (props) => {
+  let rightAnswerTotal = 0, wrongAnswerTotal = 0
+
   return (
     <div>
       <div className="header">
@@ -41,10 +43,30 @@ const QuizResults = (props) => {
           )
         }) : ''}
       </div>
-      <div className="grid grid-2">
-        { props.correctAnswersArray.length > 0 && props.inputAnswersArray.length > 0 ?
-          <div>Results section under construction...
-          </div>
+      <div className="write-in-results">
+        { props.correctAnswersArray && props.correctAnswersArray.length > 0 && props.inputAnswersArray.length > 0 ?
+            <div className="totals">
+              { props.correctAnswersArray.map((correctAnswer, index) => {
+                if (correctAnswer === props.inputAnswersArray[index]) {
+                  rightAnswerTotal++
+                  return <div className="correct grid grid-2" key={index}>
+                    <span><strong>Correct!</strong></span>
+                    <span>{props.inputAnswersArray[index]}</span>
+                  </div>
+                } else {
+                  wrongAnswerTotal++
+                  return <div className="incorrect grid grid-2" key={index}>
+                    <span><strong>Incorrect!</strong> You answered: {props.inputAnswersArray[index]}</span>
+                    <span><strong>The correct answer is:</strong> {props.correctAnswersArray[index]}</span>
+                  </div>
+                }
+              })
+              }
+              <div className="results-total grid grid-2">
+                <h2 className="sub-header">Total Correct {rightAnswerTotal}</h2>
+                <h2 className="sub-header">Total Incorrect {wrongAnswerTotal}</h2>
+              </div>
+            </div>
           : ''          
         }
       

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, Route } from 'react-router-dom'
+import { Link, NavLink, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import QuizSurveyWithBuckets from './quizzes/QuizSurveyWithBuckets'
@@ -34,9 +34,9 @@ class Quiz extends React.Component {
         <div>
           <div className="sub-header"><h2>Choose a quiz type...</h2></div>
           <div className="grid grid-3">
-            <Link to={`${this.props.match.url}/survey-with-buckets`} className="button">Self Survey</Link>
-            <Link to={`${this.props.match.url}/match`} className="button">Match</Link>
-            <Link to={`${this.props.match.url}/write-in`} className="button">Write In</Link>
+            <NavLink to={`${this.props.match.url}/survey-with-buckets`} className="button" exact activeClassName="active-nav-link-sub">Self Survey</NavLink>
+            <NavLink to={`${this.props.match.url}/match`} className="button" exact activeClassName="active-nav-link-sub">Match</NavLink>
+            <NavLink to={`${this.props.match.url}/write-in`} className="button" exact activeClassName="active-nav-link-sub">Write In</NavLink>
           </div>
         </div>
 

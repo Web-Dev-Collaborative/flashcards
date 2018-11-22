@@ -93,6 +93,8 @@ class QuizSurveyWithBuckets extends React.Component {
           <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Quiz - Self Survey</h1></Link>
         </div>
 
+        <div className="sub-header"><h2>Self Survey Quiz...</h2></div>
+
         <div className="grid card-container">
           { // if there are no further questions, display the quiz results
             this.state.remainingCardsArray.length <= 0 

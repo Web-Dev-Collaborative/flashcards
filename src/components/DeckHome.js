@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import Review from './Review'
@@ -63,9 +63,9 @@ class DeckHome extends React.Component {
         <div className="break"></div>
   
         <div className="grid grid-3">
-          <Link to={`${this.props.match.url}/review`} className="button">Review</Link>
-          <Link to={`${this.props.match.url}/quiz`} className="button">Quiz</Link>
-          <Link to={`${this.props.match.url}/edit`} className="button">Edit</Link>
+          <NavLink to={`${this.props.match.url}/review`} className="button" activeClassName="active-nav-link-sub">Review</NavLink>
+          <NavLink to={`${this.props.match.url}/quiz`} className="button" activeClassName="active-nav-link-sub">Quiz</NavLink>
+          <NavLink to={`${this.props.match.url}/edit`} className="button" activeClassName="active-nav-link-sub">Edit</NavLink>
         </div>
 
         <Route 

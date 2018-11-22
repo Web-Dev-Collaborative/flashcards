@@ -58,7 +58,7 @@ class QuizWriteIn extends React.Component {
           <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Quiz - Self Survey</h1></Link>
         </div>
 
-        <div className="break"></div>
+        <div className="sub-header"><h2>Write In Quiz...</h2></div>
 
         <div className="card-container">
           { this.state.inputAnswers.length < this.state.questions.length ? 
