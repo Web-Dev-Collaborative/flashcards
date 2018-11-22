@@ -41,15 +41,25 @@ const QuizResults = (props) => {
           )
         }) : ''}
       </div>
+      <div className="grid grid-2">
+        { props.correctAnswersArray.length > 0 && props.inputAnswersArray.length > 0 ?
+          <div>Results section under construction...
+          </div>
+          : ''          
+        }
+      
+      </div>
     </div>
   )
 }
 
 QuizResults.propTypes = {
   deckName: PropTypes.string.isRequired,
-  easyBucket: PropTypes.object.isRequired,
-  mediumBucket: PropTypes.object.isRequired,
-  difficultBucket: PropTypes.object.isRequired
+  easyBucket: PropTypes.object,
+  mediumBucket: PropTypes.object,
+  difficultBucket: PropTypes.object,
+  correctAnswersArray: PropTypes.array,
+  inputAnswersArray: PropTypes.array
 }
 
 export default QuizResults

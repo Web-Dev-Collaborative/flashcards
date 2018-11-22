@@ -232,3 +232,9 @@ a > .deck-selector-link {
   height: 70%;
   margin: auto;
 }
+
+.containing-div {
+  max-width: 100%;
+  margin: 5px auto;
+  padding: 5px;
+}
