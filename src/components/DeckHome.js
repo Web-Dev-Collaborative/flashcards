@@ -90,7 +90,7 @@ class DeckHome extends React.Component {
           }}
         />
         <Route exact path={`${this.props.match.url}/review`} render={() => <Review deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
-        <Route exact path={`${this.props.match.url}/quiz`} render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
+        <Route path={`${this.props.match.url}/quiz`} render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
         <Route exact path={`${this.props.match.url}/edit`} render={() => <Edit deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
       </div>
     )
