@@ -95,6 +95,7 @@ button, .button {
   background-color: white;
   border: 1px groove blueviolet;
   font-weight: 600;
+  font-size: 80%;
   margin: 4px;
   cursor: pointer;
   -webkit-border-radius: 2px;
@@ -273,3 +274,18 @@ a.deck-selector-link {
 .save {
   left: 4px;
 } */
+
+/* Styling for the EditCard Component */
+
+.edit-card-container {
+  margin: 15px 0;
+  padding: 2px;
+}
+
+.card-edit-2 {
+  grid-template-columns: 6fr 1fr;
+}
+
+.card-edit-3 {
+  grid-template-columns: 2fr 4fr 1fr;
+}

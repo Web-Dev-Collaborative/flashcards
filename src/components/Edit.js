@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 
+import EditCard from './EditCard'
+
 const Edit = (props) => {
   console.log('Rendering Edit')
   console.dir(props)
@@ -27,24 +29,7 @@ const Edit = (props) => {
       <div className="containing-div">
         { Object.keys(props.deck).map((card, index) => {
           return (
-            <form className="grid grid-2 card-holder" key={index} >
-              <input 
-                type="text"
-                placeholder={card}
-                value={card}
-                name="card-front"
-                // onChange={this.handleChange}
-                className="card-edit-input-front" 
-              />
-              <input 
-                type="text"
-                placeholder={props.deck[card]}
-                value={props.deck[card]}
-                name="card-front"
-                // onChange={this.handleChange}
-                className="card-edit-input-back"
-              />
-            </form>
+            <EditCard card={card} key={index} deck={props.deck} deckName={props.deckName} />
             )
           })
         }
