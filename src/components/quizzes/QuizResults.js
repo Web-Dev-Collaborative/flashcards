@@ -9,7 +9,11 @@ const QuizResults = (props) => {
   return (
     <div>
       <div className="header">
-        <Link to={`/decks/${props.deckName}`}><h1>{ props.deckName.charAt(0).toUpperCase()+props.deckName.slice(1) } - Quiz - Results</h1></Link>
+        <h1>
+            <Link to={`/decks/${props.deckName}`}>{ props.deckName.charAt(0).toUpperCase()+props.deckName.slice(1) }</Link>
+            <Link to={`/decks/${props.deckName}/quiz`}> - Quiz </Link>
+            - Results
+          </h1>
       </div>
       <div className="grid grid-3 results-container">
         { Object.keys(props.easyBucket).length > 0 ?

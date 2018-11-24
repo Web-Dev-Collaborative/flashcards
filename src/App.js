@@ -2,9 +2,10 @@ import React from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import _ from 'lodash'
 
-import Home from './routes/Home'
-import Decks from './routes/Decks'
 import Create from './routes/Create'
+import Decks from './routes/Decks'
+import Home from './routes/Home'
+import NotFound from './routes/NotFound'
 import DeckHome from './components/DeckHome'
 
 import savedDecks from './decks'
@@ -18,6 +19,13 @@ class App extends React.Component {
       isLoading: true,
       ...props
     }
+    this.save = this.save.bind(this)
+  }
+
+  save(args) {
+    console.log('Save clicked')
+    console.log('this.state:',args)
+    console.dir(args.target)
   }
 
   componentDidMount() {
@@ -77,8 +85,9 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={() => <Home decks={this.state.decks} />} />
           <Route exact path="/decks" render={() => <Decks decks={this.state.decks} />} />
-          <Route path="/decks/:deckName" render={() => <DeckHome decks={this.state.decks} />} />
+          <Route path="/decks/:deckName" render={() => <DeckHome decks={this.state.decks} save={this.save}/>} />
           <Route path="/create" component={Create} />
+          <Route component={NotFound} />
         </Switch>
 
         <div className="break"></div>

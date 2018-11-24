@@ -55,7 +55,11 @@ class QuizWriteIn extends React.Component {
     return (
       <div>
         <div className="header">
-          <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Quiz - Self Survey</h1></Link>
+          <h1>
+            <Link to={`/decks/${this.state.deckName}`}>{ this.state.deckName.charAt(0).toUpperCase()+this.state.deckName.slice(1) }</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz`}> - Quiz</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz/match`}> - Write In</Link>
+          </h1>
         </div>
 
         <div className="sub-header"><h2>Write In Quiz...</h2></div>
@@ -63,7 +67,10 @@ class QuizWriteIn extends React.Component {
         <div className="card-container">
           { this.state.inputAnswers.length < this.state.questions.length ? 
               <form className="grid" onSubmit={this.handleSubmit} key={this.state.currentCardIndex} >
-                <div className="card-holder card-front">{this.state.questions[this.state.currentCardIndex].charAt(0).toUpperCase()+this.state.questions[this.state.currentCardIndex].slice(1)}</div>
+                <div className="card-holder card-front">
+                  <h3>{this.state.questions[this.state.currentCardIndex].charAt(0).toUpperCase()+this.state.questions[this.state.currentCardIndex].slice(1)}</h3>
+                </div>
+                
                 <input 
                   className="card-holder card-edit-input-back" 
                   placeholder="Enter your answer" 

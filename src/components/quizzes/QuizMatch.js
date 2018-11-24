@@ -128,26 +128,27 @@ class QuizMatch extends React.Component {
     return (
       <div>
         <div className="header">
-          <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Quiz - Self Survey</h1></Link>
+          <h1>
+            <Link to={`/decks/${this.state.deckName}`}>{ this.state.deckName.charAt(0).toUpperCase()+this.state.deckName.slice(1) }</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz`}> - Quiz</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz/match`}> - Match</Link>
+          </h1>
         </div>
 
         <div className="sub-header"><h2>Match Quiz...</h2></div>
 
         <div className="quiz-match-container grid">
           { this.state.remainingCards.length > 0 ?
-            <div className="sub-header"><h2>Question:</h2>
-
-              <div className="button card">{this.state.remainingCards[0]}</div>
-
-              <div className="sub-header"><h2>Possible Answers:</h2>
-                <div className="possible-answers grid grid-2">
-                  <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[0]]}</div>
-                  <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[1]]}</div>
-                  <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[2]]}</div>
-                  <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[3]]}</div>
-                </div>
+            <div>
+              <div className="card-holder card-front">
+                <h3>{this.state.remainingCards[0]}</h3>
               </div>
-
+              <div className="possible-answers grid grid-2">
+                <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[0]]}</div>
+                <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[1]]}</div>
+                <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[2]]}</div>
+                <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[3]]}</div>
+              </div>
             </div>
           : <QuizResults 
               correctAnswersArray={this.state.correctAnswersArray}

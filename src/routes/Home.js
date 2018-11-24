@@ -10,9 +10,10 @@ const Home = (props) => {
   return (
     <div className="home">
       <div className="header"><h1>Home</h1></div>
+
       <div className="break"></div>
 
-      <main className="main">
+      <main className="main sub-header">
         <Link to="/decks" className="button deck-selector-link">Select from all decks</Link>
 
         <div className="sub-header recent-decks-header"><h2>Recently viewed decks...</h2></div>

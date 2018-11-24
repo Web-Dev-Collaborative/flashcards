@@ -60,22 +60,24 @@ class DeckHome extends React.Component {
           {/* Capitalize the first letter in the displayed deck name */}
           <Link to={`${this.props.match.url}`}><h1>{ this.state.currentDeckName.charAt(0).toUpperCase()+this.state.currentDeckName.slice(1) }</h1></Link>
         </div>
+
         <div className="break"></div>
-  
-        <div className="grid grid-3">
-          <NavLink to={`${this.props.match.url}/review`} className="button" activeClassName="active-nav-link-sub">Review</NavLink>
-          <NavLink to={`${this.props.match.url}/quiz`} className="button" activeClassName="active-nav-link-sub">Quiz</NavLink>
-          <NavLink to={`${this.props.match.url}/edit`} className="button" activeClassName="active-nav-link-sub">Edit</NavLink>
-        </div>
 
         <Route 
           exact path={`${this.props.match.url}/`} 
           render={() => {
             return (
               <div>
+                <div className="grid grid-3 top-nav">
+                  <NavLink to={`${this.props.match.url}/review`} className="button" activeClassName="active-nav-link-sub">Review</NavLink>
+                  <NavLink to={`${this.props.match.url}/quiz`} className="button" activeClassName="active-nav-link-sub">Quiz</NavLink>
+                  <NavLink to={`${this.props.match.url}/edit`} className="button" activeClassName="active-nav-link-sub">Edit</NavLink>
+                </div>
+
                 <div className="sub-header">
                   <h2>Cards...</h2>
                 </div>
+                
                 { Object.keys(this.state.currentDeckCards).map((card, index) => {
                   return (
                     <div className="card-holder grid grid-2" key={index} >
@@ -91,7 +93,7 @@ class DeckHome extends React.Component {
         />
         <Route exact path={`${this.props.match.url}/review`} render={() => <Review deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
         <Route path={`${this.props.match.url}/quiz`} render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
-        <Route exact path={`${this.props.match.url}/edit`} render={() => <Edit deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
+        <Route exact path={`${this.props.match.url}/edit`} render={() => <Edit deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} save={this.props.save} />} />
       </div>
     )
   }

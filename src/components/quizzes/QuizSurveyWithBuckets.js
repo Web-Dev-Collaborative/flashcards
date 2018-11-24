@@ -90,7 +90,11 @@ class QuizSurveyWithBuckets extends React.Component {
     return (
       <div>
         <div className="header">
-          <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Quiz - Self Survey</h1></Link>
+          <h1>
+            <Link to={`/decks/${this.state.deckName}`}>{ this.state.deckName.charAt(0).toUpperCase()+this.state.deckName.slice(1) }</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz`}> - Quiz</Link>
+            <Link to={`/decks/${this.state.deckName}/quiz/survey-with-buckets`}> - Self Survey</Link>
+          </h1>
         </div>
 
         <div className="sub-header"><h2>Self Survey Quiz...</h2></div>

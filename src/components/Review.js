@@ -55,7 +55,10 @@ class Review extends React.Component {
     return (
       <div className="review">
         <div className="header">
-          <Link to={`/decks/${this.props.deckName}`}><h1>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) } - Review</h1></Link>
+          <h1>
+            <Link to={`/decks/${this.props.deckName}`}>{ this.props.deckName.charAt(0).toUpperCase()+this.props.deckName.slice(1) }</Link>
+            <Link to={`/decks/${this.props.deckName}/review`}> - Review</Link>
+           </h1>
         </div>
         
         <div className="grid grid-3 review-container card-container">

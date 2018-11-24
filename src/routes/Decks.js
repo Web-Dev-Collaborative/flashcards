@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom'
 const Decks = (props) => (
   <div className="select">
     <div className="header"><h1>Decks</h1></div>
+
     <div className="break"></div>
 
-    <main className="main">
+    <main className="main sub-header">
       <div className="search">
         {/* <input type="text" placeholder="search"></input> */}
       </div>
