@@ -35,7 +35,7 @@ const EditDeck = (props) => {
           <Link to={`/decks/${props.deckName}`}>{ props.deckName.charAt(0).toUpperCase()+props.deckName.slice(1) }</Link>
           <Link to={`/decks/${props.deckName}/edit`}> - Edit</Link>
         </h1>
-      </div>
+      </div> 
 
       <div className="containing-div">
         { Object.keys(props.deck).map((card, index) => {
@@ -54,12 +54,12 @@ const EditDeck = (props) => {
         <button onClick={addCard} className="new-card-button">Add A New Card</button>
       </div>
 
-      <div className="break"></div>
+      <div className="break edit-break"></div>
 
       <div className="grid grid-3 containing-div buttons-div">
         <Link className="button edit-Link cancel" to={`/decks/${props.deckName}`}>Cancel Changes</Link>
-        <button className="edit-button save" onClick={props.saveDeckChanges}>Save Changes</button>
-        <button className="edit-button delete" onClick={deleteCheck}>Delete Deck</button>
+        <button className="save" onClick={props.saveDeckChanges}>Save Changes</button>
+        <button className="delete" onClick={deleteCheck}>Delete Deck</button>
       </div>
     </div>
   )

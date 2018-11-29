@@ -100,7 +100,7 @@ class App extends React.Component {
               deleteDeck={this.deleteDeck} 
             />} 
           />
-          <Route path="/create" component={Create} />
+          <Route path="/create" render={() => <Create saveDeckChanges={this.saveDeckChanges} deleteDeck={this.deleteDeck} />} />
           <Route component={NotFound} />
         </Switch>
 

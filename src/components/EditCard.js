@@ -44,35 +44,32 @@ class EditCard extends React.Component {
       <div>
         { !this.state.editing 
         ? <div className="grid card-holder edit-card-container">
-            <h3>{this.state.cardFront}</h3>
-            <div className="grid grid-2">
-              <button className="edit-button" onClick={this.toggleEditing}>Edit</button>
-              <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
-            </div>
+            <h3 className="card-edit-front">{this.state.cardFront}</h3>
+            <span className="card-edit-back">{this.state.cardBack}</span>
+            <button className="edit-button" onClick={this.toggleEditing}>Edit</button>
+            <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
           </div>
         : <div className="grid card-holder edit-card-container">
-            <input 
+            <textarea 
               type="text"
               name="card-front"
               ref={this.frontInput}
-              className="card-edit-input-front" 
+              className="card-edit-front" 
               defaultValue={this.state.cardFront}
               onChange={this.onFrontChange}
             />
 
-            <input 
+            <textarea 
               type="text"
               name="card-back"
               ref={this.backInput}
-              className="card-edit-input-back"
+              className="card-edit-back"
               defaultValue={this.state.cardBack}
               onChange={this.onBackChange}
             />
 
-            <div className="grid grid-2">
-              <button className="save-button" onClick={this.toggleEditing}>Save</button>
-              <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
-            </div>
+            <button className="save-button" onClick={this.toggleEditing}>Save</button>
+            <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
           </div>
         }
       </div>
