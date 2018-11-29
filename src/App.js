@@ -19,13 +19,19 @@ class App extends React.Component {
       isLoading: true,
       ...props
     }
-    this.save = this.save.bind(this)
+    this.saveDeckChanges = this.saveDeckChanges.bind(this)
+    this.deleteDeck = this.deleteDeck.bind(this)
   }
 
-  save(args) {
+  saveDeckChanges(args) {
     console.log('Save clicked')
     console.log('this.state:',args)
     console.dir(args.target)
+  }
+
+  deleteDeck(deckName) {
+    console.log('deleteDeck named: ',deckName)
+    // TODO actually delete the deck
   }
 
   componentDidMount() {
@@ -85,7 +91,15 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" render={() => <Home decks={this.state.decks} />} />
           <Route exact path="/decks" render={() => <Decks decks={this.state.decks} />} />
-          <Route path="/decks/:deckName" render={() => <DeckHome decks={this.state.decks} save={this.save}/>} />
+          <Route path="/decks/:deckName" render={() => 
+            <DeckHome 
+              decks={this.state.decks} 
+              saveDeckChanges={this.saveDeckChanges}
+              addNewCard={this.addNewCard}
+              deleteCard={this.deleteCard} 
+              deleteDeck={this.deleteDeck} 
+            />} 
+          />
           <Route path="/create" component={Create} />
           <Route component={NotFound} />
         </Switch>

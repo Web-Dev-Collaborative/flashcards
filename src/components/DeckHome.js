@@ -1,10 +1,11 @@
 import React from 'react'
 import { Route, Link, NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import PropTypes from 'prop-types'
 
 import Review from './Review'
 import Quiz from './Quiz'
-import Edit from './Edit'
+import EditDeck from './EditDeck'
 
 class DeckHome extends React.Component {
   constructor(props) {
@@ -17,6 +18,12 @@ class DeckHome extends React.Component {
       currentCardIndex: 0,
       ...props
     }
+  }
+
+  static propTypes = {
+    decks: PropTypes.object.isRequired,
+    saveDeckChanges: PropTypes.func.isRequired,
+    deleteDeck: PropTypes.func.isRequired
   }
 
   // need to load the URL params before setting state and rendering Links/Routes
@@ -80,7 +87,7 @@ class DeckHome extends React.Component {
                 
                 { Object.keys(this.state.currentDeckCards).map((card, index) => {
                   return (
-                    <div className="card-holder grid grid-2" key={index} >
+                    <div className="grid grid-2 card-holder" key={index} >
                       <strong>{card}</strong>
                       <div><p>{this.state.currentDeckCards[card]}</p></div>
                     </div>
@@ -91,9 +98,29 @@ class DeckHome extends React.Component {
             )
           }}
         />
-        <Route exact path={`${this.props.match.url}/review`} render={() => <Review deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
-        <Route path={`${this.props.match.url}/quiz`} render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} />
-        <Route exact path={`${this.props.match.url}/edit`} render={() => <Edit deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} save={this.props.save} />} />
+        <Route 
+          exact 
+          path={`${this.props.match.url}/review`} 
+          render={() => <Review deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} 
+        />
+
+        <Route 
+          path={`${this.props.match.url}/quiz`} 
+          render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} 
+        />
+
+        <Route 
+          exact 
+          path={`${this.props.match.url}/edit`} 
+          render={() => 
+            <EditDeck 
+              deckName={this.state.currentDeckName} 
+              deck={this.state.currentDeckCards} 
+              saveDeckChanges={this.props.saveDeckChanges} 
+              deleteDeck={this.props.deleteDeck} 
+            />} 
+        />
+
       </div>
     )
   }
