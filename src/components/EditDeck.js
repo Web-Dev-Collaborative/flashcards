@@ -1,20 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Link } from 'react-router-dom'
 
 import EditCard from './EditCard'
+
+// Ref to the confirm-delete modal
+const modal = React.createRef()
 
 const EditDeck = (props) => {
   console.log('Rendering Edit')
   console.dir(props)
 
+  // Confirm they want to delete the deck FOOOOOORREEEEVVEEEEERRRR
   const deleteCheck = (e) => {
     console.log('deleteCheck clicked',props.deckName)
-    // TODO
     // Popup asking if they want to confirm, if they click yes, call props.deleteDeck(thisDeck)
-    alert("You don't really mean it, do you?!")
-    props.deleteDeck(props.deckName)
+    console.dir(modal)
+    modal.current.className = 'modal delete-check showing'
   }
 
   const addCard = (e) => {
@@ -52,6 +54,18 @@ const EditDeck = (props) => {
         }
 
         <button onClick={addCard} className="new-card-button">Add A New Card</button>
+      </div>
+
+      <div className="modal delete-check hidden" ref={modal} >
+        <h3 className="sub-header">Are you sure you want to delete {props.deckName}?</h3>
+        <button className="delete" onClick={() => {
+          modal.current.className = 'modal delete-check hidden'
+          props.deleteDeck(props.deckName)
+        }
+        }>Permanently Delete Deck</button>
+        <button className="cancel" onClick={() => {
+          modal.current.className = 'modal delete-check hidden'
+        }}>Cancel Deletion</button>
       </div>
 
       <div className="break edit-break"></div>

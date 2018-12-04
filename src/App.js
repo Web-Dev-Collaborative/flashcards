@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route, NavLink, withRouter } from 'react-router-dom'
 import _ from 'lodash'
 
 import Create from './routes/Create'
@@ -19,19 +19,24 @@ class App extends React.Component {
       isLoading: true,
       ...props
     }
-    this.saveDeckChanges = this.saveDeckChanges.bind(this)
-    this.deleteDeck = this.deleteDeck.bind(this)
   }
 
-  saveDeckChanges(args) {
+  saveDeckChanges = (args) => {
     console.log('Save clicked')
     console.log('this.state:',args)
+    // TODO ask if they want to overwrite or save as a new deck name
     console.dir(args.target)
   }
 
-  deleteDeck(deckName) {
+  // Delete deck confirmation is handled by the button that passes the 
+  // command up the prop chain to this App class which controls the state
+  deleteDeck = (deckName) => {
     console.log('deleteDeck named: ',deckName)
-    // TODO actually delete the deck
+    // TODO delete the actual deck
+
+    // and redirect to the decks page
+    console.log('redirection to /decks')
+    this.props.history.push('/decks')
   }
 
   componentDidMount() {
@@ -116,4 +121,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default withRouter(App)

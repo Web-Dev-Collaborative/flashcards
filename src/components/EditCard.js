@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+// TODOS
+// Save cards by unique id number instead of name, so that...
+// Validate against duplicate entries:
+// Ask the user if they meant to create a new card with the same name
+
 class EditCard extends React.Component {
   constructor(props) {
     super(props)
@@ -11,11 +16,6 @@ class EditCard extends React.Component {
       workingDeck: {},
       ...props
     }
-    this.frontInput = React.createRef()
-    this.backInput = React.createRef()
-    this.onFrontChange = this.onFrontChange.bind(this)
-    this.onBackChange = this.onBackChange.bind(this)
-    this.toggleEditing = this.toggleEditing.bind(this)
   }
 
   static propTypes = {
@@ -25,17 +25,30 @@ class EditCard extends React.Component {
     deleteCard: PropTypes.func.isRequired
   }
 
-  onFrontChange(e) {
-    console.log('onFrontChange ',this.frontInput.current.value)
-    this.setState({ cardFront: this.frontInput.current.value })
+  onFrontChange = (event) => {
+    console.log('onFrontChange ',event.target.value)
+    this.setState({ cardFront: event.target.value })
   }
 
-  onBackChange(e) {
-    console.log('onBackChange ',this.backInput.current.value)
-    this.setState({ cardBack: this.backInput.current.value })
+  onBackChange = (event) => {
+    console.log('onBackChange ',event.target.value)
+    this.setState({ cardBack: event.target.value })
   }
 
-  toggleEditing() {
+  toggleEditing = () => {
+    // if the card is being edited currently...
+    if (this.state.editing) {
+      // validate front and back are not blank
+      if (this.state.cardFront.trim() === '' || this.state.cardFront.trim() === null || this.state.cardFront.trim() === undefined) {
+        // TODO fix these janky alerts to be nice modal/toast popups instead
+        alert('Blank front. Did you mean to delete this card? Hint: use the delete button.')
+        return
+      }
+      if (this.state.cardBack.trim() === '' || this.state.cardBack.trim() === null || this.state.cardBack.trim() === undefined) {
+        alert('Blank back. Did you mean to delete this card?')
+        return
+      }
+    }
     this.setState({ editing: !this.state.editing })
   }
 
@@ -53,18 +66,16 @@ class EditCard extends React.Component {
             <textarea 
               type="text"
               name="card-front"
-              ref={this.frontInput}
               className="card-edit-front" 
-              defaultValue={this.state.cardFront}
+              value={this.state.cardFront}
               onChange={this.onFrontChange}
             />
 
             <textarea 
               type="text"
               name="card-back"
-              ref={this.backInput}
               className="card-edit-back"
-              defaultValue={this.state.cardBack}
+              value={this.state.cardBack}
               onChange={this.onBackChange}
             />
 

@@ -367,3 +367,28 @@ input, textarea {
   padding: 7px;
   background: rgba(205,120,205,0.25);
 }
+
+/* Styling for EditCard Modal to ask for confirmation to delete a deck */
+.modal {
+  text-align: center;
+  position: fixed;
+  max-width: 100%;
+  top: 20px;
+  right: 20px;
+  left: 20px;
+  min-height: 35px;
+  padding: 25px;
+  border: 1px solid violet;
+  background-color: #efe;
+  border-radius: 2px;
+}
+
+.hidden {
+  visibility: invisible;
+  display: none;
+}
+
+.showing {
+  visibility: visible;
+  display: initial;
+}
