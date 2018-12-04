@@ -18,12 +18,14 @@ const Decks = (props) => (
       <div className="grid grid-2">
         { Object.keys(props.decks).map((deckName, index) => <Link key={index} to={`/decks/${deckName}`} className="button" >{deckName}</Link> )}
       </div>
+      <button className="load-default-decks-button" onClick={() => props.loadDefaultDecks(true)}>Load Default Decks</button>
     </main>
   </div>
 )
 
 Decks.propTypes = {
-  decks: PropTypes.object.isRequired
+  decks: PropTypes.object.isRequired,
+  loadDefaultDecks: PropTypes.func
 }
 
 export default Decks

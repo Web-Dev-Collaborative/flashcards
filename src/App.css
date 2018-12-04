@@ -216,6 +216,11 @@ a.deck-selector-link {
   padding: 20px;
 }
 
+/* Deck styles */
+.load-default-decks-button {
+  font-size: 80%;
+}
+
 /* Review styles */
 .review-container {
   grid-template-columns: 1fr 12fr 1fr;

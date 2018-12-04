@@ -19,35 +19,49 @@ class App extends React.Component {
       isLoading: true,
       ...props
     }
+    this.saveDeckChanges = this.saveDeckChanges.bind(this)
   }
 
-  saveDeckChanges = (args) => {
-    console.log('Save clicked')
-    console.log('this.state:',args)
-    // TODO ask if they want to overwrite or save as a new deck name
-    console.dir(args.target)
+  // Save deck state to localStorage
+  saveDeckChanges = () => {
+    console.log('Saving decks to local storage')
+    localStorage.setItem('usarneme_flashy', JSON.stringify(this.state))
   }
 
   // Delete deck confirmation is handled by the button that passes the 
   // command up the prop chain to this App class which controls the state
   deleteDeck = (deckName) => {
     console.log('deleteDeck named: ',deckName)
-    // TODO delete the actual deck
-
+    // remove the deck from state
+    this.setState({
+      // filter and only return decks that do not match the provided deckName
+      decks: _.pickBy(this.state.decks, (cards, deck) => {
+        if (deck !== deckName) {
+          return deck
+        }
+      })
+    })
     // and redirect to the decks page
-    console.log('redirection to /decks')
+    console.log('Deletion complete. Redirecting to /decks')
     this.props.history.push('/decks')
   }
 
-  componentDidMount() {
-    console.log('CDM start')
+  // Load the default decks provided with the application
+  // @param ignoreLocalStorage : boolean if localStorage should be checked or not
+  loadDefaultDecks = (ignoreLocalStorage) => {
+    console.log('loading default decks')
     this.setState({ isLoading: true })
+
+    if (ignoreLocalStorage === undefined) {
+      console.log('ignoreLocalStorage passed as undefined, setting to false (do not ignore/ie check localStorage)')
+      ignoreLocalStorage = false
+    }
 
     // Restore flashcard set from localStorage if available
     const localStorageRef = localStorage.getItem('usarneme_flashy')
 
     // Ensure it's not just passing an empty object {}
-    if(localStorageRef && _.isEmpty(localStorageRef) !== true) {
+    if (!ignoreLocalStorage && localStorageRef && _.isEmpty(localStorageRef) !== true) {
       console.log('Local storage loaded.')
       console.dir(JSON.parse(localStorageRef))
 
@@ -77,11 +91,10 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate = () => {
-    console.log('CDU saving to localStore')
-    console.dir(this.state)
-    // when the component updates, save to localStorage
-    localStorage.setItem('usarneme_flashy', JSON.stringify(this.state))
+  componentDidMount() {
+    console.log('CDM start')
+    this.loadDefaultDecks()
+    console.log('CDM end')
   }
 
   render() {
@@ -91,11 +104,14 @@ class App extends React.Component {
     // don't render while state is being loaded via componentDidMount
     if (this.state.isLoading) return ''
 
+    // After loading... save deck state to localStorage
+    this.saveDeckChanges()
+
     return (
       <div>
         <Switch>
           <Route exact path="/" render={() => <Home decks={this.state.decks} />} />
-          <Route exact path="/decks" render={() => <Decks decks={this.state.decks} />} />
+          <Route exact path="/decks" render={() => <Decks decks={this.state.decks} loadDefaultDecks={this.loadDefaultDecks} />} />
           <Route path="/decks/:deckName" render={() => 
             <DeckHome 
               decks={this.state.decks} 
@@ -121,4 +137,6 @@ class App extends React.Component {
   }
 }
 
+// withRoute HOC allows access to the route data in this.props. Utilized in:
+  // deleteDeck function for redirecting after deleting a deck (no sense in rendering EditDeck with no deck selected)
 export default withRouter(App)
