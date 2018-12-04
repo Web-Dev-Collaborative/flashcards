@@ -91,16 +91,16 @@ img {
   margin: 0 auto;
 }
 
-button, .button {
+.button {
   padding: 10px;
   text-align: center;
   text-transform: uppercase;
-  background-color: white;
-  border: 1px groove blueviolet;
   font-weight: 600;
   font-size: 80%;
   margin: 4px;
   cursor: pointer;
+  background-color: white;
+  border: 1px groove blueviolet;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -384,7 +384,7 @@ input, textarea {
   min-height: 35px;
   padding: 25px;
   border: 1px solid violet;
-  background-color: #efe;
+  background-color: #eae;
   border-radius: 2px;
 }
 

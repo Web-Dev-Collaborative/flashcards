@@ -22,6 +22,17 @@ class App extends React.Component {
     this.saveDeckChanges = this.saveDeckChanges.bind(this)
   }
 
+  // add a deck of supplied deckName to the decks in state
+  addDeck = (deckName, optionalDescription) => {
+    console.log('Adding deck: '+deckName+' with optionalDescription: '+optionalDescription)
+    this.setState({
+      decks: {...this.state.decks, deckName: {}},
+    })
+    // Redirect to EditDeck component, passing inputs as props
+    console.log('Deck add complete. Redirecting to /decks/:deckId/edit')
+    this.props.history.push(`/decks/${deckName}`)
+  }
+
   // Save deck state to localStorage
   saveDeckChanges = () => {
     console.log('Saving decks to local storage')
@@ -121,7 +132,14 @@ class App extends React.Component {
               deleteDeck={this.deleteDeck} 
             />} 
           />
-          <Route path="/create" render={() => <Create saveDeckChanges={this.saveDeckChanges} deleteDeck={this.deleteDeck} />} />
+          <Route path="/create" render={() => 
+            <Create 
+              addDeck={this.addDeck}
+              deleteDeck={this.deleteDeck} 
+              saveDeckChanges={this.saveDeckChanges} 
+              decks={this.state.decks}
+            />}
+          />
           <Route component={NotFound} />
         </Switch>
 

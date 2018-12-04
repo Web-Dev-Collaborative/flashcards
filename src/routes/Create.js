@@ -1,31 +1,35 @@
 import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-import EditDeck from '../components/EditDeck'
+const deckNameRef = React.createRef()
+const optionalDescriptionRef = React.createRef()
 
 const Create = (props) => {
+  console.log('Rendering Create')
+  console.dir(props.decks)
 
+  // Validate a deck name is provided (not blank) and that it is not a duplicate deck name
   const validateAndSubmit = (e) => {
-    console.log('validateAndSubmit submitted',e.target)
+    console.log('validateAndSubmit start')
     e.stopPropagation()
     e.preventDefault()
-    // TODO
+
     // Validate inputs
-    // ...
-    // Redirect to EditDeck component, passing inputs as props
-    return <Switch>
-      <Redirect push from='create/' to='create/:deckId/edit' />
-      <Route 
-        path='create/:deckId/edit' 
-        render={() => 
-          <EditDeck 
-            deckName='TODO' 
-            deck='TODO' 
-            saveDeckChanges={props.saveDeckChanges} 
-            deleteDeck={props.deleteDeck} 
-          />}
-      />
-    </Switch>
+    console.log('Validating deck named: ',deckNameRef.current.value)
+    if (!deckNameRef.current.value) {
+      alert('No deck name provided. Please enter a name for the new deck.')
+      return
+    }
+    const deckName = deckNameRef.current.value
+    let description = ''
+
+    console.log('Validating optional description of: ',optionalDescriptionRef.current.value)
+    if (optionalDescriptionRef.current.value) description = optionalDescriptionRef.current.value
+
+    console.log('Validation complete. Adding deck to state.')
+    // Add the deckName to the decks in the application's state
+    props.addDeck(deckName, description)
   }
   
   return (
@@ -36,9 +40,9 @@ const Create = (props) => {
 
       <div className="main">
         <form className="grid sub-header" onSubmit={validateAndSubmit}>
-          <input placeholder='Name:' />
-          <input placeholder='Optional Description' />
-          <input type="submit" />
+          <input ref={deckNameRef} placeholder='Name:' />
+          <input ref={optionalDescriptionRef} placeholder='Optional Description' />
+          <input className="button" type="submit" value="Create Deck" />
         </form>
       </div>
 
@@ -46,4 +50,10 @@ const Create = (props) => {
   )
 }
 
-export default Create
+Create.propTypes = {
+  decks: PropTypes.object.isRequired,
+  addDeck: PropTypes.func.isRequired
+}
+
+// withRouter HOC used to allow pushing a redirect to the history prop after the new deck is named and the form submitted
+export default withRouter(Create)
