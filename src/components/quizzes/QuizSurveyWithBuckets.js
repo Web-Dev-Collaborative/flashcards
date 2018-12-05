@@ -99,7 +99,7 @@ class QuizSurveyWithBuckets extends React.Component {
 
         <div className="sub-header"><h2>Self Survey Quiz...</h2></div>
 
-        <div className="grid card-container">
+        <div className="grid card-container limited-width-container">
           { // if there are no further questions, display the quiz results
             this.state.remainingCardsArray.length <= 0 
             ? <QuizResults 

@@ -59,8 +59,8 @@ class EditCard extends React.Component {
         ? <div className="grid card-holder edit-card-container">
             <h3 className="card-edit-front">{this.state.cardFront}</h3>
             <span className="card-edit-back">{this.state.cardBack}</span>
-            <button className="edit-button" onClick={this.toggleEditing}>Edit</button>
-            <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
+            <button className="button edit-button" onClick={this.toggleEditing}>Edit</button>
+            <button className="button delete-button" onClick={() => this.props.deleteCard(this.state.cardFront)}>Delete</button>
           </div>
         : <div className="grid card-holder edit-card-container">
             <textarea 
@@ -79,8 +79,8 @@ class EditCard extends React.Component {
               onChange={this.onBackChange}
             />
 
-            <button className="save-button" onClick={this.toggleEditing}>Save</button>
-            <button className="delete-button" onClick={this.props.deleteCard}>Delete</button>
+            <button className="button save-button" onClick={this.toggleEditing}>Save</button>
+            <button className="button delete-button" onClick={() => this.props.deleteCard(this.state.cardFront)}>Delete</button>
           </div>
         }
       </div>

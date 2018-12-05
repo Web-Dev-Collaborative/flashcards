@@ -13,7 +13,7 @@ const Home = (props) => {
 
       <div className="break"></div>
 
-      <main className="main sub-header">
+      <main className="main sub-header limited-width-container">
         <Link to="/decks" className="button deck-selector-link">Select from all decks</Link>
 
         <div className="sub-header recent-decks-header"><h2>Recently viewed decks...</h2></div>

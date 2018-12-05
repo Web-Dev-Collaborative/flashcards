@@ -37,7 +37,7 @@ class Quiz extends React.Component {
           exact path={`${this.props.match.url}/`} 
           render={() => {
             return (
-              <div>
+              <div className="limited-width-container">
                 <div className="sub-header"><h2>Choose a quiz type...</h2></div>
                 <div className="grid grid-3">
                   <NavLink to={`${this.props.match.url}/survey-with-buckets`} className="button" exact activeClassName="active-nav-link-sub">Self Survey</NavLink>

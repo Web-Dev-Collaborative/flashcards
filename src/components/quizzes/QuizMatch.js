@@ -137,7 +137,7 @@ class QuizMatch extends React.Component {
 
         <div className="sub-header"><h2>Match Quiz...</h2></div>
 
-        <div className="quiz-match-container grid">
+        <div className="quiz-match-container grid limited-width-container">
           { this.state.remainingCards.length > 0 ?
             <div>
               <div className="card-holder card-front">

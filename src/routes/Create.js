@@ -21,7 +21,8 @@ const Create = (props) => {
       alert('No deck name provided. Please enter a name for the new deck.')
       return
     }
-    const deckName = deckNameRef.current.value
+    // Remove whitespace and replace with underscore to prevent URL encoding %20
+    const deckName = deckNameRef.current.value.trim().split(' ').join('_')
     let description = ''
 
     console.log('Validating optional description of: ',optionalDescriptionRef.current.value)
@@ -38,7 +39,7 @@ const Create = (props) => {
 
       <div className="break"></div>
 
-      <div className="main">
+      <div className="main limited-width-container">
         <form className="grid sub-header" onSubmit={validateAndSubmit}>
           <input ref={deckNameRef} placeholder='Name:' />
           <input ref={optionalDescriptionRef} placeholder='Optional Description' />

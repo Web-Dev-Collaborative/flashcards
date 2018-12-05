@@ -64,7 +64,7 @@ class QuizWriteIn extends React.Component {
 
         <div className="sub-header"><h2>Write In Quiz...</h2></div>
 
-        <div className="card-container">
+        <div className="card-container limited-width-container">
           { this.state.inputAnswers.length < this.state.questions.length ? 
               <form className="grid" onSubmit={this.handleSubmit} key={this.state.currentCardIndex} >
                 <div className="card-holder card-front">

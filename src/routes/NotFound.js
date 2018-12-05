@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (
-    <div>
+    <div className="limited-width-container">
       <div className="header"><h1>Not Found</h1></div>
 
       <div className="break"></div>

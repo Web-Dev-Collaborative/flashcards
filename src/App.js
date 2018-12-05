@@ -17,26 +17,50 @@ class App extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
+      currentDeckName: '',
       ...props
     }
-    this.saveDeckChanges = this.saveDeckChanges.bind(this)
+    this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
   }
 
   // add a deck of supplied deckName to the decks in state
   addDeck = (deckName, optionalDescription) => {
     console.log('Adding deck: '+deckName+' with optionalDescription: '+optionalDescription)
     this.setState({
-      decks: {...this.state.decks, deckName: {}},
+      // start with a single default new card
+      decks: {...this.state.decks, [deckName]: {'New Card Front': 'New Card Back'}},
     })
+    console.dir(this.state)
     // Redirect to EditDeck component, passing inputs as props
-    console.log('Deck add complete. Redirecting to /decks/:deckId/edit')
-    this.props.history.push(`/decks/${deckName}`)
+    console.log('Deck add complete. Redirecting to /decks/'+deckName+'/edit')
+    this.props.history.push(`/decks/${deckName}/edit`)
   }
 
-  // Save deck state to localStorage
-  saveDeckChanges = () => {
-    console.log('Saving decks to local storage')
-    localStorage.setItem('usarneme_flashy', JSON.stringify(this.state))
+  updateDeck = (deckName, deck) => {
+    console.log('Update deck start')
+    // Copy the current deck state less the deckName provided
+    let tmpDecks = _.pickBy(this.state.decks, (cards, _deckName) => {
+      if (deckName !== _deckName) {
+        return _deckName
+      }
+    })
+    // console.log('tmpDecks created without '+deckName)
+    // console.dir(tmpDecks)
+    // Add the updated deck to the temporary decks object
+    tmpDecks = {...tmpDecks, [deckName]: deck}
+
+    // console.log('tmpDecks updated with the updated '+deckName)
+    // console.dir(tmpDecks)
+
+    this.setState({
+      decks: tmpDecks
+    })
+    // console.log('after setState this.state.decks: ')
+    // console.dir(this.state.decks)
+    // console.log('after setState, tmpDecks: ')
+    // console.dir(tmpDecks)
+
+    console.log('UpdateDeck complete')
   }
 
   // Delete deck confirmation is handled by the button that passes the 
@@ -52,11 +76,14 @@ class App extends React.Component {
         }
       })
     })
-    // and redirect to the decks page
-    console.log('Deletion complete. Redirecting to /decks')
-    this.props.history.push('/decks')
   }
 
+  // Save deck state to localStorage
+  saveToLocalStorage = () => {
+    console.log('Saving decks to local storage')
+    localStorage.setItem('usarneme_flashy', JSON.stringify(this.state))
+  }
+  
   // Load the default decks provided with the application
   // @param ignoreLocalStorage : boolean if localStorage should be checked or not
   loadDefaultDecks = (ignoreLocalStorage) => {
@@ -102,6 +129,13 @@ class App extends React.Component {
     }
   }
 
+  setCurrentDeckNameTo = (deckName) => {
+    if (!deckName || deckName.length === 0 || deckName === undefined || deckName === null) return
+    this.setState({
+      currentDeckName: deckName
+    })
+  }
+
   componentDidMount() {
     console.log('CDM start')
     this.loadDefaultDecks()
@@ -116,7 +150,7 @@ class App extends React.Component {
     if (this.state.isLoading) return ''
 
     // After loading... save deck state to localStorage
-    this.saveDeckChanges()
+    this.saveToLocalStorage()
 
     return (
       <div>
@@ -126,17 +160,20 @@ class App extends React.Component {
           <Route path="/decks/:deckName" render={() => 
             <DeckHome 
               decks={this.state.decks} 
-              saveDeckChanges={this.saveDeckChanges}
+              saveToLocalStorage={this.saveToLocalStorage}
               addNewCard={this.addNewCard}
               deleteCard={this.deleteCard} 
               deleteDeck={this.deleteDeck} 
+              updateDeck={this.updateDeck}
+              currentDeckName={this.state.currentDeckName}
+              setCurrentDeckNameTo={this.setCurrentDeckNameTo}
             />} 
           />
           <Route path="/create" render={() => 
             <Create 
               addDeck={this.addDeck}
               deleteDeck={this.deleteDeck} 
-              saveDeckChanges={this.saveDeckChanges} 
+              saveToLocalStorage={this.saveToLocalStorage} 
               decks={this.state.decks}
             />}
           />

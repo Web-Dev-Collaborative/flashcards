@@ -9,7 +9,7 @@ const Decks = (props) => (
 
     <div className="break"></div>
 
-    <main className="main sub-header">
+    <main className="main sub-header limited-width-container">
       <div className="search">
         {/* <input type="text" placeholder="search"></input> */}
       </div>
@@ -18,7 +18,7 @@ const Decks = (props) => (
       <div className="grid grid-2">
         { Object.keys(props.decks).map((deckName, index) => <Link key={index} to={`/decks/${deckName}`} className="button" >{deckName}</Link> )}
       </div>
-      <button className="button load-default-decks-button" onClick={() => props.loadDefaultDecks(true)}>Load Default Decks</button>
+      <button className="button load-default-decks-button hidden" onClick={() => props.loadDefaultDecks(true)}>Load Default Decks</button>
     </main>
   </div>
 )

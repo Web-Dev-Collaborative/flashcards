@@ -13,17 +13,17 @@ class DeckHome extends React.Component {
     this.state = {
       isLoading: true,
       keysArray: [],
-      currentDeckName: '',
-      currentDeckCards: {}, 
-      currentCardIndex: 0,
+      currentDeckCards: {},
       ...props
     }
   }
 
   static propTypes = {
     decks: PropTypes.object.isRequired,
-    saveDeckChanges: PropTypes.func.isRequired,
-    deleteDeck: PropTypes.func.isRequired
+    currentDeckName: PropTypes.string,
+    saveToLocalStorage: PropTypes.func.isRequired,
+    deleteDeck: PropTypes.func.isRequired,
+    updateDeck: PropTypes.func.isRequired
   }
 
   // need to load the URL params before setting state and rendering Links/Routes
@@ -49,9 +49,11 @@ class DeckHome extends React.Component {
       isLoading: false,
       currentDeckName, 
       currentDeckCards,
-      currentCardIndex: 0,
       keysArray
     })
+
+    // Set the application state's current deck name
+    this.props.setCurrentDeckNameTo(currentDeckName)
   }
 
   render() {
@@ -65,7 +67,7 @@ class DeckHome extends React.Component {
       <div className="deck-home">
         <div className="header">
           {/* Capitalize the first letter in the displayed deck name */}
-          <Link to={`${this.props.match.url}`}><h1>{ this.state.currentDeckName.charAt(0).toUpperCase()+this.state.currentDeckName.slice(1) }</h1></Link>
+          <Link to={`${this.props.match.url}`}><h1>{ this.props.currentDeckName.charAt(0).toUpperCase()+this.props.currentDeckName.slice(1) }</h1></Link>
         </div>
 
         <div className="break"></div>
@@ -75,7 +77,7 @@ class DeckHome extends React.Component {
           render={() => {
             return (
               <div>
-                <div className="grid grid-3 top-nav">
+                <div className="grid grid-3 top-nav limited-width-container">
                   <NavLink to={`${this.props.match.url}/review`} className="button" activeClassName="active-nav-link-sub">Review</NavLink>
                   <NavLink to={`${this.props.match.url}/quiz`} className="button" activeClassName="active-nav-link-sub">Quiz</NavLink>
                   <NavLink to={`${this.props.match.url}/edit`} className="button" activeClassName="active-nav-link-sub">Edit</NavLink>
@@ -101,12 +103,12 @@ class DeckHome extends React.Component {
         <Route 
           exact 
           path={`${this.props.match.url}/review`} 
-          render={() => <Review deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} 
+          render={() => <Review deckName={this.props.currentDeckName} deck={this.state.currentDeckCards} />} 
         />
 
         <Route 
           path={`${this.props.match.url}/quiz`} 
-          render={() => <Quiz deckName={this.state.currentDeckName} deck={this.state.currentDeckCards} />} 
+          render={() => <Quiz deckName={this.props.currentDeckName} deck={this.state.currentDeckCards} />} 
         />
 
         <Route 
@@ -114,10 +116,11 @@ class DeckHome extends React.Component {
           path={`${this.props.match.url}/edit`} 
           render={() => 
             <EditDeck 
-              deckName={this.state.currentDeckName} 
-              deck={this.state.currentDeckCards} 
-              saveDeckChanges={this.props.saveDeckChanges} 
+              deckName={this.props.currentDeckName} 
+              deck={this.props.decks[this.props.currentDeckName]}
+              saveToLocalStorage={this.props.saveToLocalStorage} 
               deleteDeck={this.props.deleteDeck} 
+              updateDeck={this.props.updateDeck}
             />} 
         />
 

@@ -21,7 +21,7 @@ class Review extends React.Component {
   }
 
   showPreviousCard = () => {
-    console.log('showPrevious clicked with this.props.currentCardIndex: ',this.state.currentCardIndex)
+    console.log('showPrevious clicked with this.state.currentCardIndex: ',this.state.currentCardIndex)
 
     if (this.state.currentCardIndex <= 0) return
     this.setState({
@@ -31,7 +31,7 @@ class Review extends React.Component {
   }
 
   showNextCard = () => {
-    console.log('showNext clicked with this.props.currentCardIndex: ',this.state.currentCardIndex)
+    console.log('showNext clicked with this.state.currentCardIndex: ',this.state.currentCardIndex)
 
     if (this.state.currentCardIndex >= this.state.keysArray.length - 1) return
       this.setState({ 
@@ -90,7 +90,7 @@ class Review extends React.Component {
            </h1>
         </div>
         
-        <div className="grid grid-3 review-container card-container">
+        <div className="grid grid-3 review-container card-container limited-width-container">
           <img 
             alt="Previous Card"
             className="controls controls-div controls-prev prev"

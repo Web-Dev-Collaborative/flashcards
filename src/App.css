@@ -216,6 +216,13 @@ a.deck-selector-link {
   padding: 20px;
 }
 
+/* To prevent stretching on larger screens/wide monitors */
+.limited-width-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
 /* Deck styles */
 .load-default-decks-button {
   font-size: 80%;
@@ -282,20 +289,7 @@ a.deck-selector-link {
   right: 0;
 }
 
-/* .delete {
-  right: 4px;
-}
-
-.cancel {
-  right: 154px;
-}
-
-.save {
-  left: 4px;
-} */
-
 /* Styling for the EditCard Component */
-
 .edit-card-container {
   padding: 2px;
   grid-gap: 4px;
@@ -336,6 +330,14 @@ a.deck-selector-link {
   .edit-card-container {
     grid-template-columns: 2fr 2fr 5fr;
   }
+
+  .save-button,
+  .edit-button,
+  .delete-button {
+    margin: 0;
+    padding: 0;
+  }
+
   .card-edit-front {
     grid-column: 1 / 3;
     grid-row: 1; 
