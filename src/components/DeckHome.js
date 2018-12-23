@@ -76,8 +76,8 @@ class DeckHome extends React.Component {
           exact path={`${this.props.match.url}/`} 
           render={() => {
             return (
-              <div>
-                <div className="grid grid-3 top-nav limited-width-container">
+              <div className="limited-width-container">
+                <div className="grid grid-3 top-nav">
                   <NavLink to={`${this.props.match.url}/review`} className="button" activeClassName="active-nav-link-sub">Review</NavLink>
                   <NavLink to={`${this.props.match.url}/quiz`} className="button" activeClassName="active-nav-link-sub">Quiz</NavLink>
                   <NavLink to={`${this.props.match.url}/edit`} className="button" activeClassName="active-nav-link-sub">Edit</NavLink>

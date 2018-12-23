@@ -44,21 +44,21 @@ class App extends React.Component {
         return _deckName
       }
     })
-    // console.log('tmpDecks created without '+deckName)
-    // console.dir(tmpDecks)
+    console.log('tmpDecks created without '+deckName)
+    console.dir(tmpDecks)
     // Add the updated deck to the temporary decks object
     tmpDecks = {...tmpDecks, [deckName]: deck}
 
-    // console.log('tmpDecks updated with the updated '+deckName)
-    // console.dir(tmpDecks)
+    console.log('tmpDecks updated with the updated '+deckName)
+    console.dir(tmpDecks)
 
     this.setState({
       decks: tmpDecks
     })
-    // console.log('after setState this.state.decks: ')
-    // console.dir(this.state.decks)
-    // console.log('after setState, tmpDecks: ')
-    // console.dir(tmpDecks)
+    console.log('after setState this.state.decks: ')
+    console.dir(this.state.decks)
+    console.log('after setState, tmpDecks: ')
+    console.dir(tmpDecks)
 
     console.log('UpdateDeck complete')
   }
