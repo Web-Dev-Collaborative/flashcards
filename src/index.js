@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 // import * as Sentry from '@sentry/browser'
 
 import { BrowserRouter } from 'react-router-dom'
+
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
@@ -17,7 +18,7 @@ import * as serviceWorker from './serviceWorker'
 // }
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter >
     <App />
   </BrowserRouter>
   , document.getElementById('root'))
