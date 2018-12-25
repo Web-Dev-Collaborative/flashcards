@@ -41,20 +41,25 @@ class App extends React.Component {
   addNewCard = () => {
     console.log('App -> addNewCard. ')
     console.log('Adding blank card to app.state.currentDeckName = '+this.state.currentDeckName)
-    const tmpObj = {
+
+    // Create a copy of the current deck of cards, plus one new card
+    const deckWithNewBlankCard = {
       [this.state.currentDeckName]: {...this.state.decks[this.state.currentDeckName], "New Card Front": "New Card Back"}
     }
-    console.log('tmpObj created: ')
-    console.dir(tmpObj)
+    console.log('deckWithNewBlankCard created: ')
+    console.dir(deckWithNewBlankCard)
 
-    const merged = _.merge(this.state.decks, tmpObj)
+    // Use Lodash to deep merge the new deck with the decks object
+    // replacing the old deck of the same name with the new deck including the blank new card
+    const merged = _.merge(this.state.decks, deckWithNewBlankCard)
     console.log('Merging complete. New state before being set/saved:')
     console.dir(merged)
 
+    // Set the state using the new all decks object
     this.setState({
       decks: merged
     })
-    console.log('Add New Card done.')
+    console.log('Add New Card complete.')
   }
 
   updateDeck = (deckName, deck) => {

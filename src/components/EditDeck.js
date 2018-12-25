@@ -13,6 +13,7 @@ class EditDeck extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      // the selectedCard string = what card is being selected for the edit, save, or delete action
       selectedCard: ''
     }
   }
@@ -79,7 +80,10 @@ class EditDeck extends React.Component {
                   card={card} 
                   deck={this.props.deck} 
                   deckName={this.props.deckName} 
-                  deleteCard={this.deleteCardCheck}
+                  deleteCard={this.deleteCard}
+                  deleteCardCheck={this.deleteCardCheck}
+                  saveToLocalStorage={this.props.saveToLocalStorage}
+                  updateDeck={this.props.updateDeck}
                 />
               )
             })

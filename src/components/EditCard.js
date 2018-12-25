@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
+
 // TODOS
 // Save cards by unique id number instead of name, so that...
 // Validate against duplicate entries:
@@ -20,7 +22,10 @@ class EditCard extends React.Component {
     card: PropTypes.string.isRequired,
     deck: PropTypes.object.isRequired,
     deckName: PropTypes.string.isRequired,
-    deleteCard: PropTypes.func.isRequired
+    deleteCard: PropTypes.func.isRequired,
+    deleteCardCheck: PropTypes.func.isRequired,
+    updateDeck: PropTypes.func.isRequired,
+    saveToLocalStorage: PropTypes.func.isRequired
   }
 
   onFrontChange = (event) => {
@@ -31,6 +36,31 @@ class EditCard extends React.Component {
   onBackChange = (event) => {
     console.log('onBackChange ',event.target.value)
     this.setState({ cardBack: event.target.value })
+  }
+
+  save = (event) => {
+    console.log('Saving')
+    console.dir(this)
+
+    // Copy the deck without the edited card
+    // filter and only return cards that do not match the old card value
+    const updatedDeck = _.pickBy(this.props.deck, (cardValue, card) => {
+      if (card !== this.props.card) {
+        return card
+      }
+    })
+    console.log('Old card value removed from deck. Copy created:')
+    console.dir(updatedDeck)
+
+    // Add the new version of the card
+    updatedDeck[this.state.cardFront] = this.state.cardBack
+    console.log('Deck created with the updated card')
+    console.dir(updatedDeck)
+
+    // Update and save deck changes to application state
+    this.props.updateDeck(this.props.deckName, updatedDeck)
+    // Save changes to storage
+    this.props.saveToLocalStorage()
   }
 
   toggleEditing = () => {
@@ -46,6 +76,9 @@ class EditCard extends React.Component {
         alert('Blank back. Did you mean to delete this card?')
         return
       }
+      // Validation passed
+      // Save card to application state
+      this.save()
     }
     this.setState({ editing: !this.state.editing })
   }
@@ -58,7 +91,7 @@ class EditCard extends React.Component {
             <h3 className="card-edit-front">{this.state.cardFront}</h3>
             <span className="card-edit-back">{this.state.cardBack}</span>
             <button className="button edit-button" onClick={this.toggleEditing}>Edit</button>
-            <button className="button delete-button" onClick={() => this.props.deleteCard(this.state.cardFront)}>Delete</button>
+            <button className="button delete-button" onClick={() => this.props.deleteCardCheck(this.state.cardFront)}>Delete</button>
           </div>
         : <div className="grid card-holder edit-card-container">
             <textarea 
@@ -78,7 +111,7 @@ class EditCard extends React.Component {
             />
 
             <button className="button save-button" onClick={this.toggleEditing}>Save</button>
-            <button className="button delete-button" onClick={() => this.props.deleteCard(this.props.card)}>Delete</button>
+            <button className="button delete-button" onClick={() => this.props.deleteCardCheck(this.props.card)}>Delete</button>
           </div>
         }
       </div>
