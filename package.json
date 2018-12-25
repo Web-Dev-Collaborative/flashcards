@@ -29,7 +29,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "description": "React Flashcards App",
+  "description": "Flashcards App",
   "main": "index.js",
   "repository": "https://github.com/Usarneme/flashcards.git",
   "author": "usarneme",
