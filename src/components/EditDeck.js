@@ -6,13 +6,14 @@ import _ from 'lodash'
 import EditCard from './EditCard'
 
 // Ref to the confirm-delete modal
-const modal = React.createRef()
+const deleteDeckModal = React.createRef()
+const deleteCardModal = React.createRef()
 
 class EditDeck extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      deck: props.deck
+      selectedCard: ''
     }
   }
 
@@ -20,6 +21,7 @@ class EditDeck extends React.Component {
     deckName: PropTypes.string.isRequired,
     deck: PropTypes.object.isRequired,
     saveToLocalStorage: PropTypes.func.isRequired,
+    addNewCard: PropTypes.func.isRequired,
     deleteDeck: PropTypes.func.isRequired,
     updateDeck: PropTypes.func.isRequired
   }  
@@ -28,52 +30,36 @@ class EditDeck extends React.Component {
   deleteDeckCheck = (e) => {
     console.log('deleteDeckCheck clicked',this.props.deckName)
     // Popup asking if they want to confirm, if they click yes, call this.props.deleteDeck(thisDeck)
-    console.dir(modal)
-    modal.current.className = 'modal delete-check showing'
+    deleteDeckModal.current.className = 'modal delete-check showing'
   }
 
   deleteCardCheck = (cardName) => {
-    // TODO: Add modal to confirm Yes | No
-    console.log('deleteCardCheck:',cardName)
+    console.log('EditDeck -> DeleteCardCheck. Card:',cardName)
+    this.setState({ selectedCard: cardName })
+    deleteCardModal.current.className = 'modal delete-check showing'
+  }
+
+  deleteCard = (cardName) => {
     // filter and only return cards that do not match the provided cardName
     const tmpDeck = _.pickBy(this.props.deck, (cardValue, card) => {
       if (card !== cardName) {
         return card
       }
     })
-    console.log('Deleted '+cardName+' from deck. Updating state.')
+    console.log('EditDeck -> DeleteCard. Deleted '+cardName+' from deck. Updating App state and saving to localStorage.')
     // Update and save deck changes to application state
     this.props.updateDeck(this.props.deckName, tmpDeck)
-    // this.props.saveToLocalStorage()
-  }
-
-  addCard = (e) => {
-    console.log('addCard ',e)
-    console.dir(e)
-  }
-
-  renderCards = () => {
-    return (
-      Object.keys(this.props.deck).map((card, index) => {
-        return (
-          <EditCard 
-            key={index} 
-            card={card} 
-            deck={this.props.deck} 
-            deckName={this.props.deckName} 
-            deleteCard={this.deleteCardCheck}
-          />
-        )
-      })
-    )
+    // Save changes to storage
+    this.props.saveToLocalStorage()
+    // Reset the selected card
+    this.setState({ selectedCard: '' })
   }
 
   render() {
     console.log('Rendering Edit')
-    console.log('this.props')
-    console.dir(this.props)
-    console.log('this.state')
-    console.dir(this.state)
+
+    console.log('this.props.deck')
+    console.dir(this.props.deck)
 
     return (
       <div className="limited-width-container edit">
@@ -86,16 +72,25 @@ class EditDeck extends React.Component {
 
         <div className="containing-div">
           { 
-            this.renderCards()
+            Object.keys(this.props.deck).map((card, index) => {
+              return (
+                <EditCard 
+                  key={index+'_'+card} 
+                  card={card} 
+                  deck={this.props.deck} 
+                  deckName={this.props.deckName} 
+                  deleteCard={this.deleteCardCheck}
+                />
+              )
+            })
           }
 
-          <button onClick={this.addCard} className="button new-card-button">Add A New Card</button>
         </div>
 
-        <div className="modal delete-check hidden" ref={modal} >
+        <div className="modal delete-check hidden" ref={deleteDeckModal} >
           <h3 className="sub-header">Are you sure you want to delete {this.props.deckName}?</h3>
           <button className="button delete" onClick={() => {
-            modal.current.className = 'modal delete-check hidden'
+            deleteDeckModal.current.className = 'modal delete-check hidden'
             this.props.deleteDeck(this.props.deckName)
             // Deck deleted. Redirecting to decks route
             console.log('Delete deck complete. Redirecting to /decks')
@@ -103,21 +98,27 @@ class EditDeck extends React.Component {
           }
           }>Permanently Delete Deck</button>
           <button className="button cancel" onClick={() => {
-            modal.current.className = 'modal delete-check hidden'
+            deleteDeckModal.current.className = 'modal delete-check hidden'
+          }}>Cancel Deletion</button>
+        </div>
+
+        <div className="modal delete-check hidden" ref={deleteCardModal} >
+          <h3 className="sub-header">Are you sure you want to delete {this.state.selectedCard}?</h3>
+          <button className="button delete" onClick={() => {
+            deleteCardModal.current.className = 'modal delete-check hidden'
+            this.deleteCard(this.state.selectedCard)
+          }
+          }>Permanently Delete Card</button>
+          <button className="button cancel" onClick={() => {
+            deleteCardModal.current.className = 'modal delete-check hidden'
+            this.setState({ selectedCard: '' })
           }}>Cancel Deletion</button>
         </div>
 
         <div className="break edit-break"></div>
 
-        <div className="grid grid-3 containing-div buttons-div">
-          <Link className="button edit-Link cancel" to={`/decks/${this.props.deckName}`}>Cancel Changes</Link>
-          <button className="button save" onClick={() => { 
-            this.props.saveToLocalStorage()
-            // Deck saved. Redirecting to decks/:deckId
-            console.log('Deck saved. Redirecting to decks/:deckId')
-            this.props.history.push(`/decks/${this.props.deckName}`)
-          }
-          }>Save Changes</button>
+        <div className="grid grid-2 containing-div buttons-div">
+          <button onClick={this.props.addNewCard} className="button new-card-button">Add A New Card</button>
           <button className="button delete" onClick={this.deleteDeckCheck}>Delete Deck</button>
         </div>
       </div>

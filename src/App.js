@@ -25,15 +25,36 @@ class App extends React.Component {
 
   // add a deck of supplied deckName to the decks in state
   addDeck = (deckName, optionalDescription) => {
-    console.log('Adding deck: '+deckName+' with optionalDescription: '+optionalDescription)
+    console.log('App -> addDeck. Deck: '+deckName+' with optionalDescription: '+optionalDescription)
     this.setState({
       // start with a single default new card
       decks: {...this.state.decks, [deckName]: {'New Card Front': 'New Card Back'}},
     })
+    console.log('App -> addDeck after adding deck to state. this.state:')
     console.dir(this.state)
+
     // Redirect to EditDeck component, passing inputs as props
-    console.log('Deck add complete. Redirecting to /decks/'+deckName+'/edit')
+    console.log('App -> addDeck. Deck add complete. Redirecting to /decks/'+deckName+'/edit')
     this.props.history.push(`/decks/${deckName}/edit`)
+  }
+
+  addNewCard = () => {
+    console.log('App -> addNewCard. ')
+    console.log('Adding blank card to app.state.currentDeckName = '+this.state.currentDeckName)
+    const tmpObj = {
+      [this.state.currentDeckName]: {...this.state.decks[this.state.currentDeckName], "New Card Front": "New Card Back"}
+    }
+    console.log('tmpObj created: ')
+    console.dir(tmpObj)
+
+    const merged = _.merge(this.state.decks, tmpObj)
+    console.log('Merging complete. New state before being set/saved:')
+    console.dir(merged)
+
+    this.setState({
+      decks: merged
+    })
+    console.log('Add New Card done.')
   }
 
   updateDeck = (deckName, deck) => {
@@ -57,6 +78,7 @@ class App extends React.Component {
     })
     console.log('after setState this.state.decks: ')
     console.dir(this.state.decks)
+
     console.log('after setState, tmpDecks: ')
     console.dir(tmpDecks)
 
@@ -137,13 +159,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('CDM start')
+    console.log('App.js -> CDM.')
     this.loadDefaultDecks()
-    console.log('CDM end')
+    console.log('App.js -> CDM end')
   }
 
   render() {
-    console.log('Rendering App')
+    console.log('Rendering App.js')
     console.dir(this)
 
     // don't render while state is being loaded via componentDidMount

@@ -12,9 +12,7 @@ class EditCard extends React.Component {
     this.state = {
       cardFront: props.card,
       cardBack: props.deck[props.card] || 'New Card Back',
-      editing: false,
-      workingDeck: {},
-      ...props
+      editing: false
     }
   }
 
@@ -54,7 +52,7 @@ class EditCard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id={this.props.card} >
         { !this.state.editing 
         ? <div className="grid card-holder edit-card-container">
             <h3 className="card-edit-front">{this.state.cardFront}</h3>
@@ -80,7 +78,7 @@ class EditCard extends React.Component {
             />
 
             <button className="button save-button" onClick={this.toggleEditing}>Save</button>
-            <button className="button delete-button" onClick={() => this.props.deleteCard(this.state.cardFront)}>Delete</button>
+            <button className="button delete-button" onClick={() => this.props.deleteCard(this.props.card)}>Delete</button>
           </div>
         }
       </div>

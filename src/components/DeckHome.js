@@ -12,15 +12,16 @@ class DeckHome extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
-      keysArray: [],
       currentDeckCards: {},
-      ...props
+      currentDeckName: '',
+      keysArray: []
     }
   }
 
   static propTypes = {
     decks: PropTypes.object.isRequired,
     currentDeckName: PropTypes.string,
+    addNewCard: PropTypes.func.isRequired,
     saveToLocalStorage: PropTypes.func.isRequired,
     deleteDeck: PropTypes.func.isRequired,
     updateDeck: PropTypes.func.isRequired
@@ -31,7 +32,7 @@ class DeckHome extends React.Component {
     let url = this.props.match.url.trim()
     // Remove a trailing slash eg: /decks/spanish/ -> /decks/spanish
     if (url[url.length-1] === '/') { url = url.substring(0, this.props.match.url.length-1) }
-    console.log('CDM DeckHome. url',url)
+    console.log('DeckHome -> CDM with url',url)
 
     const lastSlashIndex = url.lastIndexOf('/')+1
     const deckNameLength = url.length
@@ -118,6 +119,7 @@ class DeckHome extends React.Component {
             <EditDeck 
               deckName={this.props.currentDeckName} 
               deck={this.props.decks[this.props.currentDeckName]}
+              addNewCard={this.props.addNewCard}
               saveToLocalStorage={this.props.saveToLocalStorage} 
               deleteDeck={this.props.deleteDeck} 
               updateDeck={this.props.updateDeck}
