@@ -178,7 +178,7 @@ class App extends React.Component {
 
     // After loading... save deck state to localStorage
     this.saveToLocalStorage()
-
+ 
     return (
       <div>
         <Switch>

@@ -55,12 +55,16 @@ class Create extends React.Component {
     
     return (
       <div className="create">
-        <div className="header"><h1>Create a deck</h1></div>
+        <div className="header"><h1>Flashcards</h1></div>
 
         <div className="break"></div>
 
         <div className="main limited-width-container">
-          <form className="grid sub-header" onSubmit={validateAndSubmit}>
+          <div className="sub-header">
+            <h2>Create a New Deck</h2>
+          </div>
+
+          <form className="grid" onSubmit={validateAndSubmit}>
             <input ref={deckNameRef} placeholder='Name:' />
             <input ref={optionalDescriptionRef} placeholder='Optional Description' />
             <input className="button" type="submit" value="Create Deck" />
