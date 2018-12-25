@@ -110,7 +110,6 @@ img {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  border: 1px gray dashed;
   border-bottom: 5px groove blueviolet;
 
   -webkit-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
@@ -237,7 +236,10 @@ a.deck-selector-link {
 .card {
   padding: 20px;
   background-color: rgba(255,255,255,0.95);
-  border: 1px gray dotted;
+
+  -webkit-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  -moz-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
 }
 
 /* To prevent stretching on larger screens/wide monitors */
@@ -265,7 +267,10 @@ a.deck-selector-link {
 }
 
 .card-holder {
-  border: 1px dashed salmon;
+  -webkit-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  -moz-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+
   padding: 4px;
   margin: 4px;
   background-color: white;
@@ -304,6 +309,7 @@ a.deck-selector-link {
 .possible-answer {
   text-transform: none;
   font-weight: 400;
+  max-height: initial;
 }
 
 /* Styling for the Edt Deck Route/Page */
@@ -385,16 +391,10 @@ a.deck-selector-link {
 }
 
 input, textarea {
-  border: 3px solid white; 
-  -webkit-box-shadow: 
-    inset 0 0 6px  rgba(0,0,0,0.1),
-          0 0 12px rgba(0,0,0,0.1); 
-  -moz-box-shadow: 
-    inset 0 0 6px  rgba(0,0,0,0.1),
-          0 0 12px rgba(0,0,0,0.1); 
-  box-shadow: 
-    inset 0 0 6px  rgba(0,0,0,0.1),
-          0 0 12px rgba(0,0,0,0.1); 
+  -webkit-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  -moz-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+
   padding: 7px;
   background: rgba(205,120,205,0.25);
 }
@@ -419,12 +419,12 @@ input, textarea {
   left: 20px;
   min-height: 35px;
   padding: 25px;
-  border: 1px solid violet;
   background-color: #eae;
   border-radius: 2px;
 
-  border: 3px solid white;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.1), 0 0 12px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  -moz-box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
 }
 
 .hidden {

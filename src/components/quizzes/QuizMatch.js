@@ -143,7 +143,7 @@ class QuizMatch extends React.Component {
               <div className="card-holder card-front">
                 <h3>{this.state.remainingCards[0]}</h3>
               </div>
-              <div className="possible-answers grid grid-2">
+              <div className="grid grid-2 possible-answers">
                 <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[0]]}</div>
                 <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[1]]}</div>
                 <div className="button possible-answer" onClick={e => this.submitAnswer(e)} >{this.state.allPossibleAnswers[this.state.displayedAnswersArray[2]]}</div>

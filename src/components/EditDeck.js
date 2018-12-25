@@ -93,30 +93,34 @@ class EditDeck extends React.Component {
 
         <div className="modal delete-check hidden" ref={deleteDeckModal} >
           <h3 className="sub-header">Are you sure you want to delete {this.props.deckName}?</h3>
-          <button className="button delete" onClick={() => {
-            deleteDeckModal.current.className = 'modal delete-check hidden'
-            this.props.deleteDeck(this.props.deckName)
-            // Deck deleted. Redirecting to decks route
-            console.log('Delete deck complete. Redirecting to /decks')
-            this.props.history.push(`/decks`)
-          }
-          }>Permanently Delete Deck</button>
-          <button className="button cancel" onClick={() => {
-            deleteDeckModal.current.className = 'modal delete-check hidden'
-          }}>Cancel Deletion</button>
+          <div className="grid limited-width-container">
+            <button className="button delete" onClick={() => {
+              deleteDeckModal.current.className = 'modal delete-check hidden'
+              this.props.deleteDeck(this.props.deckName)
+              // Deck deleted. Redirecting to decks route
+              console.log('Delete deck complete. Redirecting to /decks')
+              this.props.history.push(`/decks`)
+            }
+            }>Permanently Delete Deck</button>
+            <button className="button cancel" onClick={() => {
+              deleteDeckModal.current.className = 'modal delete-check hidden'
+            }}>Cancel Deletion</button>          
+          </div>
         </div>
 
         <div className="modal delete-check hidden" ref={deleteCardModal} >
           <h3 className="sub-header">Are you sure you want to delete {this.state.selectedCard}?</h3>
-          <button className="button delete" onClick={() => {
-            deleteCardModal.current.className = 'modal delete-check hidden'
-            this.deleteCard(this.state.selectedCard)
-          }
-          }>Permanently Delete Card</button>
-          <button className="button cancel" onClick={() => {
-            deleteCardModal.current.className = 'modal delete-check hidden'
-            this.setState({ selectedCard: '' })
-          }}>Cancel Deletion</button>
+          <div className="grid limited-width-container">
+            <button className="button delete" onClick={() => {
+              deleteCardModal.current.className = 'modal delete-check hidden'
+              this.deleteCard(this.state.selectedCard)
+            }
+            }>Permanently Delete Card</button>
+            <button className="button cancel" onClick={() => {
+              deleteCardModal.current.className = 'modal delete-check hidden'
+              this.setState({ selectedCard: '' })
+            }}>Cancel Deletion</button>
+          </div>
         </div>
 
         <div className="break edit-break"></div>
