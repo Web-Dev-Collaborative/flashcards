@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       isLoading: true,
       currentDeckName: '',
+      stats: {},
       ...props
     }
     this.saveToLocalStorage = this.saveToLocalStorage.bind(this)

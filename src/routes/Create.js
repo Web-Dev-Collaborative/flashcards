@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 // Refs for uncontrolled dekc name and description form inputs, and a modal popup to validate the form
 const deckNameRef = React.createRef()
-const optionalDescriptionRef = React.createRef()
 const errorModalRef = React.createRef()
 
 class Create extends React.Component {
@@ -45,9 +44,6 @@ class Create extends React.Component {
       const deckName = deckNameRef.current.value.trim().split(' ').join('_')
       let description = ''
 
-      console.log('Validating optional description of: ',optionalDescriptionRef.current.value)
-      if (optionalDescriptionRef.current.value) description = optionalDescriptionRef.current.value
-
       console.log('Validation complete. Adding deck to state.')
       // Add the deckName to the decks in the application's state
       this.props.addDeck(deckName, description)
@@ -66,7 +62,6 @@ class Create extends React.Component {
 
           <form className="grid" onSubmit={validateAndSubmit}>
             <input ref={deckNameRef} placeholder='Name:' />
-            <input ref={optionalDescriptionRef} placeholder='Optional Description' />
             <input className="button" type="submit" value="Create Deck" />
           </form>
         </div>
