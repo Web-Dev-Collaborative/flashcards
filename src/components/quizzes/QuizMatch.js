@@ -53,37 +53,45 @@ class QuizMatch extends React.Component {
   // get 1 correct answer + 3 random answers out of all of the possible answers 
   // to render as possible correct answers to select from as a match
   setRandomAnswersArray() {
-    console.log('setRandomAnswersArray function begin.')
+    console.log('QuizMatch.js -> setRandomAnswersArray function begin.')
 
     // to hold the 3 random answer indices
     const tmpIndicesArray = []
+    console.log('tempIndicesArray should be empty here. length: ',tmpIndicesArray.length)
 
     const currentCardAnswer = this.state.deck[this.state.remainingCards[0]]
-    // console.log('currentCardAnswer ',currentCardAnswer)
-
     const currentCardAnswerIndex = this.state.allPossibleAnswers.indexOf(currentCardAnswer)
-    // console.log('currentCardAnswerIndex: ',currentCardAnswerIndex)
 
+    console.log('before pushing current card answer index '+currentCardAnswerIndex+' into the temp indices array',tmpIndicesArray.toString())
     // Ensure the correct answer is always included in the index array
     tmpIndicesArray.push(currentCardAnswerIndex)
 
+    console.log('after pushing current card answer index '+currentCardAnswerIndex+' into the temp indices array',tmpIndicesArray)
+
     // until we have four numbers that are not the same number
-    while (tmpIndicesArray.length < 4) {
+    // The counter and maxEscape prevent JS from running forever.
+    // This seems to only happen when the pRNG cannot find a non-duplicate number from that already in the array
+    // OR when the number of available cards in the deck is less than 4 TODO find a better fix than the janky counter escape
+    let counter = 0
+    const maxEscape = 500
+    while (tmpIndicesArray.length < 4 && counter < maxEscape) {
+      console.log('inside the while loop')
+      console.log('creating random number')
       let randomNumber = Math.floor(Math.random()*Object.keys(this.state.deck).length)
+      console.log('random number generated',randomNumber)
       if (tmpIndicesArray.indexOf(randomNumber) === -1) tmpIndicesArray.push(randomNumber)
+      counter++
     }
 
-    // console.log('tmpIndicesArray populated in order: ',tmpIndicesArray)
-    // console.log('Shuffling')
+    console.log('tmpIndicesArray populated in order: ',tmpIndicesArray)
+    console.log('Shuffling')
 
     // Shuffle the order so the correct answer is in a random location
     const shuffledIndicesArray = this.shuffle(tmpIndicesArray)
-
-    // console.log('Shuffled indices array: ',shuffledIndicesArray)
+    console.log('Shuffled indices array: ',shuffledIndicesArray)
 
     const displayedAnswersArray = shuffledIndicesArray
-
-    // console.log('about to set state of displayedAnswersArray to:',displayedAnswersArray)
+    console.log('about to set state of displayedAnswersArray to:',displayedAnswersArray)
 
     // set the 3 random number index answers + the correct answer 
     // to state to be accessible by the render method

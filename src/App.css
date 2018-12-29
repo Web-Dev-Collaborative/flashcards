@@ -270,7 +270,7 @@ a.deck-selector-link {
   box-shadow: 0 0 0 #c5376d, 0 2px 15px rgba(0, 0, 0, .35);
 
   padding: 4px;
-  margin: 4px;
+  margin: 0 0 20px 0;
   background-color: white;
   /* More space for the definition/back than the term/front */
   grid-template-columns: 3fr 5fr;
@@ -300,12 +300,16 @@ a.deck-selector-link {
 }
 
 /* Styling for the Quiz type Self Survey */
+.easy, .medium, .difficult {
+  padding: 15px;
+}
+
 .easy {
   background-color: rgba(20,255,20,0.7);
 }
 
 .medium {
-  background-color: rgba(255,140,0,0.7);
+  background-color: rgba(255,200,0,0.7);
 }
 
 .difficult {
@@ -321,6 +325,25 @@ a.deck-selector-link {
   text-transform: none;
   font-weight: 400;
   max-height: initial;
+  align-self: stretch;
+  padding: 20px;
+}
+
+/* Styling for the Quiz Results page */
+.results-container {
+  grid-template-columns: 1fr;
+}
+
+@media all and (min-width: 768) {
+  .results-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media all and (min-width: 920) {
+  .results-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 /* Styling for the Edt Deck Route/Page */
