@@ -330,19 +330,29 @@ a.deck-selector-link {
 }
 
 /* Styling for the Quiz Results page */
-.results-container {
+.results-container,
+.results-card-container,
+.results-card {
   grid-template-columns: 1fr;
 }
 
 @media all and (min-width: 768) {
-  .results-container {
+  .results-container,
+  .results-card-container,
+  .results-card {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media all and (min-width: 920) {
+@media all and (min-width: 1220) {
   .results-container {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media all and (min-width: 1920) {
+  .results-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 

@@ -87,6 +87,7 @@ class QuizWriteIn extends React.Component {
                   easyBucket={{}}
                   mediumBucket={{}}
                   difficultBucket={{}}
+                  deck={this.props.deck}
                 />
           }
         </div>

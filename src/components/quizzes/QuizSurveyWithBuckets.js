@@ -106,7 +106,8 @@ class QuizSurveyWithBuckets extends React.Component {
                 easyBucket={this.state.easyBucket}
                 mediumBucket={this.state.mediumBucket}
                 difficultBucket={this.state.difficultBucket}
-                deckName={this.state.deckName}
+                deckName={this.props.deckName}
+                deck={this.props.deck}
               /> 
             : 
             [ // if there are further cards, display the card
