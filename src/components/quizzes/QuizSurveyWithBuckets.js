@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Card from '../Card'
 import Survey from './Survey'
+import QuizProgress from './QuizProgress'
 import QuizResults from './QuizResults'
 
 class QuizSurveyWithBuckets extends React.Component {
@@ -96,6 +97,8 @@ class QuizSurveyWithBuckets extends React.Component {
             <Link to={`/decks/${this.state.deckName}/quiz/survey-with-buckets`}> - Self Survey</Link>
           </h1>
         </div>
+
+        <QuizProgress currentNumber={Object.keys(this.state.workingDeck).length} totalNumbers={Object.keys(this.props.deck).length} />
 
         <div className="sub-header"><h2>Self Survey Quiz...</h2></div>
 

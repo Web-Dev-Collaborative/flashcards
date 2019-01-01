@@ -219,7 +219,7 @@ a.deck-selector-link {
 }
 
 .review, .edit, .quiz {
-  padding: 0 5px;
+  padding: 0;
 }
 
 .all-cards-holder {
@@ -329,11 +329,41 @@ a.deck-selector-link {
   padding: 20px;
 }
 
+/* Quiz Progress bar styling */
+.quiz-progress-container {
+  margin: 0;
+  grid-gap: 0;
+}
+
+.quiz-progress-completed {
+  background-color: #c5376d;
+}
+
+.quiz-progress-remaining {
+  background-color: rgba(150, 150, 100, 0.15)
+}
+
 /* Styling for the Quiz Results page */
 .results-container,
 .results-card-container,
 .results-card {
   grid-template-columns: 1fr;
+}
+
+.results-card {
+  margin: 5px;
+  padding: 10px;
+}
+
+summary {
+  font-size: larger;
+  font-weight: 500;
+  padding: 3px;
+}
+
+summary + p {
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 @media all and (min-width: 768) {

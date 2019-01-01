@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import QuizProgress from './QuizProgress'
 import QuizResults from './QuizResults'
 
 class QuizMatch extends React.Component {
@@ -142,6 +143,8 @@ class QuizMatch extends React.Component {
             <Link to={`/decks/${this.state.deckName}/quiz/match`}> - Match</Link>
           </h1>
         </div>
+
+        <QuizProgress currentNumber={this.state.remainingCards.length} totalNumbers={Object.keys(this.props.deck).length} />
 
         <div className="sub-header"><h2>Match Quiz...</h2></div>
 

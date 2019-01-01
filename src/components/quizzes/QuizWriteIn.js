@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import QuizProgress from './QuizProgress'
 import QuizResults from './QuizResults'
 
 class QuizWriteIn extends React.Component {
@@ -49,8 +50,8 @@ class QuizWriteIn extends React.Component {
 
   render() {
     if (this.state.isLoading) return ''
-    // console.log('Rendering QuizWriteIn')
-    // console.dir(this.state)
+    console.log('Rendering QuizWriteIn')
+    console.dir(this.state)
 
     return (
       <div>
@@ -61,6 +62,8 @@ class QuizWriteIn extends React.Component {
             <Link to={`/decks/${this.state.deckName}/quiz/match`}> - Write In</Link>
           </h1>
         </div>
+
+        <QuizProgress currentNumber={Object.keys(this.props.deck).length - this.state.inputAnswers.length} totalNumbers={Object.keys(this.props.deck).length} />
 
         <div className="sub-header"><h2>Write In Quiz...</h2></div>
 

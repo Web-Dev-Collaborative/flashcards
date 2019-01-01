@@ -14,7 +14,9 @@ class QuizResults extends React.Component {
       difficultKeys: [],
       difficultTotal: 0,
       correctMatches: [],
-      incorrectMatches: []
+      incorrectMatches: [],
+      correctAnswersArray: props.correctAnswersArray || [],
+      inputAnswersArray: props.inputAnswersArray || []
     }
   }
 
@@ -31,13 +33,13 @@ class QuizResults extends React.Component {
   }
 
   componentDidMount() {
-    console.log('QuizResults -> CDM. Prepareing initial state.')
+    console.log('QuizResults -> CDM. Preparing initial state.')
     // Prepare stats object to be stored to state
-    const easyKeys = Object.keys(this.props.easyBucket)
+    const easyKeys = Object.keys(this.props.easyBucket || {})
     const easyTotal = easyKeys.length
-    const mediumKeys = Object.keys(this.props.mediumBucket)
+    const mediumKeys = Object.keys(this.props.mediumBucket || {})
     const mediumTotal = mediumKeys.length
-    const difficultKeys = Object.keys(this.props.difficultBucket)
+    const difficultKeys = Object.keys(this.props.difficultBucket || {})
     const difficultTotal = difficultKeys.length
 
     // Timestamp
@@ -49,12 +51,15 @@ class QuizResults extends React.Component {
     // Filtering into incorrect and correct arrays from the provided answers 
     // by comparing input and correct answers arrays
     const incorrectMatches = []
-    const correctMatches = this.props.inputAnswersArray.filter((str, idx) => {
-      console.log('Testing input "'+str+'" against correct "'+this.props.correctAnswersArray[idx]+'"')
-      if (str === this.props.correctAnswersArray[idx]) return str
-      console.log('Not matching')
-      incorrectMatches.push(str)
-    })
+    let correctMatches = []
+    if (this.props.inputAnswersArray) {
+      correctMatches = this.props.inputAnswersArray.filter((str, idx) => {
+        console.log('Testing input "'+str+'" against correct "'+this.props.correctAnswersArray[idx]+'"')
+        if (str === this.props.correctAnswersArray[idx]) return str
+        console.log('Not matching')
+        incorrectMatches.push(str)
+      })
+    }
 
     this.setState({
       easyKeys,
@@ -71,6 +76,8 @@ class QuizResults extends React.Component {
   render() {
     console.log('QuizResults -> Render. With Props:')
     console.dir(this.props)
+    console.log('and state:')
+    console.dir(this.state)
 
     return (
       <div>
@@ -81,71 +88,72 @@ class QuizResults extends React.Component {
               - Results
             </h1>
         </div>
-        {/* If self survey, display the self survey results
-            Otherwise display the write-in or match results */}
-        { (this.state.easyTotal + this.state.mediumTotal + this.state.difficultTotal > 0) ? 
-          <div className="grid grid-3 limited-width-container">
-            <div className="easy-results">
-              <h3>Easy: {this.state.easyTotal}</h3>
-              <p>
+        { /* If self survey, display the self survey results
+            Otherwise display the write-in or match results */
+          (this.state.easyTotal + this.state.mediumTotal + this.state.difficultTotal) > 0 ? 
+          <div className="grid limited-width-container">
+            <details className="easy-results">
+              <summary>Easy: {this.state.easyTotal} ({ ((this.state.easyTotal/(this.state.easyTotal + this.state.mediumTotal + this.state.difficultTotal))*100).toFixed(2) + '%'})</summary>
+              <div>
                 { this.state.easyTotal > 0 ? 
                   this.state.easyKeys.map((card, index) => {
                     return (
-                      <div className="grid grid-2 card-holder" key={index} >
-                        <strong>{card}</strong>
-                        <div><p>Card Back</p></div>
-                      </div>
+                      <details className="grid grid-2 card-holder results-card" key={index} >
+                        <summary>{card}</summary>
+                        <p>{this.props.easyBucket[card]}</p>
+                      </details>
                     )
                   }) 
                   : '' }
-              </p>
-            </div>
-            <div className="medium-results">
-              <h3>Medium: {this.state.mediumTotal}</h3>
-              <p>
+              </div>
+            </details>
+            <details className="medium-results">
+              <summary>Medium: {this.state.mediumTotal} ({ ((this.state.easyTotal/(this.state.mediumTotal + this.state.mediumTotal + this.state.difficultTotal))*100).toFixed(2) + '%'})</summary>
+              <div>
                 { this.state.mediumTotal > 0 ? 
                   this.state.mediumKeys.map((card, index) => {
                     return (
-                      <div className="grid grid-2 card-holder" key={index} >
-                        <strong>{card}</strong>
-                        <div><p>Card Back</p></div>
-                      </div>
+                      <details className="grid grid-2 card-holder results-card" key={index} >
+                        <summary>{card}</summary>
+                        <p>{this.props.mediumBucket[card]}</p>
+                      </details>
                     )
                   }) 
                   : '' }
-              </p>
-            </div>
-            <div className="difficult-results">
-              <h3>Difficult: {this.state.difficultTotal}</h3>
-              <p>
+              </div>
+            </details>
+            <details className="difficult-results">
+              <summary>Difficult: {this.state.difficultTotal} ({ ((this.state.difficultTotal/(this.state.easyTotal + this.state.mediumTotal + this.state.difficultTotal))*100).toFixed(2) + '%'})</summary>
+              <div>
                 { this.state.difficultTotal > 0 ? 
                   this.state.difficultKeys.map((card, index) => {
                     return (
-                      <div className="grid grid-2 card-holder" key={index} >
-                        <strong>{card}</strong>
-                        <div><p>Card Back</p></div>
-                      </div>
+                      <details className="grid grid-2 card-holder results-card" key={index} >
+                        <summary>{card}</summary>
+                        <p>{this.props.difficultBucket[card]}</p>
+                      </details>
                     )
                   }) 
                   : '' }
-              </p>
-            </div>
-          </div>
-        :
-        <div className="limited-width-container results-write-in results-match">
-          {this.props.inputAnswersArray.map((answer, index) => {
-            return (
-              <div className="grid card-holder results-card-container" key={index}>
-                <div className="grid results-card">
-                  <h3>You answered:</h3><p>{answer}</p>
-                </div>
-                <div className="grid results-card">
-                  <h3>Correct Answer:</h3> 
-                  <p>{this.props.correctAnswersArray[index]}</p>
-                </div>
               </div>
-            )
-          })}
+            </details>
+          </div>
+        : <div className="limited-width-container results-write-in results-match">
+          { this.props.inputAnswersArray && this.props.inputAnswersArray.length > 0 ?
+              this.props.inputAnswersArray.map((answer, index) => {
+              return (
+                <div className="grid card-holder results-card-container" key={index}>
+                  <div className="grid">
+                    <h3>You answered:</h3><p>{answer}</p>
+                  </div>
+                  <div className="grid">
+                    <h3>Correct Answer:</h3> 
+                    <p>{this.props.correctAnswersArray[index]}</p>
+                  </div>
+                </div>
+              )
+            })
+            : '' }
         </div>
         }
       </div>
