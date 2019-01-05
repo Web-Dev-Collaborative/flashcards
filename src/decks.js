@@ -70,6 +70,14 @@ const decks = {
 		"Class: State": "Alter an object's behavior when its state changes.",
 		"Class: Strategy": "Encapsulates an algorithm inside a class separating the selection from the implementation.",
 		"Class: Visitor": "Adds a new operation to a class without changing the class."
+	},
+	"CS Sorting and Searching": {
+		"Selection Sort":"Find the smallest unsorted element in an array and exchange it with the first unsorted element of that array. Omega-Notation: Best n^2. Worst n^2.",
+		"Bubble Sort":"Exchange adjacent pairs if they are out of order; effectively 'bubbling' larger elements to the right and smaller elements to the left. Omega-Notation: Best n. Worst n^2.",
+		"Insertion Sort":"Traverse the array left to right shifting elements as necessary to insert each element into the right place. Omega-Notation: Best n. Worst n^2.",
+		"Merge Sort":"Split the full array into subarrays then merge the subarrays back together in the right order. Omega-Notation: Best n log n. Worst n log n.",
+		"Linear Search":"Iterate across the array from left to right trying to locate a target element. Omega-Notation: Best 1. Worst n.",
+		"Binary Search":"Given a sorted array, divide and conquer by systematically eliminating half of the remaining elements in the search for the target element. Omega-Notation: Best 1. Worst log n."
 	}	
 }
 
