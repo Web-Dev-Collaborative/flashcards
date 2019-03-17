@@ -1,8 +1,19 @@
 // Your basic Express JS node server
-const express = require('express')
-const path = require('path')
+import express from 'express'
+import path from 'path'
 const app = express()
 
+//
+// Back End Server Action
+//
+app.post('/register', function(req, res) {
+  console.log("Register route posted to with req")
+  console.dir(req)
+})
+
+//
+// Front End Static-Built Routes
+//
 // Pulls source from the production build folder
 app.use(express.static(path.join(__dirname, 'build')))
 
@@ -14,4 +25,4 @@ app.get('/*', function(req, res) {
 })
 
 // Your basic DBZ Port
-app.listen(9001)
+app.listen(9001, () => console.log("Flashy App Express Server listening on port 9001."))
