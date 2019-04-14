@@ -3,6 +3,8 @@ import express from 'express'
 import path from 'path'
 const app = express()
 
+app.set('env', 'production')
+
 const env = process.env.NODE_ENV || 'production'
 // console.log(process.env)
 console.log("app.get('env') = "+app.get('env'))
