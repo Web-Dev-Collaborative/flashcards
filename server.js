@@ -4,6 +4,10 @@ import path from 'path'
 const app = express()
 
 const env = process.env.NODE_ENV || 'production'
+// console.log(process.env)
+console.log("app.get('env') = "+app.get('env'))
+
+const PORT = process.env.PORT || 9001
 
 //
 // Back End Server Action
@@ -28,4 +32,4 @@ app.get('/*', function(req, res) {
 })
 
 // Your basic DBZ Port
-app.listen(9001, () => console.log("Flashy App Express Server listening on port 9001. Type: "+env))
+app.listen(PORT, () => console.log("Flashy App Express Server listening on port "+PORT+". Type: "+env))
