@@ -9,6 +9,7 @@ const app = express()
 app.post('/register', function(req, res) {
   console.log("Register route posted to with req")
   console.dir(req)
+  const { email, password } = req.body
 })
 
 //
