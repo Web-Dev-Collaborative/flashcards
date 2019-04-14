@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@sentry/browser": "^4.6.6",
+    "@babel/preset-env": "*",
+    "babel-preset-env": "*",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
     "dotenv": "^7.0.0",
@@ -33,14 +35,12 @@
     "not op_mini all"
   ],
   "description": "Flashcards App",
-  "main": "index.js",
+  "main": "start.js",
   "repository": "https://github.com/Usarneme/flashcards.git",
   "author": "usarneme",
   "license": "MIT",
   "devDependencies": {
-    "@babel/preset-env": "^7.4.3",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0"
   }
 }
