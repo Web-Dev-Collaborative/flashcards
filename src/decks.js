@@ -77,8 +77,10 @@ const decks = {
 		"Insertion Sort":"Traverse the array left to right shifting elements as necessary to insert each element into the right place. Omega-Notation: Best n. Worst n^2.",
 		"Merge Sort":"Split the full array into subarrays then merge the subarrays back together in the right order. Omega-Notation: Best n log n. Worst n log n.",
 		"Linear Search":"Iterate across the array from left to right trying to locate a target element. Omega-Notation: Best 1. Worst n.",
-		"Binary Search":"Given a sorted array, divide and conquer by systematically eliminating half of the remaining elements in the search for the target element. Omega-Notation: Best 1. Worst log n."
-	}	
+		"Binary Search":"Given a sorted array, divide and conquer by systematically eliminating half of the remaining elements in the search for the target element. Omega-Notation: Best 1. Worst log n.",
+		"Big Omega Ω":"If we call Big O the worst case scenario, then Big Omega is the best case scenario or the super lucky scenario. A simple example: What is the best scenario in case of sorting an array of a size N using Bubble sort? The best case is if the array was already sorted! and for the Bubble sort algorithm, it takes one iteration over the array (From 0 to N-1) to find out that it is indeed sorted. Therefore Big Omega of Bubble sort is Ω(n).",
+		"Big Theta Θ":"If the best case scenario and the worst case scenario are the same, then we would use the Big Theta notation instead of saying that the Big O and Big Omega of this algorithm are the same."
+	}
 }
 
 export default decks
