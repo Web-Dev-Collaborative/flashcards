@@ -14,5 +14,6 @@
 ### To Test Locally
 * `git clone https://github.com/Usarneme/flashcards.git`
 * `npm install`
+* `npm run build`
 * `node start.js`
 * Navigate to http://localhost:9001 in your browser
