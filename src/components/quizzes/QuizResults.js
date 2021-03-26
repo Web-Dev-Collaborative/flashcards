@@ -57,7 +57,7 @@ class QuizResults extends React.Component {
         console.log('Testing input "'+str+'" against correct "'+this.props.correctAnswersArray[idx]+'"')
         if (str === this.props.correctAnswersArray[idx]) return str
         console.log('Not matching')
-        incorrectMatches.push(str)
+        return incorrectMatches.push(str)
       })
     }
 

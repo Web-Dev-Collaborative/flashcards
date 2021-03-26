@@ -1,6 +1,6 @@
 # Flashcards
 
-#### [Example Build](https://usarneme-flashcards.herokuapp.com/) - Hosted on Heroku so it might take a bit to spin up the dyno at first load.
+#### [Example Build](https://usarneme-flashcards.herokuapp.com/) - Hosted on Heroku free-tier so it might take a bit to spin up the dyno at first load.
 
 ## Tech 
 * JavaScript/ES6
@@ -12,8 +12,8 @@
 * CSS
 
 ### To Test Locally
-* `git clone https://github.com/Usarneme/flashcards.git`
-* `npm install`
-* `npm run build`
-* `node start.js`
-* Navigate to http://localhost:9001 in your browser
+1. `git clone https://github.com/Usarneme/flashcards.git`
+2. `npm install`
+3. `npm run start:dev`
+4. Navigate to http://localhost:3000 in your browser
+

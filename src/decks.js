@@ -32,7 +32,7 @@ const decks = {
 		"Object: Flyweight": "A fine-grained instance used for efficient sharing of information that is contained elsewhere.",
 		"Object: Proxy": "A place holder object representing the true object."
 	},
-	"OWASPTop102017": {
+	"OWASPTop10": {
 		"Injection": "Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper authorization.",
 		"Broken Authentication": "Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume other users’ identities (temporarily or permanently).",
 		"Sensitive Data Exposure": "Many web applications and APIs do not properly protect sensitive data, such as financial, healthcare, and PII. Attackers may steal or modify such weakly protected data to conduct credit card fraud, identity theft, or other crimes. Sensitive data deserves extra protection, such as encryption at rest or in transit, as well as special precautions when exchanged with the browser.",
